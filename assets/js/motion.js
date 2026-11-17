@@ -1,0 +1,88 @@
+/* Motion design sobre : apparitions au défilement, cartes animées après un filtre,
+   en-tête compact, parallaxe légère du héros. Désactivé si l'utilisateur réduit les animations. */
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var navbar = document.querySelector(".navbar");
+
+  /* En-tête compact dès qu'on défile (toujours actif, sans animation forcée) */
+  function headerState() { if (navbar) navbar.classList.toggle("scrolled", window.scrollY > 8); }
+  window.addEventListener("scroll", headerState, { passive: true });
+  headerState();
+
+  if (!root.classList.contains("motion")) return;
+
+  /* ---------- Apparitions ---------- */
+  var TARGETS = [
+    ".page-head .wrap > *", ".pro-hero-in > div:first-child > *", ".pro-perks > div",
+    ".section-head", ".trust li", ".pc-card", ".part-card", ".uni-card", ".split-media",
+    ".split > div:not(.split-media) > *", ".promo > *", ".arrival", ".shop-card", ".uni-section",
+    ".fps-row", ".table-wrap", ".filters", ".forge-start", ".cat-banner", ".cart-line",
+    ".checkout", ".summary", ".passport", ".panel", ".credit", ".tabs-block h2", ".product > div"
+  ].join(",");
+  var STEP = 70, MAX_STAGGER = 6;
+
+  function delayFor(el, list) {
+    var sibs = list.filter(function (x) { return x.parentNode === el.parentNode; });
+    return Math.min(sibs.indexOf(el), MAX_STAGGER) * STEP;
+  }
+  function settle(el, cls) {
+    el.classList.remove(cls, "in");
+    el.style.removeProperty("--d");
+  }
+  function rise(el, d) {
+    el.style.setProperty("--d", d + "ms");
+    el.classList.add("rise");
+    el.addEventListener("animationend", function done(e) {
+      if (e.target !== el) return;
+      el.removeEventListener("animationend", done);
+      settle(el, "rise");
+    });
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      var el = en.target;
+      io.unobserve(el);
+      el.classList.add("in");
+      var d = parseInt(el.style.getPropertyValue("--d"), 10) || 0;
+      setTimeout(function () { settle(el, "reveal"); }, 900 + d);
+    });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+
+  var all = Array.prototype.slice.call(document.querySelectorAll(TARGETS));
+  var vh = window.innerHeight;
+  all.forEach(function (el) {
+    if (el.closest(".hero")) return;
+    var r = el.getBoundingClientRect(), d = delayFor(el, all);
+    if (r.top < vh * 0.92 && r.bottom > 0) rise(el, d);
+    else { el.style.setProperty("--d", d + "ms"); el.classList.add("reveal"); io.observe(el); }
+  });
+
+  /* ---------- Cartes ajoutées après un filtre ou une recherche ---------- */
+  ["#g-grid", "#c-grid", "#c-pcs", "#passport", "#tk-result"].forEach(function (sel) {
+    var box = document.querySelector(sel);
+    if (!box) return;
+    new MutationObserver(function (muts) {
+      var added = [];
+      muts.forEach(function (m) { Array.prototype.forEach.call(m.addedNodes, function (n) { if (n.nodeType === 1) added.push(n); }); });
+      added.slice(0, 12).forEach(function (n, i) { rise(n, Math.min(i, MAX_STAGGER) * 50); });
+    }).observe(box, { childList: true });
+  });
+
+  /* ---------- Parallaxe légère du héros ---------- */
+  var heroMedia = document.querySelector(".hero-media");
+  if (heroMedia) {
+    var ticking = false;
+    window.addEventListener("scroll", function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var y = window.scrollY;
+        if (y < window.innerHeight * 1.2) heroMedia.style.transform = "translate3d(0," + (y * 0.16).toFixed(1) + "px,0)";
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+})();

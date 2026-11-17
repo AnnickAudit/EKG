@@ -48,4 +48,4 @@ Toutes les données (PC, composants, univers pro, boutiques, horaires, arrivages
 
 ## Crédits
 
-Photos : [Unsplash](https://unsplash.com/license), détail sur `credits.html`. Elles sont affichées en bichromie noir et jaune et seront remplacées par des photos du showroom et de l'atelier. Logo et bannière © Ekinox Gamos.
+Photos : [Unsplash](https://unsplash.com/license), détail sur `credits.html`. Elles seront remplacées par des photos du showroom et de l'atelier. Logo et bannière © Ekinox Gamos.

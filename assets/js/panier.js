@@ -76,8 +76,8 @@
     var up = "";
     if (upsell && !hasUps) {
       var it = A.getItem(upsell.id), u = A.upsFor(it);
-      up = '<div class="upsell band-y">' + I.bolt + '<div><b>Protège ton Ekinox ' + esc(it.name) + " des délestages</b><br><span style=\"font-size:14px\">" + esc(u.name) + " dimensionné pour " + it.watts + " W, + " + A.fmtAr(u.price) + "</span></div>" +
-        '<button class="btn btn-sm btn-dark" type="button" data-addups="' + upsell.key + '">Ajouter</button></div>';
+      up = '<div class="upsell">' + I.bolt + '<div><b>Protège ton Ekinox ' + esc(it.name) + " des délestages</b><br><span style=\"font-size:14px\">" + esc(u.name) + " dimensionné pour " + it.watts + " W, + " + A.fmtAr(u.price) + "</span></div>" +
+        '<button class="btn btn-sm btn-primary" type="button" data-addups="' + upsell.key + '">Ajouter</button></div>';
     }
 
     var radio = function (name, list, cur) {
@@ -105,6 +105,7 @@
     refresh();
   }
 
+  var lastGrand = null;
   function refresh() {
     var t = totals();
     var el = $("#totals"); if (!el) return;
@@ -112,6 +113,8 @@
       "<div><span>Livraison</span><span>" + (t.feeKnown ? (t.fee ? A.fmtAr(t.fee) : "Gratuit") : "Sur devis") + "</span></div>" +
       '<div class="grand"><span>Total</span><span class="price">' + A.fmtAr(t.total) + "</span></div>" +
       (form.payment === "Acompte" ? '<div><span>À payer maintenant (20 %)</span><b class="mono">' + A.fmtAr(t.now) + "</b></div>" : "");
+    A.tween(el.querySelector(".grand .price"), lastGrand, t.total);
+    lastGrand = t.total;
     $("#co-wa").href = A.waLink(waText());
     var pay = $("#co-pay");
     if (form.payment === "Espèces") { pay.hidden = true; }

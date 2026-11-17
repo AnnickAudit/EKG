@@ -49,7 +49,7 @@
 
     var q = $("#qr");
     if (window.QRCode) {
-      new window.QRCode(q, { text: passportUrl(sn), width: 190, height: 190, colorDark: "#000000", colorLight: "#FEE903", correctLevel: window.QRCode.CorrectLevel.M });
+      new window.QRCode(q, { text: passportUrl(sn), width: 190, height: 190, colorDark: "#000000", colorLight: "#D6D2B6", correctLevel: window.QRCode.CorrectLevel.M });
     } else {
       q.innerHTML = '<p style="color:#000;font:600 12px var(--font-mono);padding:20px 0">' + esc(sn) + "</p>";
     }

@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap">
 <link rel="stylesheet" href="assets/css/site.css">
-<script>(function(){var d=document.documentElement,m=null,f=d.getAttribute("data-force");try{m=localStorage.getItem("ekg-mode")}catch(e){}if(f){m=f}else if(m!=="jour"&&m!=="nuit"){var h=(new Date().getUTCHours()+3)%24;m=(h>=6&&h<18)?"jour":"nuit"}d.setAttribute("data-mode",m)})();</script>
+<script>(function(){var d=document.documentElement,m=null,f=d.getAttribute("data-force");try{m=localStorage.getItem("ekg-mode")}catch(e){}if(f){m=f}else if(m!=="jour"&&m!=="nuit"){var h=(new Date().getUTCHours()+3)%24;m=(h>=6&&h<18)?"jour":"nuit"}d.setAttribute("data-mode",m);if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches&&"IntersectionObserver"in window)d.classList.add("motion")})();</script>
 </head>
 <body data-nav="">
 <a class="skip" href="#main">Aller au contenu</a>
@@ -20,7 +20,7 @@
 <main id="main">
   <!-- Héros -->
   <section class="hero">
-    <div class="hero-media duo"><img src="assets/img/photos/hero-setup.jpg" alt="" fetchpriority="high"></div>
+    <div class="hero-media ph"><img src="assets/img/photos/hero-setup.jpg" alt="" fetchpriority="high"></div>
     <div class="wrap hero-in">
       <div class="hero-copy">
         <p class="kicker" data-show-mode="nuit">Challenge everything</p>
@@ -112,7 +112,7 @@
   <!-- Atelier -->
   <section class="section">
     <div class="wrap split">
-      <div class="split-media duo"><img src="assets/img/photos/atelier-cpu.jpg" alt="Installation d'un processeur sur une carte mère" loading="lazy"></div>
+      <div class="split-media ph"><img src="assets/img/photos/atelier-cpu.jpg" alt="Installation d'un processeur sur une carte mère" loading="lazy"></div>
       <div>
         <p class="eyebrow">L'atelier de Mahamasina</p>
         <h2>Chaque PC passe entre nos mains.</h2>
@@ -129,7 +129,7 @@
   </section>
 
   <!-- Arrivages -->
-  <section class="band-y">
+  <section class="band-soft">
     <div class="wrap section" style="padding-block:clamp(40px,6vw,72px)">
       <div class="section-head" style="margin-bottom:20px">
         <div>
@@ -138,7 +138,7 @@
           <p class="lead">Inscris-toi sur un arrivage : tu es prévenu en premier et tu peux bloquer ta pièce avec 20 % d'acompte MVola.</p>
         </div>
       </div>
-      <div class="arrivals" id="home-arrivals" style="--band-line:#C9B902;--band-title:#000;--band-muted:#4A4500"></div>
+      <div class="arrivals" id="home-arrivals"></div>
     </div>
   </section>
 
@@ -174,5 +174,6 @@
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/home.js"></script>
+<script src="assets/js/motion.js"></script>
 </body>
 </html>

@@ -32,6 +32,23 @@
     return val;
   }
 
+  /* ---------- Chiffres animés ---------- */
+  var REDUCED = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  function tween(el, from, to, fmt, dur) {
+    if (!el) return;
+    fmt = fmt || fmtAr;
+    if (REDUCED || from == null || from === to || isNaN(from)) { el.textContent = fmt(to); return; }
+    dur = dur || 520;
+    var t0 = performance.now(), token = {};
+    el._tw = token;
+    (function step(t) {
+      if (el._tw !== token) return;
+      var p = Math.min(1, Math.max(0, (t - t0) / dur)), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(p < 1 ? Math.round((from + (to - from) * e) / 1000) * 1000 : to);
+      if (p < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+
   /* ---------- Icônes ---------- */
   var I = function (p, extra) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"' + (extra || "") + ">" + p + "</svg>"; };
   var icons = {
@@ -93,7 +110,7 @@
   function photo(id, cls, opts) {
     opts = opts || {};
     var p = D.photos[id] || {};
-    return '<div class="duo ' + (cls || "") + '"><img src="assets/img/photos/' + id + '.jpg" alt="' + esc(opts.alt != null ? opts.alt : (p.alt || "")) + '"' +
+    return '<div class="ph' + (cls ? " " + cls : "") + '"><img src="assets/img/photos/' + id + '.jpg" alt="' + esc(opts.alt != null ? opts.alt : (p.alt || "")) + '"' +
       (opts.eager ? ' fetchpriority="high"' : ' loading="lazy"') + ' decoding="async"></div>';
   }
 
@@ -107,7 +124,7 @@
     }
     return '<article class="pc-card">' +
       (pc.badge ? '<span class="tag tag-y pc-badge">' + esc(pc.badge) + "</span>" : "") +
-      '<a class="pc-media" href="produit.html?id=' + pc.id + '" tabindex="-1" aria-hidden="true">' + photo(pc.photo, "", { alt: "" }).replace('class="duo "', 'class="duo" style="height:100%"') + "</a>" +
+      '<a class="pc-media" href="produit.html?id=' + pc.id + '" tabindex="-1" aria-hidden="true">' + photo(pc.photo, "", { alt: "" }).replace('class="ph"', 'class="ph" style="height:100%"') + "</a>" +
       '<div class="pc-body">' +
       '<div class="pc-top"><a class="pc-name" href="produit.html?id=' + pc.id + '">' + esc(pc.name) + '</a><span class="tag">' + esc(pc.res) + "</span></div>" +
       '<p class="pc-line">' + esc(pc.line) + "</p>" +
@@ -115,7 +132,7 @@
       fps +
       '<div class="pc-foot"><span class="price">' + fmtAr(pc.price) + '</span><span class="stock ' + st.cls + '">' + esc(st.text) + "</span></div>" +
       '<div class="pc-actions"><a class="btn btn-sm" href="produit.html?id=' + pc.id + '">Détails</a>' +
-      '<button class="btn btn-sm btn-primary" type="button" data-add="' + pc.id + '">' + (stockTotal(pc) ? "Ajouter" : "Réserver") + "</button></div>" +
+      '<button class="btn btn-sm" type="button" data-add="' + pc.id + '">' + (stockTotal(pc) ? "Ajouter" : "Réserver") + "</button></div>" +
       "</div></article>";
   }
 
@@ -128,7 +145,7 @@
       '<a class="part-name" href="produit.html?id=' + part.id + '">' + esc(part.name) + "</a>" +
       '<p class="part-spec">' + esc(part.spec) + "</p>" +
       '<div class="part-foot"><div><span class="price">' + fmtAr(part.price) + '</span><br><span class="stock ' + st.cls + '">' + esc(st.text) + "</span></div>" +
-      '<button class="btn btn-sm btn-primary" type="button" data-add="' + part.id + '" aria-label="Ajouter ' + esc(part.name) + ' au panier">' + icons.cart + "</button></div>" +
+      '<button class="btn btn-sm" type="button" data-add="' + part.id + '" aria-label="Ajouter ' + esc(part.name) + ' au panier">' + icons.cart + "</button></div>" +
       "</article>";
   }
 
@@ -296,6 +313,6 @@
     $: $, $$: $$, esc: esc, fmtAr: fmtAr, fmtNum: fmtNum, fmtDate: fmtDate, normalize: normalize, params: params, store: store,
     icons: icons, getItem: getItem, isPc: isPc, catName: catName, stockTotal: stockTotal, stockInfo: stockInfo, upsFor: upsFor,
     fpsFor: fpsFor, gameName: gameName, photo: photo, pcCard: pcCard, partCard: partCard, cart: cart, waLink: waLink,
-    shopStatus: shopStatus, tanaNow: tanaNow, fmtHour: fmtHour, getMode: getMode, setMode: setMode, toast: toast
+    shopStatus: shopStatus, tanaNow: tanaNow, tween: tween, reducedMotion: REDUCED, fmtHour: fmtHour, getMode: getMode, setMode: setMode, toast: toast
   };
 })();

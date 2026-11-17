@@ -12,7 +12,7 @@
     "<ul><li>" + A.esc(star.specs.cpu) + "</li><li>" + A.esc(star.specs.gpu) + "</li><li>" + A.esc(star.specs.ram) + "</li><li>≈ " + star.fps.gtav + " FPS sur GTA V en 1440p</li></ul>" +
     '<span class="price">' + A.fmtAr(star.price) + "</span>" +
     '<span class="stock ' + st.cls + '">' + A.esc(st.text) + "</span>" +
-    '<a class="btn btn-primary btn-block" href="produit.html?id=zenith">Voir la fiche</a>';
+    '<a class="btn btn-block" href="produit.html?id=zenith">Voir la fiche</a>';
 
   /* Gamme */
   $("#home-pcs").innerHTML = D.pcs.map(function (p) { return A.pcCard(p); }).join("");
@@ -30,7 +30,7 @@
     $("#home-arrivals").innerHTML = D.arrivals.map(function (a, i) {
       var on = notified.indexOf(i) > -1;
       return '<div class="arrival"><time>' + A.esc(a.date) + "</time><div><b>" + A.esc(a.name) + "</b><span>" + A.esc(a.note) + "</span></div>" +
-        '<button class="btn btn-sm btn-dark" type="button" data-notify="' + i + '"' + (on ? ' aria-pressed="true"' : "") + ">" + (on ? A.icons.check + "Inscrit" : "Me prévenir") + "</button></div>";
+        '<button class="btn btn-sm" type="button" data-notify="' + i + '"' + (on ? ' aria-pressed="true"' : "") + ">" + (on ? A.icons.check + "Inscrit" : "Me prévenir") + "</button></div>";
     }).join("");
   }
   renderArrivals();

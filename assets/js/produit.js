@@ -147,9 +147,11 @@
       (state.ups ? "\n- Pack anti-délestage : " + ups.name + " (" + A.fmtAr(ups.price) + ")" : "") +
       "\nTotal : " + A.fmtAr(unit() * state.qty) + "\nRéf. : EKG-" + it.id.toUpperCase() + "\nMerci !";
   }
+  var lastUnit = it.price;
   function refresh() {
-    $("#p-unit").textContent = A.fmtAr(unit());
-    $("#sb-price").textContent = A.fmtAr(unit());
+    A.tween($("#p-unit"), lastUnit, unit());
+    A.tween($("#sb-price"), lastUnit, unit());
+    lastUnit = unit();
     $("#p-total").textContent = state.qty > 1 || state.ups ? "Total : " + A.fmtAr(unit() * state.qty) + (state.ups ? " avec le pack anti-délestage" : "") : "";
     $("#p-wa").href = A.waLink(waText());
     var r = $("#p-reserve");

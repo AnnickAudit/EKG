@@ -118,6 +118,7 @@
       "\nUsage : " + usageEl.options[usageEl.selectedIndex].text + "\nPouvez-vous confirmer la disponibilité ?";
   }
 
+  var lastTotal = null;
   function renderSummary() {
     var rows = STEPS.map(function (st) { return { st: st, p: P(st.cat) }; });
     var count = rows.filter(function (r) { return r.p; }).length;
@@ -149,7 +150,9 @@
       '<button class="link-btn" type="button" id="fx-reset">Tout effacer</button>' +
       '<p class="note-demo">Prix et FPS de démonstration. Un conseiller confirme la disponibilité avant le montage.</p>';
 
-    $("#fsb-total").textContent = A.fmtAr(total);
+    A.tween($("#forge-summary .sum-total .price"), lastTotal, total);
+    A.tween($("#fsb-total"), lastTotal, total);
+    lastTotal = total;
     var stEl = $("#fsb-state");
     stEl.textContent = complete ? "Configuration complète" : count + " / " + STEPS.length + " pièces";
     stEl.className = "stock" + (complete ? "" : " wait");
