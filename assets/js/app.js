@@ -59,6 +59,8 @@
     menu: I('<path d="M4 7h16M4 12h16M4 17h16"/>'),
     close: I('<path d="M6 6l12 12M18 6 6 18"/>'),
     arrow: I('<path d="M5 12h14M13 6l6 6-6 6"/>'),
+    chevL: I('<path d="m15 18-6-6 6-6"/>'),
+    chevR: I('<path d="m9 18 6-6-6-6"/>'),
     whatsapp: I('<path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.7z"/><path d="M9 8.6c.2-.5.5-.6.8-.6h.5c.2 0 .4.1.5.4l.7 1.7c.1.3 0 .5-.1.7l-.5.6c-.1.1-.1.3 0 .5.5 1 1.5 2 2.6 2.5.2.1.4.1.5-.1l.6-.7c.2-.2.4-.2.7-.1l1.6.8c.3.1.4.3.4.5v.5c0 .4-.2.7-.6.9-.6.3-1.4.5-2.3.2-2.4-.8-4.4-2.8-5.2-5.1-.2-.8 0-1.5.3-1.9z"/>'),
     phone: I('<path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>'),
     pin: I('<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),
@@ -114,38 +116,44 @@
       (opts.eager ? ' fetchpriority="high"' : ' loading="lazy"') + ' decoding="async"></div>';
   }
 
+  /* « ZÉNITH » -> « Zénith » ; nom affiché d'un produit */
+  function nice(name) { return name.charAt(0) + name.slice(1).toLowerCase(); }
+  function displayName(it) { return isPc(it) ? "Ekinox " + nice(it.name) : it.name; }
+
   function pcCard(pc, opts) {
     opts = opts || {};
-    var st = stockInfo(pc);
-    var fps = "";
+    var st = stockInfo(pc), fps = "", url = "produit.html?id=" + pc.id;
     if (opts.game) {
       var v = fpsFor(pc, opts.game);
-      fps = '<p class="pc-fps">≈ ' + v + ' FPS<i style="--w:' + Math.min(100, Math.round(v / 4)) + '%"></i></p>';
+      fps = '<p class="pc-fps"><span>≈ ' + v + ' FPS</span><i style="--w:' + Math.min(100, Math.round(v / 4)) + '%"></i></p>';
     }
     return '<article class="pc-card">' +
-      (pc.badge ? '<span class="tag tag-y pc-badge">' + esc(pc.badge) + "</span>" : "") +
-      '<a class="pc-media" href="produit.html?id=' + pc.id + '" tabindex="-1" aria-hidden="true">' + photo(pc.photo, "", { alt: "" }).replace('class="ph"', 'class="ph" style="height:100%"') + "</a>" +
+      '<a class="pc-media" href="' + url + '" tabindex="-1" aria-hidden="true">' + photo(pc.photo, "", { alt: "" }) + "</a>" +
       '<div class="pc-body">' +
-      '<div class="pc-top"><a class="pc-name" href="produit.html?id=' + pc.id + '">' + esc(pc.name) + '</a><span class="tag">' + esc(pc.res) + "</span></div>" +
+      '<p class="pc-eyebrow">' + esc(pc.badge || "") + "</p>" +
+      '<h3><a class="pc-name" href="' + url + '">' + esc(displayName(pc)) + "</a></h3>" +
       '<p class="pc-line">' + esc(pc.line) + "</p>" +
-      '<ul class="pc-specs"><li>' + esc(pc.specs.cpu) + "</li><li>" + esc(pc.specs.gpu) + "</li><li>" + esc(pc.specs.ram) + "</li><li>" + esc(pc.specs.storage) + "</li></ul>" +
+      '<ul class="pc-specs"><li>' + esc(pc.specs.gpu) + "</li><li>" + esc(pc.specs.cpu) + "</li><li>" + esc(pc.specs.ram + " · " + pc.specs.storage) + "</li></ul>" +
       fps +
-      '<div class="pc-foot"><span class="price">' + fmtAr(pc.price) + '</span><span class="stock ' + st.cls + '">' + esc(st.text) + "</span></div>" +
-      '<div class="pc-actions"><a class="btn btn-sm" href="produit.html?id=' + pc.id + '">Détails</a>' +
-      '<button class="btn btn-sm" type="button" data-add="' + pc.id + '">' + (stockTotal(pc) ? "Ajouter" : "Réserver") + "</button></div>" +
+      '<p class="pc-price">' + fmtAr(pc.price) + "</p>" +
+      '<div class="pc-actions"><button class="btn btn-primary btn-sm" type="button" data-add="' + pc.id + '">' + (stockTotal(pc) ? "Acheter" : "Réserver") + "</button>" +
+      '<a class="more" href="' + url + '">En savoir plus</a></div>' +
+      '<span class="stock ' + st.cls + '">' + esc(st.text) + "</span>" +
       "</div></article>";
   }
 
   function partCard(part) {
-    var st = stockInfo(part);
+    var st = stockInfo(part), url = "produit.html?id=" + part.id;
+    var eyebrow = part.note || (!stockTotal(part) && part.arrival ? "Arrivage le " + part.arrival : "");
     return '<article class="part-card">' +
-      (part.note ? '<span class="tag tag-olive part-note">' + esc(part.note) + "</span>" : "") +
-      '<div class="part-ico">' + (icons[part.cat] || icons.box) + "</div>" +
+      '<a class="part-media" href="' + url + '" tabindex="-1" aria-hidden="true">' + (icons[part.cat] || icons.box) + "</a>" +
+      '<p class="part-eyebrow">' + esc(eyebrow) + "</p>" +
       '<span class="part-cat">' + esc(catName(part.cat)) + "</span>" +
-      '<a class="part-name" href="produit.html?id=' + part.id + '">' + esc(part.name) + "</a>" +
+      '<a class="part-name" href="' + url + '">' + esc(part.name) + "</a>" +
       '<p class="part-spec">' + esc(part.spec) + "</p>" +
-      '<div class="part-foot"><div><span class="price">' + fmtAr(part.price) + '</span><br><span class="stock ' + st.cls + '">' + esc(st.text) + "</span></div>" +
-      '<button class="btn btn-sm" type="button" data-add="' + part.id + '" aria-label="Ajouter ' + esc(part.name) + ' au panier">' + icons.cart + "</button></div>" +
+      '<p class="part-price">' + fmtAr(part.price) + "</p>" +
+      '<div class="part-foot"><span class="stock ' + st.cls + '">' + esc(st.text) + "</span>" +
+      '<button class="btn btn-sm" type="button" data-add="' + part.id + '" aria-label="Ajouter ' + esc(part.name) + ' au panier">Ajouter</button></div>' +
       "</article>";
   }
 
@@ -185,7 +193,7 @@
   };
   function updateCartCount(bump) {
     var n = cart.count();
-    $$("[data-cart-count]").forEach(function (el) { el.textContent = n; });
+    $$("[data-cart-count]").forEach(function (el) { el.textContent = n ? n : ""; el.toggleAttribute("data-zero", !n); });
     if (bump) $$(".cart-btn").forEach(function (b) { b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump"); });
   }
 
@@ -218,8 +226,10 @@
   function renderModeBtn() {
     var b = $("#mode-btn"); if (!b) return;
     var m = getMode();
-    b.innerHTML = (m === "nuit" ? icons.moon : icons.sun) + "<span>" + (m === "nuit" ? "Nuit · Gaming" : "Jour · Pro") + "</span>";
-    b.setAttribute("aria-label", "Mode " + (m === "nuit" ? "Nuit (gaming)" : "Jour (pro)") + " actif. Passer en mode " + (m === "nuit" ? "Jour" : "Nuit"));
+    b.innerHTML = m === "nuit" ? icons.moon : icons.sun;
+    var label = "Mode " + (m === "nuit" ? "Nuit (gaming)" : "Jour (pro)") + " actif. Passer en mode " + (m === "nuit" ? "Jour" : "Nuit");
+    b.setAttribute("aria-label", label);
+    b.setAttribute("title", label);
   }
 
   /* ---------- Toasts ---------- */
@@ -236,61 +246,103 @@
   /* ---------- En-tête & pied de page ---------- */
   var NAV = [
     ["gamme.html", "PC Gamer"], ["configurateur.html", "Forge"], ["catalogue.html", "Composants"],
-    ["pro.html", "Pro"], ["garantie.html", "Garantie & SAV"], ["boutiques.html", "Boutiques"]
+    ["pro.html", "Ekinox Pro"], ["garantie.html", "Garantie"], ["boutiques.html", "Boutiques"]
   ];
-  function logoHtml() {
-    return '<a class="logo" href="index.html" aria-label="Ekinox Gamos, accueil"><img src="assets/img/logo-ekg.png" alt="" width="42" height="42"><span class="logo-word"><b>EKINOX</b><small>GAMOS</small></span></a>';
-  }
   function renderHeader() {
     var el = $("#site-header"); if (!el) return;
     var current = doc.body.getAttribute("data-nav") || "";
     var links = NAV.map(function (n) { return '<a href="' + n[0] + '"' + (current === n[0] ? ' aria-current="page"' : "") + ">" + n[1] + "</a>"; }).join("");
     var q = esc(params().get("q") || "");
-    var search = function (id) { return '<form class="nav-search" action="catalogue.html" role="search"><input type="search" name="q" id="' + id + '" value="' + q + '" placeholder="Rechercher « RTX 5060 »" aria-label="Rechercher un produit"><button type="submit" aria-label="Rechercher">' + icons.search + "</button></form>"; };
     el.innerHTML =
-      '<div class="topbar"><div class="wrap topbar-in">' +
-      '<span><span data-show-mode="nuit">Livraison 24 h à Tana · Province par transporteur</span><span data-show-mode="jour">Devis sous 24 h ouvrées · Installation sur site à Tana</span></span>' +
-      '<span class="tb-pay"><b>MVola</b> · <b>Orange Money</b> · <b>Airtel Money</b></span>' +
-      '<span class="tb-demo">Site de démonstration</span></div></div>' +
-      '<div class="navbar"><div class="wrap nav-in">' + logoHtml() +
-      '<nav class="nav-links" aria-label="Navigation principale">' + links + "</nav>" +
-      search("nav-q") +
-      '<button class="mode-btn" id="mode-btn" type="button"></button>' +
-      '<a class="cart-btn" href="panier.html" aria-label="Panier">' + icons.cart + '<span>Panier</span><b data-cart-count>0</b></a>' +
-      '<button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Ouvrir le menu">' + icons.menu + "</button>" +
-      "</div>" +
-      '<div class="drawer" id="drawer" hidden><div class="wrap">' + search("drawer-q") + '<nav aria-label="Menu mobile">' + links + "</nav></div></div></div>";
+      '<nav class="gnav" aria-label="Navigation principale"><div class="gnav-in">' +
+      '<a class="logo" href="index.html" aria-label="Ekinox Gamos, accueil"><img src="assets/img/logo-ekg.png" alt="" width="30" height="30"><span>Ekinox Gamos</span></a>' +
+      '<div class="gnav-links">' + links + "</div>" +
+      '<div class="gnav-tools">' +
+      '<button class="icon-btn" id="search-btn" type="button" aria-expanded="false" aria-controls="search-panel" aria-label="Rechercher">' + icons.search + "</button>" +
+      '<button class="icon-btn mode-btn" id="mode-btn" type="button"></button>' +
+      '<a class="icon-btn cart-btn" href="panier.html" aria-label="Panier">' + icons.cart + "<b data-cart-count></b></a>" +
+      '<button class="icon-btn burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Ouvrir le menu">' + icons.menu + "</button>" +
+      "</div></div>" +
+      '<div class="gnav-panel" id="search-panel" hidden><div class="wrap search-panel"><form action="catalogue.html" role="search">' + icons.search +
+      '<input type="search" name="q" id="gnav-q" value="' + q + '" placeholder="Rechercher sur Ekinox Gamos" aria-label="Rechercher un produit"></form>' +
+      '<div class="quick"><p>Liens rapides</p><a href="catalogue.html?q=rtx%205060">Cartes graphiques RTX 5060</a><a href="catalogue.html?cat=ups">Onduleurs anti-délestage</a>' +
+      '<a href="configurateur.html">Composer un PC avec Forge</a><a href="garantie.html">Vérifier une garantie</a><a href="boutiques.html">Horaires des boutiques</a></div></div></div>' +
+      '<div class="gnav-panel" id="drawer" hidden><div class="wrap drawer"><nav aria-label="Menu mobile">' + links + "</nav></div></div></nav>";
+
+    /* Ruban d'annonce, sous la navigation (il défile avec la page) */
+    el.insertAdjacentHTML("afterend",
+      '<div class="ribbon"><p>' +
+      '<span data-show-mode="nuit">Livraison en 24 h à Tana, paiement MVola, Orange Money ou Airtel Money. <a href="gamme.html">Voir la gamme ›</a></span>' +
+      '<span data-show-mode="jour">Ekinox Pro : devis sous 24 h ouvrées et installation sur site à Tana. <a href="pro.html#devis">Demander un devis ›</a></span>' +
+      ' <span class="demo">· Site de démonstration</span></p></div>');
 
     renderModeBtn();
     $("#mode-btn").addEventListener("click", function () { setMode(getMode() === "nuit" ? "jour" : "nuit"); });
-    var burger = $("#burger"), drawer = $("#drawer");
-    burger.addEventListener("click", function () {
-      var open = drawer.hidden;
-      drawer.hidden = !open;
-      burger.setAttribute("aria-expanded", String(open));
-      burger.innerHTML = open ? icons.close : icons.menu;
-    });
+
+    var panels = { search: [$("#search-btn"), $("#search-panel")], drawer: [$("#burger"), $("#drawer")] };
+    function toggle(name, open) {
+      Object.keys(panels).forEach(function (k) {
+        var on = k === name ? (open === undefined ? panels[k][1].hidden : open) : false;
+        panels[k][1].hidden = !on;
+        panels[k][0].setAttribute("aria-expanded", String(on));
+        if (k === "drawer") panels[k][0].innerHTML = on ? icons.close : icons.menu;
+        if (k === "search" && on) setTimeout(function () { $("#gnav-q").focus(); }, 30);
+      });
+    }
+    panels.search[0].addEventListener("click", function () { toggle("search"); });
+    panels.drawer[0].addEventListener("click", function () { toggle("drawer"); });
+    doc.addEventListener("keydown", function (e) { if (e.key === "Escape") toggle(null, false); });
   }
+
   function renderFooter() {
     var el = $("#site-footer"); if (!el) return;
-    var st = shopStatus();
-    var shops = D.shops.map(function (s) {
-      return '<div class="foot-shop"><b>' + esc(s.name) + "</b><span>" + esc(s.address) + '</span><a href="tel:' + s.tel + '">' + esc(s.phone) + "</a></div>";
-    }).join("");
-    el.className = "site-footer";
-    el.innerHTML =
-      '<div class="wrap foot-grid">' +
-      '<div class="foot-brand">' + logoHtml() + '<p class="foot-slogan">All you need is here</p>' +
-      "<p>Spécialiste et fournisseur de matériel informatique gaming et professionnel à Antananarivo. PC assemblés et testés dans notre atelier.</p>" +
-      '<div class="foot-pay"><span class="tag">MVola</span><span class="tag">Orange Money</span><span class="tag">Airtel Money</span><span class="tag">Espèces</span><span class="tag">Virement</span></div></div>' +
-      '<div><h3>Boutiques</h3><p class="shop-status' + (st.open ? "" : " closed") + '" style="margin-bottom:14px">' + esc(st.text) + "</p>" + shops +
-      '<p class="muted" style="font-size:14px;margin-top:14px">Lun–ven 8h30–17h · Sam 8h30–12h</p></div>' +
-      '<div><h3>Boutique en ligne</h3><ul><li><a href="gamme.html">PC Gamer Ekinox</a></li><li><a href="configurateur.html">Configurateur Forge</a></li><li><a href="catalogue.html">Composants</a></li><li><a href="catalogue.html?cat=ups">Onduleurs</a></li><li><a href="pro.html">Espace pro</a></li><li><a href="panier.html">Panier</a></li></ul></div>' +
-      '<div><h3>Service</h3><ul><li><a href="garantie.html">Passeport garantie</a></li><li><a href="garantie.html#sav">Suivi SAV</a></li><li><a href="boutiques.html">Retrait en boutique</a></li><li><a href="' + waLink("Bonjour Ekinox Gamos, j'ai une question.") + '" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="' + D.shop.facebook + '" target="_blank" rel="noopener">Facebook</a></li><li><a href="mailto:' + D.shop.email + '">' + D.shop.email + "</a></li></ul></div>" +
-      "</div>" +
-      '<div class="wrap foot-bottom"><span>© 2026 Ekinox Gamos · Challenge everything</span>' +
-      '<span>Site de démonstration : prix, stocks et numéros de série fictifs · <a href="credits.html">Crédits photos</a> · <a href="proposition/proposition-ekinox.html">Proposition d\'agence</a></span></div>';
+    var col = function (title, items) {
+      return "<div><h3>" + title + "</h3><ul>" + items.map(function (i) {
+        return '<li><a href="' + i[0] + '"' + (i[2] ? ' target="_blank" rel="noopener"' : "") + ">" + i[1] + "</a></li>";
+      }).join("") + "</ul></div>";
+    };
+    el.className = "gfoot";
+    el.innerHTML = '<div class="wrap">' +
+      '<div class="gfoot-notes"><p>Site de démonstration réalisé pour Ekinox Gamos. Les prix, stocks, FPS, numéros de série et tickets SAV sont fictifs, et les paiements sont simulés.</p>' +
+      "<p>FPS estimés en moyenne, avec les réglages indiqués sur chaque fiche. Les valeurs réelles varient selon le jeu, le pilote et les options graphiques.</p>" +
+      '<p>Photos d\'illustration Unsplash, détail sur la page <a href="credits.html" style="color:inherit">Crédits</a>.</p></div>' +
+      '<nav class="gfoot-cols" aria-label="Plan du site">' +
+      col("Acheter", [["gamme.html", "PC Gamer Ekinox"], ["configurateur.html", "Configurateur Forge"], ["catalogue.html", "Composants"], ["catalogue.html?cat=ups", "Onduleurs"], ["panier.html", "Panier"]]) +
+      col("Ekinox Pro", [["pro.html", "Univers métier"], ["pro.html#archi", "Architecture et BTP"], ["pro.html#serveurs", "Serveurs et stockage"], ["pro.html#devis", "Demander un devis"]]) +
+      col("Services", [["garantie.html", "Passeport garantie"], ["garantie.html#sav", "Suivi SAV"], ["index.html#arrivages", "Arrivages"], ["boutiques.html", "Retrait en boutique"]]) +
+      col("Boutiques", [["boutiques.html", "Showroom Mahamasina"], ["boutiques.html", "Annexe Andravoahangy"], ["boutiques.html", "Horaires et itinéraires"]]) +
+      col("Ekinox Gamos", [[D.shop.facebook, "Facebook", 1], [waLink("Bonjour Ekinox Gamos, j'ai une question."), "WhatsApp", 1], ["mailto:" + D.shop.email, "E-mail"], ["proposition/proposition-ekinox.html", "Proposition d'agence"]]) +
+      "</nav>" +
+      '<p class="gfoot-more">Autres façons d\'acheter : passez au <a href="boutiques.html">showroom de Mahamasina</a> ou appelez le <a href="tel:' + D.shops[0].tel + '">' + D.shops[0].phone + "</a>.</p>" +
+      '<div class="gfoot-legal"><span class="gfoot-brand"><img src="assets/img/logo-ekg.png" alt="" width="22" height="22"><b>Challenge everything</b></span>' +
+      "<span>Copyright © 2026 Ekinox Gamos. Tous droits réservés.</span>" +
+      '<nav aria-label="Liens annexes"><a href="credits.html">Crédits</a><a href="boutiques.html">Contact</a><a href="proposition/proposition-ekinox.html">Proposition</a></nav>' +
+      "<span>Madagascar</span></div></div>";
   }
+
+  /* ---------- Défileurs horizontaux (gamme, avantages) ---------- */
+  function initScrollers() {
+    $$("[data-scroller]").forEach(function (box) {
+      var sc = $(".scroller", box), prev = $('[data-dir="prev"]', box), next = $('[data-dir="next"]', box);
+      if (!sc || !prev || !next || sc._init) return;
+      sc._init = true;
+      function update() {
+        prev.disabled = sc.scrollLeft < 8;
+        next.disabled = sc.scrollLeft + sc.clientWidth > sc.scrollWidth - 8;
+      }
+      function go(dir) {
+        var first = sc.firstElementChild;
+        var w = first ? first.getBoundingClientRect().width + 20 : 300;
+        sc.scrollBy({ left: dir * w, behavior: REDUCED ? "auto" : "smooth" });
+      }
+      prev.addEventListener("click", function () { go(-1); });
+      next.addEventListener("click", function () { go(1); });
+      sc.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+      update();
+    });
+  }
+  doc.addEventListener("DOMContentLoaded", initScrollers);
 
   /* ---------- Ajout au panier (délégation) ---------- */
   doc.addEventListener("click", function (e) {
@@ -299,7 +351,7 @@
     var it = getItem(b.getAttribute("data-add"));
     if (!it) return;
     cart.add(it.id, 1);
-    toast((isPc(it) ? "Ekinox " : "") + it.name + " ajouté au panier", { href: "panier.html", text: "Voir le panier" });
+    toast(displayName(it) + " ajouté au panier", { href: "panier.html", text: "Voir le panier" });
   });
 
   /* ---------- Démarrage ---------- */
@@ -313,6 +365,7 @@
     $: $, $$: $$, esc: esc, fmtAr: fmtAr, fmtNum: fmtNum, fmtDate: fmtDate, normalize: normalize, params: params, store: store,
     icons: icons, getItem: getItem, isPc: isPc, catName: catName, stockTotal: stockTotal, stockInfo: stockInfo, upsFor: upsFor,
     fpsFor: fpsFor, gameName: gameName, photo: photo, pcCard: pcCard, partCard: partCard, cart: cart, waLink: waLink,
+    nice: nice, displayName: displayName, initScrollers: initScrollers,
     shopStatus: shopStatus, tanaNow: tanaNow, tween: tween, reducedMotion: REDUCED, fmtHour: fmtHour, getMode: getMode, setMode: setMode, toast: toast
   };
 })();

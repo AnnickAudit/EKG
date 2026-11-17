@@ -1,58 +1,58 @@
-/* Accueil */
+/* Accueil : prix des tuiles, gamme, avantages, arrivages, boutiques */
 (function () {
   "use strict";
-  var A = window.EKGApp, D = window.EKG, $ = A.$;
+  var A = window.EKGApp, D = window.EKG, $ = A.$, esc = A.esc, I = A.icons;
 
-  /* PC à la une */
-  var star = A.getItem("zenith"), st = A.stockInfo(star);
-  $("#hero-card").innerHTML =
-    '<span class="tag tag-y">Le plus choisi</span>' +
-    "<h3>EKINOX " + A.esc(star.name) + "</h3>" +
-    '<p class="muted" style="margin-top:-6px">' + A.esc(star.line) + "</p>" +
-    "<ul><li>" + A.esc(star.specs.cpu) + "</li><li>" + A.esc(star.specs.gpu) + "</li><li>" + A.esc(star.specs.ram) + "</li><li>≈ " + star.fps.gtav + " FPS sur GTA V en 1440p</li></ul>" +
-    '<span class="price">' + A.fmtAr(star.price) + "</span>" +
-    '<span class="stock ' + st.cls + '">' + A.esc(st.text) + "</span>" +
-    '<a class="btn btn-block" href="produit.html?id=zenith">Voir la fiche</a>';
+  /* Prix « À partir de » des tuiles */
+  A.$$("[data-price]").forEach(function (el) {
+    var it = A.getItem(el.getAttribute("data-price"));
+    if (it) el.textContent = "À partir de " + A.fmtAr(it.price);
+  });
+
+  /* Onduleurs de la tuile anti-délestage */
+  $("#home-ups").innerHTML = ["ups-1200", "ups-2000", "surge"].map(function (id) {
+    var p = A.getItem(id);
+    return '<a href="produit.html?id=' + p.id + '"><span>' + esc(p.name) + '</span><span class="price">' + A.fmtAr(p.price) + "</span></a>";
+  }).join("");
 
   /* Gamme */
   $("#home-pcs").innerHTML = D.pcs.map(function (p) { return A.pcCard(p); }).join("");
 
-  /* Univers */
-  $("#home-unis").innerHTML = D.universes.map(function (u) {
-    return '<a class="uni-card" href="pro.html#' + u.id + '">' + A.photo(u.photo, "", { alt: "" }) +
-      '<span class="arrow">' + A.icons.arrow + "</span>" +
-      '<div class="uni-body"><h3>' + A.esc(u.name) + "</h3><p>" + A.esc(u.software.slice(0, 3).join(" · ")) + "</p></div></a>";
+  /* Avantages */
+  var WHY = [
+    ["wrench", "Assemblé à Tana", "Chaque machine est montée et câblée dans notre atelier de Mahamasina."],
+    ["gauge", "Testé 24 h", "Processeur et carte graphique à pleine charge avant la livraison, températures relevées."],
+    ["camera", "Carnet d'assemblage", "Tu reçois les photos et une vidéo de ta propre machine avant qu'elle parte."],
+    ["shield", "Garanti 12 mois", "Passeport numérique et QR code sur le boîtier pour suivre la garantie et le SAV."],
+    ["phone", "Mobile money", "MVola, Orange Money ou Airtel Money. Acompte de 20 % pour réserver."],
+    ["truck", "Livré en 24 h à Tana", "Ou retiré gratuitement en boutique. Envoi en province par transporteur."]
+  ];
+  $("#home-why").innerHTML = WHY.map(function (w) {
+    return '<article class="why-card">' + I[w[0]] + "<h3>" + w[1] + "</h3><p>" + w[2] + "</p></article>";
   }).join("");
 
-  /* Arrivages */
+  /* Arrivage RTX 50 : inscription */
+  var btn = $("#notify-rtx");
   var notified = A.store("ekg-notify") || [];
-  function renderArrivals() {
-    $("#home-arrivals").innerHTML = D.arrivals.map(function (a, i) {
-      var on = notified.indexOf(i) > -1;
-      return '<div class="arrival"><time>' + A.esc(a.date) + "</time><div><b>" + A.esc(a.name) + "</b><span>" + A.esc(a.note) + "</span></div>" +
-        '<button class="btn btn-sm" type="button" data-notify="' + i + '"' + (on ? ' aria-pressed="true"' : "") + ">" + (on ? A.icons.check + "Inscrit" : "Me prévenir") + "</button></div>";
-    }).join("");
+  function renderNotify() {
+    var on = notified.indexOf(0) > -1;
+    btn.textContent = on ? "Inscrit ✓" : "Me prévenir";
+    btn.setAttribute("aria-pressed", String(on));
   }
-  renderArrivals();
-  $("#home-arrivals").addEventListener("click", function (e) {
-    var b = e.target.closest("[data-notify]"); if (!b) return;
-    var i = parseInt(b.getAttribute("data-notify"), 10);
-    var k = notified.indexOf(i);
-    if (k > -1) notified.splice(k, 1); else { notified.push(i); A.toast("Inscrit : tu seras prévenu sur WhatsApp à l'arrivage"); }
+  btn.addEventListener("click", function () {
+    var k = notified.indexOf(0);
+    if (k > -1) notified.splice(k, 1); else { notified.push(0); A.toast("Inscrit : tu seras prévenu sur WhatsApp à l'arrivage"); }
     A.store("ekg-notify", notified);
-    renderArrivals();
+    renderNotify();
   });
-
-  /* Onduleurs */
-  $("#home-ups").innerHTML = ["ups-1200", "ups-2000"].map(function (id) { return A.partCard(A.getItem(id)); }).join("");
+  renderNotify();
 
   /* Boutiques */
   var s = A.shopStatus();
   $("#home-shops").innerHTML = D.shops.map(function (shop) {
-    return '<article class="shop-card"><h3>' + A.esc(shop.name) + "</h3>" +
-      '<p class="shop-status' + (s.open ? "" : " closed") + '">' + A.esc(s.text) + "</p>" +
-      '<dl class="shop-meta"><dt>Adresse</dt><dd>' + A.esc(shop.address) + "</dd><dt>Téléphone</dt><dd><a href=\"tel:" + shop.tel + '">' + A.esc(shop.phone) + "</a></dd><dt>Sur place</dt><dd>" + A.esc(shop.role) + "</dd></dl>" +
-      '<div class="btn-row"><a class="btn btn-sm btn-primary" href="' + shop.maps + '" target="_blank" rel="noopener">' + A.icons.pin + "Itinéraire</a>" +
-      '<a class="btn btn-sm" href="boutiques.html">Horaires</a></div></article>';
+    return '<article class="shop-card"><h3>' + esc(shop.name) + "</h3>" +
+      '<p class="shop-status' + (s.open ? "" : " closed") + '">' + esc(s.text) + "</p>" +
+      '<dl class="shop-meta"><dt>Adresse</dt><dd>' + esc(shop.address) + '</dd><dt>Téléphone</dt><dd><a href="tel:' + shop.tel + '">' + esc(shop.phone) + "</a></dd><dt>Sur place</dt><dd>" + esc(shop.role) + "</dd></dl>" +
+      '<div class="cta-row" style="justify-content:flex-start"><a class="btn btn-primary btn-sm" href="' + shop.maps + '" target="_blank" rel="noopener">Itinéraire</a><a class="more" href="boutiques.html">Horaires</a></div></article>';
   }).join("");
 })();

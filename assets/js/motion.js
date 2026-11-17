@@ -1,9 +1,9 @@
-/* Motion design sobre : apparitions au défilement, cartes animées après un filtre,
-   en-tête compact, parallaxe légère du héros. Désactivé si l'utilisateur réduit les animations. */
+/* Motion design : apparitions au défilement, cartes animées après un filtre.
+   Désactivé si l'utilisateur réduit les animations. */
 (function () {
   "use strict";
   var root = document.documentElement;
-  var navbar = document.querySelector(".navbar");
+  var navbar = document.querySelector(".gnav");
 
   /* En-tête compact dès qu'on défile (toujours actif, sans animation forcée) */
   function headerState() { if (navbar) navbar.classList.toggle("scrolled", window.scrollY > 8); }
@@ -15,10 +15,10 @@
   /* ---------- Apparitions ---------- */
   var TARGETS = [
     ".page-head .wrap > *", ".pro-hero-in > div:first-child > *", ".pro-perks > div",
-    ".section-head", ".trust li", ".pc-card", ".part-card", ".uni-card", ".split-media",
-    ".split > div:not(.split-media) > *", ".promo > *", ".arrival", ".shop-card", ".uni-section",
-    ".fps-row", ".table-wrap", ".filters", ".forge-start", ".cat-banner", ".cart-line",
-    ".checkout", ".summary", ".passport", ".panel", ".credit", ".tabs-block h2", ".product > div"
+    ".section-title", ".section-head", ".tile", ".pc-card", ".part-card", ".why-card", ".hl-card",
+    ".uni-card", ".split-media", ".split > div:not(.split-media) > *", ".promo > *", ".arrival",
+    ".shop-card", ".uni-section", ".fps-row", ".table-wrap", ".filters", ".forge-start", ".cat-banner",
+    ".cart-line", ".checkout", ".summary", ".passport", ".panel", ".credit", ".product > *"
   ].join(",");
   var STEP = 70, MAX_STAGGER = 6;
 
@@ -54,7 +54,7 @@
   var all = Array.prototype.slice.call(document.querySelectorAll(TARGETS));
   var vh = window.innerHeight;
   all.forEach(function (el) {
-    if (el.closest(".hero")) return;
+    if (el.closest(".hero, .p-hero")) return;
     var r = el.getBoundingClientRect(), d = delayFor(el, all);
     if (r.top < vh * 0.92 && r.bottom > 0) rise(el, d);
     else { el.style.setProperty("--d", d + "ms"); el.classList.add("reveal"); io.observe(el); }
@@ -71,18 +71,4 @@
     }).observe(box, { childList: true });
   });
 
-  /* ---------- Parallaxe légère du héros ---------- */
-  var heroMedia = document.querySelector(".hero-media");
-  if (heroMedia) {
-    var ticking = false;
-    window.addEventListener("scroll", function () {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        var y = window.scrollY;
-        if (y < window.innerHeight * 1.2) heroMedia.style.transform = "translate3d(0," + (y * 0.16).toFixed(1) + "px,0)";
-        ticking = false;
-      });
-    }, { passive: true });
-  }
 })();

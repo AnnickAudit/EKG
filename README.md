@@ -23,9 +23,9 @@ Numéros de démonstration : passeport `EKG-2026-0412` (sous garantie), `EKG-202
 
 ## Charte
 
-Couleurs relevées sur le logo : noir `#000000`, jaune `#FEE903`, olive `#969108`. Pas de blanc. Le texte courant utilise un gris chaud `#D6D2B6` pour le confort de lecture. Polices : Orbitron (titres), Barlow (texte), JetBrains Mono (prix et specs).
+Couleurs relevées sur le logo : noir `#000000`, jaune `#FEE903`, olive `#969108`. Pas de blanc : les titres et le texte utilisent des gris chauds. Police : Geist et Geist Mono. Mise en page inspirée des grands sites produits (tuiles, titres centrés, boutons pilule, barre produit fixe).
 
-Le mode **Nuit** garde tout le site en noir. Le mode **Jour** passe l'en-tête et les bandeaux en jaune. Par défaut, le site suit l'heure de Tana (Jour de 6 h à 18 h), et l'espace pro s'ouvre toujours en Jour.
+Le mode **Nuit** met en avant le gaming, le mode **Jour** l'offre pro ; le ruban d'annonce passe en jaune le jour. Par défaut, le site suit l'heure de Tana (Jour de 6 h à 18 h), et l'espace pro s'ouvre toujours en Jour.
 
 ## Lancer en local
 
