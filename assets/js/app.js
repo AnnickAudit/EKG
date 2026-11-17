@@ -144,11 +144,24 @@
       "</div></article>";
   }
 
+  /* Photo réelle d'un composant, ou null */
+  function partImg(part) {
+    var f = D.partImg && D.partImg[part.id];
+    return f ? "assets/img/parts/" + f + ".jpg" : null;
+  }
+  function partMedia(part, cls) {
+    var src = partImg(part);
+    return src
+      ? '<div class="ph ' + (cls || "") + '"><img src="' + src + '" alt="' + esc(part.name) + '" loading="lazy" decoding="async"></div>'
+      : '<div class="' + (cls || "") + ' icon">' + (icons[part.cat] || icons.box) + "</div>";
+  }
+
   function partCard(part) {
-    var st = stockInfo(part), url = "produit.html?id=" + part.id;
+    var st = stockInfo(part), url = "produit.html?id=" + part.id, src = partImg(part);
     var eyebrow = part.note || (!stockTotal(part) && part.arrival ? "Arrivage le " + part.arrival : "");
     return '<article class="part-card">' +
-      '<a class="part-media" href="' + url + '" tabindex="-1" aria-hidden="true">' + (icons[part.cat] || icons.box) + "</a>" +
+      '<a class="part-media' + (src ? " has-img" : "") + '" href="' + url + '" tabindex="-1" aria-hidden="true">' +
+      (src ? '<img src="' + src + '" alt="" loading="lazy" decoding="async">' : (icons[part.cat] || icons.box)) + "</a>" +
       '<p class="part-eyebrow">' + esc(eyebrow) + "</p>" +
       '<span class="part-cat">' + esc(catName(part.cat)) + "</span>" +
       '<a class="part-name" href="' + url + '">' + esc(part.name) + "</a>" +
@@ -395,7 +408,7 @@
     $: $, $$: $$, esc: esc, fmtAr: fmtAr, fmtNum: fmtNum, fmtDate: fmtDate, normalize: normalize, params: params, store: store,
     icons: icons, getItem: getItem, isPc: isPc, catName: catName, stockTotal: stockTotal, stockInfo: stockInfo, upsFor: upsFor,
     fpsFor: fpsFor, gameName: gameName, photo: photo, pcCard: pcCard, partCard: partCard, cart: cart, waLink: waLink,
-    nice: nice, displayName: displayName, initScrollers: initScrollers,
+    nice: nice, displayName: displayName, initScrollers: initScrollers, partImg: partImg, partMedia: partMedia,
     shopStatus: shopStatus, tanaNow: tanaNow, tween: tween, reducedMotion: REDUCED, fmtHour: fmtHour, getMode: getMode, setMode: setMode, toast: toast
   };
 })();

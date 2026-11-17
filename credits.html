@@ -29,7 +29,7 @@
   <section class="wrap grid-2" style="padding-block:36px 80px;align-items:start">
     <div>
       <h2 style="margin-bottom:18px">Photos</h2>
-      <p class="muted" style="margin-bottom:18px">Toutes sous <a href="https://unsplash.com/license" target="_blank" rel="noopener">licence Unsplash</a> : usage commercial gratuit, attribution non obligatoire. Elles sont affichées en couleurs naturelles.</p>
+      <p class="muted" style="margin-bottom:18px">Photos sous <a href="https://unsplash.com/license" target="_blank" rel="noopener">licence Unsplash</a> (usage commercial gratuit, attribution non obligatoire), et une photo d'onduleur du domaine public (CC0, Wikimedia Commons). Ce sont des photos d'illustration du type de produit : sur le vrai site, chaque fiche aura la photo du modèle vendu.</p>
       <div class="credits" id="credits"></div>
     </div>
     <div class="panel">
@@ -53,10 +53,15 @@
 <script>
 (function () {
   var A = window.EKGApp, D = window.EKG;
-  A.$("#credits").innerHTML = Object.keys(D.photos).map(function (id) {
+  var ambiance = Object.keys(D.photos).map(function (id) {
     var p = D.photos[id];
     return '<div class="credit">' + A.photo(id, "", { alt: "" }) + '<div><b>' + A.esc(p.alt) + '</b><br><span class="muted">Photo de ' + A.esc(p.by) + ' · </span><a href="' + p.url + '" target="_blank" rel="noopener">Voir sur Unsplash</a></div></div>';
-  }).join("");
+  });
+  var parts = Object.keys(D.partPhotos).map(function (id) {
+    var p = D.partPhotos[id];
+    return '<div class="credit"><div class="ph"><img src="assets/img/parts/' + id + '.jpg" alt="" loading="lazy"></div><div><b>' + A.esc(p.alt) + '</b><br><span class="muted">Photo de ' + A.esc(p.by) + ' · ' + A.esc(p.license) + ' · </span><a href="' + p.url + '" target="_blank" rel="noopener">Source</a></div></div>';
+  });
+  A.$("#credits").innerHTML = '<h3>Ambiance</h3>' + ambiance.join("") + '<h3 style="margin-top:20px">Composants</h3>' + parts.join("");
 })();
 </script>
 <script src="assets/js/motion.js"></script>

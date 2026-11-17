@@ -173,6 +173,48 @@ window.EKG = {
     { id: "surge", cat: "ups", name: "Parafoudre 8 prises", spec: "Protection surtension · 2 USB", price: 85000, stock: { mahamasina: 10, andravoahangy: 8 } }
   ],
 
+  /* Photo réelle de chaque composant (dossier assets/img/parts). Photos d'illustration du type de produit. */
+  partImg: {
+    "cpu-r5-5600": "cpu-ryzen", "cpu-r5-7600": "cpu-ryzen", "cpu-r7-7700": "cpu-ryzen", "cpu-r9-9900x": "cpu-ryzen", "cpu-r7-9800x3d": "cpu-ryzen",
+    "cpu-i5-14400f": "cpu-intel", "cpu-i7-14700f": "cpu-intel",
+    "mb-b550m": "carte-mere-jaune", "mb-b650m": "carte-mere-jaune", "mb-b650": "carte-mere-jaune", "mb-x870": "carte-mere-jaune", "mb-b760m-d4": "carte-mere-jaune", "mb-b760": "carte-mere-jaune",
+    "ram-16-d4": "ram-ddr5-jaune", "ram-32-d4": "ram-ddr5-jaune", "ram-32-d5": "ram-ddr5-jaune", "ram-64-d5": "ram-ddr5-jaune",
+    "gpu-5050": "gpu-rtx-jaune", "gpu-5060": "gpu-rtx-jaune", "gpu-5060ti": "gpu-rtx-jaune", "gpu-9060xt": "gpu-duo-jaune", "gpu-9070": "gpu-duo-jaune",
+    "gpu-5070": "gpu-rtx-proart", "gpu-5070ti": "gpu-rtx-proart", "gpu-5080": "gpu-rtx-proart",
+    "ssd-512": "ssd-nvme", "ssd-1t": "ssd-nvme", "ssd-2t": "ssd-nvme", "hdd-2t": "hdd-jaune",
+    "psu-550": "alim-jaune", "psu-650": "alim-chieftec-jaune", "psu-750": "alim-chieftronic-jaune", "psu-850": "alim-850w-jaune", "psu-1000": "alim-bequiet-jaune",
+    "case-rgb-atx": "../photos/pc-lianli", "case-matx": "../photos/pc-dark", "case-airflow": "../photos/pc-inside", "case-pano": "../photos/pc-glass",
+    "cool-tower": "ventirad-jaune", "cool-aio240": "watercooling-jaune", "cool-aio360": "watercooling-jaune",
+    "mon-24-180": "ecran", "mon-27-qhd": "ecran", "mon-27-4k": "ecran",
+    "kb-meca": "clavier-jaune", "mouse-gaming": "souris-jaune", "headset": "casque-jaune", "pad-xl": "bureau-jaune",
+    "ups-1200": "onduleur-apc", "ups-2000": "onduleur-apc", "surge": "parafoudre"
+  },
+  partPhotos: {
+    "gpu-rtx-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/ipVMl4H6g6o", license: "Unsplash", alt: "Carte graphique GeForce RTX sur fond jaune" },
+    "gpu-duo-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/Wr7nS1-7rx4", license: "Unsplash", alt: "Deux cartes graphiques sur fond jaune" },
+    "gpu-rtx-proart": { by: "GAMERCOMP.RU", url: "https://unsplash.com/photos/cl3LQoBGxP4", license: "Unsplash", alt: "Carte graphique GeForce RTX montée dans un PC" },
+    "cpu-ryzen": { by: "BoliviaInteligente", url: "https://unsplash.com/photos/utzc2cBWUag", license: "Unsplash", alt: "Processeur AMD Ryzen" },
+    "cpu-intel": { by: "Christian Wiediger", url: "https://unsplash.com/photos/eo5jK8Mmz68", license: "Unsplash", alt: "Processeur Intel Core" },
+    "carte-mere-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/3wKbz439TNU", license: "Unsplash", alt: "Carte mère sur fond jaune" },
+    "ram-ddr5-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/mSShcSJcsrY", license: "Unsplash", alt: "Deux barrettes de mémoire DDR5 sur fond jaune" },
+    "ssd-nvme": { by: "Rémy", url: "https://unsplash.com/photos/aCIrk0LK6YQ", license: "Unsplash", alt: "SSD NVMe M.2 installé sur une carte mère" },
+    "hdd-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/nfuuFQ41byY", license: "Unsplash", alt: "Disque dur sur fond jaune" },
+    "alim-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/3pkXVlGK194", license: "Unsplash", alt: "Alimentation PC avec câbles sur fond jaune" },
+    "alim-chieftec-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/o8juSlQcCqs", license: "Unsplash", alt: "Alimentation PC sur fond jaune" },
+    "alim-chieftronic-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/b7EBrPOTVoU", license: "Unsplash", alt: "Alimentation PC modulaire sur fond jaune" },
+    "alim-850w-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/PBhuaGzJkxk", license: "Unsplash", alt: "Alimentation 850 W 80+ Gold sur fond jaune" },
+    "alim-bequiet-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/GwJLVb9XPxc", license: "Unsplash", alt: "Alimentation PC haut de gamme sur fond jaune" },
+    "ventirad-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/1bkX3U_1k7I", license: "Unsplash", alt: "Ventirad double tour sur fond jaune" },
+    "watercooling-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/ltzme6y7WSc", license: "Unsplash", alt: "Watercooling AIO sur fond jaune" },
+    "clavier-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/f41B-562UDY", license: "Unsplash", alt: "Clavier sur fond jaune" },
+    "souris-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/TfxQ1k9Ecpw", license: "Unsplash", alt: "Souris sur fond jaune" },
+    "casque-jaune": { by: "Andrey Matveev", url: "https://unsplash.com/photos/UgM8JMcU9K8", license: "Unsplash", alt: "Casque audio sur fond jaune" },
+    "bureau-jaune": { by: "Arturo Esparza", url: "https://unsplash.com/photos/Jvm-3D52-Fc", license: "Unsplash", alt: "Clavier et souris sur fond jaune" },
+    "ecran": { by: "Joshua Kettle", url: "https://unsplash.com/photos/mHm1ASYNC0I", license: "Unsplash", alt: "Écran incurvé sur un bureau" },
+    "onduleur-apc": { by: "MSDN.WhiteKnight", url: "https://commons.wikimedia.org/wiki/File:APC_Back-UPS_ES525.jpg", license: "CC0 (domaine public), Wikimedia Commons", alt: "Onduleur à prises européennes" },
+    "parafoudre": { by: "David Thielen", url: "https://unsplash.com/photos/Nw8bwn1Kd6o", license: "Unsplash", alt: "Multiprise parafoudre noire" }
+  },
+
   universes: [
     {
       id: "bureautique", name: "Bureautique & gestion", photo: "bureau-office",

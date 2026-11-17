@@ -28,7 +28,7 @@
     if (l.ups) subs.push("+ Pack anti-délestage : " + A.upsFor(it).name + " (" + A.fmtAr(A.upsFor(it).price) + ")");
     return {
       name: pc ? "Ekinox " + it.name : it.name, href: "produit.html?id=" + it.id,
-      thumb: pc ? A.photo(it.photo, "cart-thumb", { alt: "" }) : '<div class="cart-thumb icon">' + (I[it.cat] || I.box) + "</div>",
+      thumb: pc ? A.photo(it.photo, "cart-thumb", { alt: "" }) : A.partMedia(it, "cart-thumb"),
       subs: subs, stock: A.stockInfo(it), item: it
     };
   }

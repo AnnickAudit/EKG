@@ -95,7 +95,7 @@
       "</div></div></section>" +
 
       '<section class="section" id="acheter" style="padding-top:0"><div class="wrap"><div class="product">' +
-      A.photo(it.photo, "product-media", { alt: "" }) +
+      '<div class="product-aside">' + A.photo(it.photo, "product-media", { alt: "" }) + "</div>" +
       '<div class="buybox"><h2>Acheter ' + esc(title) + ".</h2>" + buyInner + "</div></div></div></section>" +
 
       '<section class="section" id="perf" style="padding-top:0"><div class="wrap"><div class="section-title"><h2>Performances.</h2>' +
@@ -140,7 +140,8 @@
 
     root.innerHTML =
       '<div class="wrap" style="padding-top:clamp(28px,4vw,48px)"><nav class="crumbs" aria-label="Fil d\'Ariane" style="justify-content:flex-start"><a href="index.html">Accueil</a><span>›</span><a href="catalogue.html?cat=' + it.cat + '">' + esc(A.catName(it.cat)) + "</a><span>›</span><span>" + esc(title) + "</span></nav>" +
-      '<div class="product" id="acheter"><div class="product-media icon">' + (I[it.cat] || I.box) + "</div>" +
+      '<div class="product" id="acheter"><div class="product-aside">' + A.partMedia(it, "product-media") +
+      (A.partImg(it) ? '<p class="photo-note">Photo d\'illustration du type de produit, non contractuelle.</p>' : "") + "</div>" +
       '<div class="buybox"><p class="eyebrow">' + esc(A.catName(it.cat)) + '</p><h1 style="font-size:clamp(32px,3.6vw,48px)">' + esc(title) + '</h1><p class="tagline">' + esc(it.spec) + "</p>" + buyInner + "</div></div></div>" +
       '<section class="section"><div class="wrap grid-2" style="align-items:start"><div><h2 style="margin-bottom:20px">Caractéristiques.</h2><div class="table-wrap"><table class="spec-table"><tbody>' +
       attrs.map(function (r) { return '<tr><th scope="row">' + r[0] + "</th><td>" + esc(r[1]) + "</td></tr>"; }).join("") + "</tbody></table></div></div>" +

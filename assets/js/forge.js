@@ -99,8 +99,9 @@
   function render(focusCat) {
     $("#forge-steps").innerHTML = STEPS.map(function (st, i) {
       var opts = partsOf(st.cat).map(function (p) {
-        var checked = sel[st.cat] === p.id, why = checked ? "" : reason(p), s = A.stockInfo(p);
+        var checked = sel[st.cat] === p.id, why = checked ? "" : reason(p), s = A.stockInfo(p), img = A.partImg(p);
         return '<label class="opt' + (why ? " is-off" : "") + '"><input type="radio" name="f-' + st.cat + '" value="' + p.id + '"' + (checked ? " checked" : "") + (why ? " disabled" : "") + ">" +
+          (img ? '<img class="opt-thumb" src="' + img + '" alt="" loading="lazy" decoding="async">' : "") +
           "<b>" + esc(p.name) + '</b><span class="opt-sub">' + esc(p.spec) + "</span>" + (why ? '<span class="why">' + esc(why) + "</span>" : "") +
           '<span class="opt-price"><span class="price">' + A.fmtAr(p.price) + '</span><span class="stock ' + s.cls + '">' + esc(s.text) + "</span></span></label>";
       }).join("");
