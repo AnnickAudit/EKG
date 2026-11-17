@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Composants et périphériques · Ekinox Gamos</title>
+<meta name="description" content="Cartes graphiques, processeurs, cartes mères, mémoire, stockage, écrans, périphériques et onduleurs. Stock en temps réel dans nos deux boutiques d'Antananarivo.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="assets/img/logo-ekg.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){var d=document.documentElement,m=null,f=d.getAttribute("data-force");try{m=localStorage.getItem("ekg-mode")}catch(e){}if(f){m=f}else if(m!=="jour"&&m!=="nuit"){var h=(new Date().getUTCHours()+3)%24;m=(h>=6&&h<18)?"jour":"nuit"}d.setAttribute("data-mode",m)})();</script>
+</head>
+<body data-nav="catalogue.html">
+<a class="skip" href="#main">Aller au contenu</a>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a><span>/</span><span>Composants</span></nav>
+      <p class="kicker">All you need is here</p>
+      <h1>Composants &amp; périphériques</h1>
+      <p class="lead">Stock mis à jour pour nos deux boutiques. Retrait gratuit à Mahamasina ou Andravoahangy, livraison à Tana en 24 h.</p>
+    </div>
+  </section>
+
+  <div class="wrap cat-layout">
+    <aside class="cat-side" aria-label="Filtres">
+      <div>
+        <p class="eyebrow">Catégories</p>
+        <ul class="cat-list" id="c-cats"></ul>
+      </div>
+      <div class="field">
+        <label for="c-max">Prix maximum <output id="c-max-out" for="c-max"></output></label>
+        <input type="range" id="c-max" min="100000" max="7500000" step="100000" value="7500000">
+      </div>
+      <label class="check"><input type="checkbox" id="c-stock"> En stock uniquement</label>
+      <a class="btn btn-sm" href="configurateur.html">Monter un PC avec Forge</a>
+    </aside>
+
+    <div>
+      <div class="cat-tools">
+        <div class="search-big">
+          <span data-icon="search"></span>
+          <input class="input" type="search" id="c-q" placeholder="Ex. rtx5060, ddr5, 1 To, onduleur" aria-label="Rechercher dans le catalogue">
+        </div>
+        <select class="select" id="c-sort" aria-label="Trier">
+          <option value="asc">Prix croissant</option>
+          <option value="desc">Prix décroissant</option>
+          <option value="name">Nom</option>
+        </select>
+      </div>
+      <div id="c-banner"></div>
+      <div id="c-pcs"></div>
+      <p class="note-demo" id="c-count" style="margin-bottom:14px" aria-live="polite"></p>
+      <div class="part-grid" id="c-grid"></div>
+      <div class="empty" id="c-empty" hidden>
+        <span data-icon="search"></span>
+        <b>Aucun produit ne correspond.</b>
+        <span>Essaie un autre mot, ou demande-nous directement : on commande aussi sur demande.</span>
+        <a class="btn btn-primary" id="c-ask" target="_blank" rel="noopener">Demander sur WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer id="site-footer"></footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/catalogue.js"></script>
+</body>
+</html>

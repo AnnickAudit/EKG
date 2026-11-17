@@ -1,0 +1,8 @@
+# Fichiers sources du client (copies utilisées dans assets/img)
+logo 1.png
+logo.jpeg
+
+# Système
+.DS_Store
+Thumbs.db
+*.swp

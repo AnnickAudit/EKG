@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nos boutiques · Ekinox Gamos</title>
+<meta name="description" content="Showroom Ekinox Gamos à Mahamasina, près de Gastro Pizza, et annexe à l'immeuble Raitra, Andravoahangy. Horaires, itinéraires et contacts.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="assets/img/logo-ekg.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){var d=document.documentElement,m=null,f=d.getAttribute("data-force");try{m=localStorage.getItem("ekg-mode")}catch(e){}if(f){m=f}else if(m!=="jour"&&m!=="nuit"){var h=(new Date().getUTCHours()+3)%24;m=(h>=6&&h<18)?"jour":"nuit"}d.setAttribute("data-mode",m)})();</script>
+</head>
+<body data-nav="boutiques.html">
+<a class="skip" href="#main">Aller au contenu</a>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a><span>/</span><span>Boutiques</span></nav>
+      <p class="kicker">Antananarivo</p>
+      <h1>Nos boutiques</h1>
+      <p class="lead">Le showroom de Mahamasina accueille l'atelier d'assemblage. L'annexe d'Andravoahangy est idéale pour les composants et les retraits rapides.</p>
+      <p class="shop-status" id="b-status" style="margin-top:18px"></p>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-block:36px 56px">
+    <div class="shop-grid" id="b-shops"></div>
+  </section>
+
+  <section class="band-mode">
+    <div class="wrap section" style="padding-block:clamp(44px,6vw,72px)">
+      <div class="grid-2">
+        <div>
+          <p class="kicker">Retrait en boutique</p>
+          <h2>Commande en ligne, retire en 2 heures.</h2>
+          <p class="muted" style="margin-top:14px">Pour un produit en stock, ta commande est prête sous 2 heures pendant les horaires d'ouverture. Pour un PC assemblé, compte 48 heures avec le test de charge.</p>
+        </div>
+        <ol class="steps" style="margin-top:0">
+          <li><div><b>Tu commandes</b><span>Sur le site, sur WhatsApp ou par téléphone.</span></div></li>
+          <li><div><b>On confirme</b><span>Disponibilité et boutique de retrait, sous 30 minutes.</span></div></li>
+          <li><div><b>Commande prête</b><span>Tu reçois un message avec ta référence.</span></div></li>
+          <li><div><b>Retrait</b><span>Présente ta référence ; paiement sur place si besoin.</span></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid-2">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2>Une question avant de passer ?</h2>
+        <p class="lead" style="margin-top:14px">Écris-nous sur WhatsApp : un conseiller répond pendant les horaires d'ouverture.</p>
+        <div class="btn-row" style="margin-top:22px">
+          <a class="btn btn-primary btn-lg" id="b-wa" target="_blank" rel="noopener"></a>
+        </div>
+      </div>
+      <dl class="shop-meta panel" id="b-contact" style="display:grid"></dl>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/boutiques.js"></script>
+</body>
+</html>

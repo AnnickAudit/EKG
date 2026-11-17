@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Garantie &amp; SAV · Ekinox Gamos</title>
+<meta name="description" content="Passeport garantie Ekinox : consulte la garantie de ton PC avec son numéro de série ou son QR code, ouvre et suis une demande SAV.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="assets/img/logo-ekg.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){var d=document.documentElement,m=null,f=d.getAttribute("data-force");try{m=localStorage.getItem("ekg-mode")}catch(e){}if(f){m=f}else if(m!=="jour"&&m!=="nuit"){var h=(new Date().getUTCHours()+3)%24;m=(h>=6&&h<18)?"jour":"nuit"}d.setAttribute("data-mode",m)})();</script>
+</head>
+<body data-nav="garantie.html">
+<a class="skip" href="#main">Aller au contenu</a>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a><span>/</span><span>Garantie &amp; SAV</span></nav>
+      <p class="kicker">Passeport garantie</p>
+      <h1>Ta machine a un passeport.</h1>
+      <p class="lead">Chaque PC Ekinox reçoit un numéro de série et un QR code collé sur le boîtier. Il donne accès à la garantie, au rapport de test et à l'historique d'entretien.</p>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-block:36px 24px">
+    <form class="panel" id="pp-form" role="search" aria-label="Consulter un passeport garantie">
+      <h2>Consulter un passeport</h2>
+      <div class="lookup">
+        <label class="sr-only" for="pp-sn">Numéro de série</label>
+        <input class="input" id="pp-sn" placeholder="EKG-2026-0412" autocomplete="off" spellcheck="false">
+        <button class="btn btn-primary" type="submit">Consulter</button>
+      </div>
+      <p class="demo-hint">Numéros de démonstration : <button type="button" data-sn="EKG-2026-0412">EKG-2026-0412</button> (sous garantie) · <button type="button" data-sn="EKG-2025-1187">EKG-2025-1187</button> (expirée)</p>
+      <p class="hint" id="pp-error" role="alert"></p>
+    </form>
+    <div id="passport" aria-live="polite"></div>
+  </section>
+
+  <section class="wrap" id="sav" style="padding-block:40px 80px;scroll-margin-top:80px">
+    <div class="section-head" style="margin-bottom:24px">
+      <div>
+        <p class="eyebrow">Service après-vente</p>
+        <h2>Un souci ? On s'en occupe.</h2>
+        <p class="lead">Dépose ta demande en ligne, apporte la machine dans l'une de nos boutiques et suis la réparation étape par étape. Tu es prévenu sur WhatsApp à chaque changement.</p>
+      </div>
+    </div>
+    <div class="cards-2">
+      <form class="panel" id="sav-form" novalidate>
+        <h2>Ouvrir une demande</h2>
+        <div class="form-grid">
+          <div class="field full"><label for="s-sn">Numéro de série</label><input class="input" id="s-sn" placeholder="EKG-2026-0412" style="font-family:var(--font-mono);text-transform:uppercase"></div>
+          <div class="field"><label for="s-type">Problème</label>
+            <select class="select" id="s-type"><option>Ne démarre pas</option><option>Écran noir</option><option>Surchauffe ou bruit</option><option>Plantages</option><option>Mise à niveau</option><option>Autre</option></select></div>
+          <div class="field"><label for="s-shop">Dépôt</label><select class="select" id="s-shop"></select></div>
+          <div class="field full"><label for="s-desc">Description</label><textarea class="textarea" id="s-desc" placeholder="Depuis quand, dans quelles conditions, messages d'erreur…"></textarea></div>
+          <div class="field full"><label for="s-phone">Téléphone WhatsApp</label><input class="input" id="s-phone" inputmode="tel" placeholder="034 12 345 67"></div>
+          <p class="hint full" id="s-error" role="alert"></p>
+          <button class="btn btn-primary full" type="submit">Ouvrir la demande</button>
+        </div>
+        <div id="sav-result"></div>
+      </form>
+
+      <div class="panel">
+        <h2>Suivre une réparation</h2>
+        <form class="lookup" id="tk-form">
+          <label class="sr-only" for="tk-id">Numéro de ticket</label>
+          <input class="input" id="tk-id" placeholder="EKG-SAV-0007" autocomplete="off">
+          <button class="btn btn-primary" type="submit">Suivre</button>
+        </form>
+        <p class="demo-hint">Ticket de démonstration : <button type="button" data-tk="EKG-SAV-0007">EKG-SAV-0007</button></p>
+        <p class="hint" id="tk-error" role="alert"></p>
+        <div id="tk-result"></div>
+        <div class="trace" style="margin-block:8px 4px"></div>
+        <h3>Ce que couvre la garantie</h3>
+        <ul class="list-pads">
+          <li>12 mois pièces et main-d'œuvre sur les PC assemblés par Ekinox Gamos.</li>
+          <li>Garantie constructeur sur les composants vendus seuls, gérée en boutique.</li>
+          <li>Diagnostic gratuit en atelier, même hors garantie.</li>
+          <li>Extension de 12 mois possible avant la fin de la garantie.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/garantie.js"></script>
+</body>
+</html>

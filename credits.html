@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Crédits · Ekinox Gamos</title>
+<meta name="description" content="Crédits des photos, polices et ressources utilisées sur le site de démonstration Ekinox Gamos.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="assets/img/logo-ekg.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){var d=document.documentElement,m=null,f=d.getAttribute("data-force");try{m=localStorage.getItem("ekg-mode")}catch(e){}if(f){m=f}else if(m!=="jour"&&m!=="nuit"){var h=(new Date().getUTCHours()+3)%24;m=(h>=6&&h<18)?"jour":"nuit"}d.setAttribute("data-mode",m)})();</script>
+</head>
+<body data-nav="">
+<a class="skip" href="#main">Aller au contenu</a>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a><span>/</span><span>Crédits</span></nav>
+      <h1>Crédits</h1>
+      <p class="lead">Ce site est une démonstration. Les photos d'ambiance viennent d'Unsplash et seront remplacées par des photos prises au showroom et à l'atelier d'Ekinox Gamos.</p>
+    </div>
+  </section>
+
+  <section class="wrap grid-2" style="padding-block:36px 80px;align-items:start">
+    <div>
+      <h2 style="margin-bottom:18px">Photos</h2>
+      <p class="muted" style="margin-bottom:18px">Toutes sous <a href="https://unsplash.com/license" target="_blank" rel="noopener">licence Unsplash</a> : usage commercial gratuit, attribution non obligatoire. Elles sont affichées en bichromie noir et jaune, aux couleurs de la marque.</p>
+      <div class="credits" id="credits"></div>
+    </div>
+    <div class="panel">
+      <h2>Marque et ressources</h2>
+      <dl class="shop-meta">
+        <dt>Logo</dt><dd>Badge EKG et bannière © Ekinox Gamos</dd>
+        <dt>Couleurs</dt><dd>Noir #000000, jaune #FEE903, olive #969108, relevées sur le logo</dd>
+        <dt>Polices</dt><dd>Orbitron, Barlow et JetBrains Mono, Google Fonts, licence SIL Open Font License</dd>
+        <dt>QR codes</dt><dd>Bibliothèque qrcodejs, licence MIT</dd>
+        <dt>Données</dt><dd>Prix, stocks, FPS, numéros de série et tickets SAV fictifs</dd>
+        <dt>Contacts</dt><dd>Adresses, horaires et numéros issus de la bannière et des pages publiques d'Ekinox Gamos</dd>
+      </dl>
+      <a class="btn" href="proposition/proposition-ekinox.html">Lire la proposition d'agence</a>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  var A = window.EKGApp, D = window.EKG;
+  A.$("#credits").innerHTML = Object.keys(D.photos).map(function (id) {
+    var p = D.photos[id];
+    return '<div class="credit">' + A.photo(id, "", { alt: "" }) + '<div><b>' + A.esc(p.alt) + '</b><br><span class="muted">Photo de ' + A.esc(p.by) + ' · </span><a href="' + p.url + '" target="_blank" rel="noopener">Voir sur Unsplash</a></div></div>';
+  }).join("");
+})();
+</script>
+</body>
+</html>

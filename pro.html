@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr" data-force="jour">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ekinox Pro · Matériel informatique pour les entreprises · Ekinox Gamos</title>
+<meta name="description" content="Postes bureautiques, stations architecture et 3D, studios audio, serveurs et parcs de cybercafés. Proforma avec NIF et STAT, installation sur site à Antananarivo.">
+<meta name="theme-color" content="#FEE903">
+<link rel="icon" href="assets/img/logo-ekg.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){var d=document.documentElement,m=null,f=d.getAttribute("data-force");try{m=localStorage.getItem("ekg-mode")}catch(e){}if(f){m=f}else if(m!=="jour"&&m!=="nuit"){var h=(new Date().getUTCHours()+3)%24;m=(h>=6&&h<18)?"jour":"nuit"}d.setAttribute("data-mode",m)})();</script>
+</head>
+<body data-nav="pro.html">
+<a class="skip" href="#main">Aller au contenu</a>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="band-mode pro-hero">
+    <div class="wrap pro-hero-in">
+      <div>
+        <nav class="crumbs" aria-label="Fil d'Ariane" style="color:inherit"><a href="index.html">Accueil</a><span>/</span><span>Espace pro</span></nav>
+        <p class="kicker">All you need is here</p>
+        <h1>Ekinox Pro</h1>
+        <p class="lead" style="margin-top:16px">Postes, stations et serveurs pour les entreprises, studios et institutions de Tana. Configurés pour votre métier, installés sur site, garantis 12 mois.</p>
+        <div class="btn-row" style="margin-top:26px">
+          <a class="btn btn-primary btn-lg" href="#devis">Demander un devis</a>
+          <a class="btn btn-ghost btn-lg" id="pro-wa" target="_blank" rel="noopener">Parler à un conseiller</a>
+        </div>
+      </div>
+      <div class="pro-perks">
+        <div><b>Proforma NIF / STAT</b><span>Factures conformes pour votre comptabilité</span></div>
+        <div><b>Prix HT</b><span>TVA 20 % détaillée sur chaque devis</span></div>
+        <div><b>Installation sur site</b><span>Câblage, réseau, configuration à Tana</span></div>
+        <div><b>SAV prioritaire</b><span>Diagnostic sous 48 h, poste de prêt</span></div>
+        <div><b>Virement accepté</b><span>Et paiement échelonné sur devis</span></div>
+        <div><b>Devis sous 24 h</b><span>Jours ouvrés, par e-mail ou WhatsApp</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-top:clamp(40px,6vw,64px)">
+    <div class="section-head" style="margin-bottom:8px">
+      <div>
+        <p class="eyebrow">Univers métier</p>
+        <h2>Une configuration pour chaque métier.</h2>
+      </div>
+      <div class="toggle" role="group" aria-label="Affichage des prix">
+        <button type="button" id="px-ht" aria-pressed="true">Prix HT</button>
+        <button type="button" id="px-ttc" aria-pressed="false">Prix TTC</button>
+      </div>
+    </div>
+    <div class="chips" id="uni-nav" style="margin-bottom:12px"></div>
+    <div id="uni-list"></div>
+  </section>
+
+  <section class="section" id="devis" style="scroll-margin-top:80px">
+    <div class="wrap grid-2" style="align-items:start">
+      <div>
+        <p class="eyebrow">Demande de devis</p>
+        <h2>Décrivez votre besoin, on vous répond sous 24 h ouvrées.</h2>
+        <p class="lead" style="margin-top:14px">Le devis détaille chaque poste, la TVA, l'installation et la garantie. Il est établi au nom de votre société avec vos numéros NIF et STAT.</p>
+        <ul class="list-pads" style="margin-top:24px">
+          <li>Visite technique gratuite à Antananarivo pour les parcs de plus de 5 postes.</li>
+          <li>Reprise de votre ancien matériel, déduite du devis.</li>
+          <li>Contrat de maintenance annuel en option.</li>
+        </ul>
+        <div class="panel" style="margin-top:28px" id="devis-result" hidden></div>
+      </div>
+      <form class="panel" id="devis-form" novalidate>
+        <div class="form-grid">
+          <div class="field full"><label for="d-company">Société ou institution</label><input class="input" id="d-company" autocomplete="organization" required></div>
+          <div class="field"><label for="d-nif">NIF</label><input class="input" id="d-nif" inputmode="numeric" placeholder="10 chiffres"></div>
+          <div class="field"><label for="d-stat">STAT</label><input class="input" id="d-stat" placeholder="Numéro statistique"></div>
+          <div class="field"><label for="d-name">Nom du contact</label><input class="input" id="d-name" autocomplete="name" required></div>
+          <div class="field"><label for="d-phone">Téléphone</label><input class="input" id="d-phone" inputmode="tel" autocomplete="tel" placeholder="034 12 345 67" required></div>
+          <div class="field full"><label for="d-email">E-mail</label><input class="input" id="d-email" type="email" autocomplete="email" placeholder="contact@societe.mg"></div>
+          <div class="field"><label for="d-uni">Univers</label><select class="select" id="d-uni"></select></div>
+          <div class="field"><label for="d-qty">Nombre de postes</label><input class="input" id="d-qty" type="number" min="1" max="500" value="5"></div>
+          <div class="field"><label for="d-budget">Budget indicatif</label>
+            <select class="select" id="d-budget"><option>À définir</option><option>Moins de 10 M Ar</option><option>10 à 30 M Ar</option><option>30 à 80 M Ar</option><option>Plus de 80 M Ar</option></select></div>
+          <div class="field"><label for="d-delay">Délai souhaité</label>
+            <select class="select" id="d-delay"><option>Sous 2 semaines</option><option>Sous 1 mois</option><option>Ce trimestre</option><option>Pas d'urgence</option></select></div>
+          <div class="field full"><label for="d-msg">Votre besoin</label><textarea class="textarea" id="d-msg" placeholder="Logiciels utilisés, nombre d'utilisateurs, contraintes de réseau ou d'espace…"></textarea></div>
+          <label class="check full"><input type="checkbox" id="d-install" checked> Installation et configuration sur site</label>
+          <label class="check full"><input type="checkbox" id="d-trade"> Reprise de l'ancien parc informatique</label>
+          <p class="hint full" id="d-error" role="alert"></p>
+          <button class="btn btn-primary btn-lg full" type="submit">Envoyer la demande</button>
+          <p class="note-demo full">Démonstration : la demande n'est envoyée nulle part tant que vous ne cliquez pas sur WhatsApp.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/pro.js"></script>
+</body>
+</html>

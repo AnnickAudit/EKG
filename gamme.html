@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PC Gamer Ekinox · Ekinox Gamos</title>
+<meta name="description" content="La gamme de PC gamer Ekinox : Aube, Zénith, Équinoxe, Éclipse, Solstice. Assemblés et testés 24 h à Antananarivo.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="assets/img/logo-ekg.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){var d=document.documentElement,m=null,f=d.getAttribute("data-force");try{m=localStorage.getItem("ekg-mode")}catch(e){}if(f){m=f}else if(m!=="jour"&&m!=="nuit"){var h=(new Date().getUTCHours()+3)%24;m=(h>=6&&h<18)?"jour":"nuit"}d.setAttribute("data-mode",m)})();</script>
+</head>
+<body data-nav="gamme.html">
+<a class="skip" href="#main">Aller au contenu</a>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a><span>/</span><span>PC Gamer</span></nav>
+      <p class="kicker">Challenge everything</p>
+      <h1>La gamme Ekinox</h1>
+      <p class="lead">Cinq configurations éprouvées, du 1080p compétitif à la 4K. Choisis ton jeu : on affiche les FPS estimés pour chaque machine.</p>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-block:28px 80px">
+    <div class="filters">
+      <div class="field">
+        <label for="f-budget">Budget maximum <output id="f-budget-out" for="f-budget"></output></label>
+        <input type="range" id="f-budget" min="3000000" max="13000000" step="250000" value="13000000">
+      </div>
+      <div class="field">
+        <label for="f-res">Définition</label>
+        <select class="select" id="f-res">
+          <option value="">Toutes</option>
+          <option value="1080p">1080p</option>
+          <option value="1440p">1440p</option>
+          <option value="4K">4K</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-game">Mon jeu</label>
+        <select class="select" id="f-game"></select>
+      </div>
+      <div class="field">
+        <label for="f-sort">Trier par</label>
+        <select class="select" id="f-sort">
+          <option value="asc">Prix croissant</option>
+          <option value="desc">Prix décroissant</option>
+          <option value="fps">FPS sur mon jeu</option>
+        </select>
+      </div>
+    </div>
+
+    <p class="note-demo" id="g-count" style="margin:22px 0 14px" aria-live="polite"></p>
+    <div class="pc-grid" id="g-grid"></div>
+    <div class="empty" id="g-empty" hidden>
+      <span data-icon="pc"></span>
+      <b>Aucun PC de la gamme dans ce budget.</b>
+      <span>Compose une machine sur mesure dans Forge, ou augmente le budget.</span>
+      <a class="btn btn-primary" href="configurateur.html">Ouvrir Forge</a>
+    </div>
+
+    <p class="note-demo" style="margin-top:24px">FPS estimés en moyenne, réglages indiqués sur chaque fiche. Ils varient selon le jeu, le pilote et les options graphiques.</p>
+  </section>
+
+  <section class="band-mode">
+    <div class="wrap promo">
+      <div>
+        <p class="kicker">Sur mesure</p>
+        <h2>Aucune machine ne te correspond ?</h2>
+        <p class="muted">Forge vérifie la compatibilité de chaque pièce et calcule le total en Ariary. Un conseiller valide ta configuration sur WhatsApp.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="configurateur.html">Composer mon PC</a>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/gamme.js"></script>
+</body>
+</html>

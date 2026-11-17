@@ -1,0 +1,1296 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Proposition Ekinox Gamos</title>
+<meta name="description" content="Proposition d'agence pour le site premium d'Ekinox Gamos : diagnostic, concept, fonctionnalités, direction artistique, maquette et planning.">
+<link rel="icon" href="assets/logo-ekg.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@500;700;800;900&display=swap">
+<style>
+/* Layout : document d'agence en colonne éditoriale (max 1180px), entièrement dans la charte EKG : noir et jaune, olive en appui. Signature tirée du logo : pistes de circuit terminées par une pastille. Monde unique sombre, choisi volontairement (pas de blanc dans la marque). */
+:root{
+  --bg:#000000;           /* noir EKG */
+  --surface:#0C0C08;
+  --surface-2:#14140E;
+  --ink:#D6D2B6;          /* gris chaud de lecture (ajout fonctionnel) */
+  --muted:#9C987F;
+  --line:#2C2B1E;
+  --yellow:#FEE903;       /* jaune EKG */
+  --on-yellow:#000000;
+  --olive:#969108;        /* olive EKG, le E du logo */
+  --btn-bg:#FEE903;
+  --btn-fg:#000000;
+  --trace-line:#2C2B1E;
+  --trace-accent:#FEE903;
+  --pad-fill:#000000;
+  --pad-border:#FEE903;
+  --ok:#5FD39A;
+  --shadow:rgba(0,0,0,.7);
+  --phone:#1A1912;
+  --font-display:"Orbitron","Arial Black",system-ui,sans-serif;
+  --font-body:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:inherit}
+::selection{background:var(--yellow);color:var(--on-yellow)}
+:focus-visible{outline:2px solid var(--yellow);outline-offset:3px;border-radius:4px}
+.mono{font-family:var(--font-mono)}
+.wrap{max-width:1180px;margin-inline:auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+
+/* ---------- Typo ---------- */
+.eyebrow{font:600 12px/1.3 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--olive);margin:0 0 16px}
+h1,h2{font-family:var(--font-display);text-wrap:balance;margin:0;color:var(--yellow)}
+h1{font-weight:800;font-size:clamp(36px,6vw,76px);line-height:1.08;letter-spacing:-.01em}
+h2{font-weight:700;font-size:clamp(25px,3.3vw,40px);line-height:1.18;max-width:26ch}
+h3,h4{font-family:var(--font-body);margin:0;text-wrap:balance}
+h3{font-weight:700;font-size:21px;line-height:1.3;margin-bottom:16px;color:var(--ink)}
+.hl{background:var(--yellow);color:var(--on-yellow);padding:0 .12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.intro{font-size:clamp(17px,1.6vw,19px);color:var(--muted);max-width:62ch;margin:22px 0 0}
+.note{font-size:15px;color:var(--muted);max-width:70ch}
+.caption{font-size:15px;color:var(--muted);margin:16px 0 0;max-width:72ch}
+.sec{padding-block:clamp(64px,9vw,120px);border-top:1px solid var(--line)}
+.sec-body{margin-top:clamp(36px,5vw,56px)}
+.block{margin-top:clamp(48px,6vw,72px)}
+.price{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* ---------- Piste de circuit (signature) ---------- */
+.trace{position:relative;height:2px;background:var(--trace-line);margin:0}
+.trace::before{content:"";position:absolute;left:0;top:0;width:min(120px,30%);height:2px;background:var(--trace-accent)}
+.trace::after{content:"";position:absolute;left:min(120px,30%);top:-5px;width:12px;height:12px;border-radius:50%;background:var(--pad-fill);border:2px solid var(--pad-border)}
+.trace.sweep{transform-origin:left;animation:sweep .8s cubic-bezier(.2,.7,.2,1)}
+@keyframes sweep{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ---------- Hero ---------- */
+.hero{padding-block:clamp(24px,4vw,44px) clamp(48px,6vw,80px)}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:12px 24px;flex-wrap:wrap;font:500 12px/1.4 var(--font-mono);color:var(--muted)}
+.brand{display:inline-flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:800;font-size:15px;letter-spacing:.12em;color:var(--yellow)}
+.brand small{font-weight:700;font-size:11px;letter-spacing:.3em;color:var(--olive)}
+.logo-img{border-radius:50%;clip-path:circle(49.3%);display:block;flex:none}
+.brand .logo-img{width:34px;height:34px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,5vw,72px);align-items:center;margin-top:clamp(40px,7vw,88px)}
+.lede{font-size:clamp(17px,1.7vw,20px);max-width:56ch;color:var(--muted);margin:28px 0 0}
+.lede b{color:var(--ink);font-weight:600}
+.toc{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:32px;font:500 13px/1.4 var(--font-mono)}
+.toc a{text-decoration:none;border-bottom:2px solid var(--line);padding-bottom:2px;transition:border-color .2s,color .2s}
+.toc a:hover{border-color:var(--yellow);color:var(--yellow)}
+.emblem{position:relative;margin:0 auto;width:100%;max-width:480px;aspect-ratio:480/420}
+.emblem svg{position:absolute;inset:0;width:100%;height:100%}
+.emblem .logo-img{position:absolute;left:27.08%;top:21.43%;width:45.83%;height:auto;aspect-ratio:1}
+.tr path{fill:none;stroke:var(--olive);stroke-width:2}
+.tr-main path{fill:none;stroke:var(--yellow);stroke-width:3}
+.pad-s{fill:var(--bg);stroke:var(--olive);stroke-width:2}
+.pad{fill:var(--bg);stroke:var(--yellow);stroke-width:3}
+.pad-dot{fill:var(--yellow)}
+.e-label{font:800 17px var(--font-display);letter-spacing:.12em;fill:var(--yellow)}
+.e-sub{font:500 12px var(--font-mono);fill:var(--muted)}
+.hero .trace{margin-top:clamp(40px,6vw,72px)}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:32px 0 0}
+.fact{padding:4px 20px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:8px;min-width:0}
+.fact:first-child{border-left:0;padding-left:0}
+.fact dt{font-family:var(--font-display);font-weight:800;font-size:clamp(26px,2.9vw,36px);line-height:1;color:var(--yellow);font-variant-numeric:tabular-nums;white-space:nowrap}
+.fact dd{margin:0;display:flex;flex-direction:column;gap:2px}
+.fact .k{font-weight:600;color:var(--ink)}
+.fact .d{font-size:15px;color:var(--muted)}
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:1fr}
+  .emblem{max-width:400px}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}
+  .fact:nth-child(3){border-left:0;padding-left:0}
+}
+@media (max-width:440px){
+  .facts{grid-template-columns:1fr}
+  .fact{border-left:0;padding-left:0}
+}
+
+/* ---------- Listes, tableaux ---------- */
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,64px)}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+.list{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.list li{position:relative;padding-left:24px}
+.list li::before{content:"";position:absolute;left:0;top:.5em;width:10px;height:10px;border-radius:50%;background:var(--pad-fill);border:2px solid var(--pad-border)}
+.list.arrows li::before{content:"→";border:0;background:none;width:auto;height:auto;border-radius:0;top:0;color:var(--yellow);font-weight:700}
+.list b{font-weight:600;color:var(--ink)}
+.list q{color:var(--yellow);quotes:"« " " »"}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:700px;font-size:16px}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 11px/1.3 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--olive);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:700;white-space:nowrap}
+td:last-child{color:var(--muted)}
+
+/* ---------- Mondes Nuit (fond noir) / Jour (bandeau jaune) ---------- */
+.mock{
+  --m-bg:#000000; --m-surface:#0E0E0A; --m-surface-2:#16160F; --m-line:#2C2B1E; --m-ink:#D6D2B6; --m-muted:#9C987F;
+  --m-accent:#FEE903; --m-on-accent:#000000; --m-accent-ink:#FEE903; --m-olive:#969108;
+  --m-band-bg:#FEE903; --m-band-fg:#000000; --m-band-btn-bg:#000000; --m-band-btn-fg:#FEE903;
+  --m-glow:#FEE903; --m-ok:#5FD39A; --m-warn:#FEE903; --m-edge:#FEE903;
+  --m-trace:#FEE903; --m-pad-fill:#000000; --m-pad-border:#FEE903;
+  background:var(--m-bg);color:var(--m-ink);
+  transition:background-color .45s ease,color .45s ease;
+}
+.mock[data-mode="jour"]{
+  --m-bg:#FEE903; --m-surface:#F1DC00; --m-surface-2:#E6D100; --m-line:#BFAF02; --m-ink:#000000; --m-muted:#4A4500;
+  --m-accent:#000000; --m-on-accent:#FEE903; --m-accent-ink:#000000; --m-olive:#969108;
+  --m-band-bg:#000000; --m-band-fg:#FEE903; --m-band-btn-bg:#FEE903; --m-band-btn-fg:#000000;
+  --m-glow:#000000; --m-ok:#0B6B3A; --m-warn:#000000; --m-edge:#000000;
+  --m-trace:#000000; --m-pad-fill:#FEE903; --m-pad-border:#000000;
+}
+.mock[data-mode="nuit"] [data-show="jour"],
+.mock[data-mode="jour"] [data-show="nuit"]{display:none}
+.mock .trace{--trace-line:var(--m-line);--trace-accent:var(--m-trace);--pad-fill:var(--m-pad-fill);--pad-border:var(--m-pad-border)}
+.m-hl{background:var(--m-accent);color:var(--m-on-accent);padding:0 .1em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* ---------- Callout ---------- */
+.callout{margin-top:clamp(40px,5vw,56px);border-radius:16px;overflow:hidden}
+.callout-in{padding:clamp(24px,4vw,44px);display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:clamp(16px,4vw,48px)}
+.callout .eyebrow{color:var(--m-ink)}
+.callout p.big{margin:0;font-weight:600;font-size:clamp(20px,2.3vw,26px);line-height:1.4;text-wrap:pretty}
+@media (max-width:760px){.callout-in{grid-template-columns:1fr}}
+
+/* ---------- Concept ---------- */
+.promise{display:grid;margin:0}
+.promise p{margin:0;font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(24px,4.4vw,56px);line-height:1.15;color:var(--yellow);padding-block:14px;border-bottom:1px solid var(--line)}
+.promise + .note{margin-top:16px}
+.modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:clamp(48px,6vw,72px)}
+@media (max-width:760px){.modes{grid-template-columns:1fr}}
+.mode-panel{border-radius:16px;border:1px solid var(--m-line);padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:20px}
+.mode-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.mode-head svg{width:26px;height:26px;color:var(--m-accent-ink);flex:none}
+.mode-head h3{margin:0;font-family:var(--font-display);font-weight:800;font-size:22px;letter-spacing:.08em;color:var(--m-ink)}
+.mode-head span{margin-left:auto;font:500 12px var(--font-mono);color:var(--m-muted)}
+.mode-panel dl{margin:0;display:grid;grid-template-columns:minmax(0,120px) minmax(0,1fr);gap:12px 18px}
+.mode-panel dt{font:500 12px/1.7 var(--font-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--m-muted)}
+.mode-panel dd{margin:0}
+.mode-panel .slogan{font-family:var(--font-display);font-weight:700;font-style:normal;letter-spacing:.06em;font-size:15px;text-transform:uppercase}
+@media (max-width:420px){.mode-panel dl{grid-template-columns:1fr;gap:2px}.mode-panel dd{margin-bottom:10px}}
+
+.rewrite{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:20px;align-items:center;margin-top:24px}
+.rewrite .arrow{font:800 28px var(--font-display);color:var(--yellow)}
+@media (max-width:860px){.rewrite{grid-template-columns:1fr}.rewrite .arrow{justify-self:center;transform:rotate(90deg)}}
+.post,.fiche{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;min-width:0}
+.post-head{display:flex;align-items:center;gap:10px;font-size:15px;margin-bottom:12px;line-height:1.3}
+.post-head .logo-img{width:38px;height:38px}
+.post-head small{display:block;color:var(--muted);font-size:13px}
+.post p{margin:0;font-size:15px;line-height:1.7;overflow-wrap:anywhere}
+.fiche-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.fiche h4{font-weight:700;font-size:21px;line-height:1.2}
+.fiche .ref{font:500 12px var(--font-mono);color:var(--muted)}
+.fiche .price{font:700 22px var(--font-mono);letter-spacing:-.02em;color:var(--yellow)}
+.specs{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 16px;margin:16px 0;padding:14px 0;border-block:1px solid var(--line);font:14px/1.5 var(--font-mono)}
+.specs dt{color:var(--muted)}
+.specs dd{margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badge{display:inline-flex;align-items:center;gap:6px;font:600 12px/1 var(--font-mono);padding:7px 10px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.badge.ok::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.badge.y{background:var(--yellow);color:var(--on-yellow);border-color:var(--yellow)}
+.fiche .cta{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 15px/1 var(--font-body);padding:12px 16px;border-radius:10px;border:1px solid var(--line);color:var(--ink)}
+.btn.primary{background:var(--btn-bg);border-color:var(--btn-bg);color:var(--btn-fg)}
+
+/* ---------- Fonctionnalités ---------- */
+.legend{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:28px;font-size:15px;color:var(--muted);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.pill{font:600 11px/1 var(--font-mono);padding:5px 8px;border-radius:999px;letter-spacing:.06em;white-space:nowrap;border:1.5px solid transparent}
+.pill.p1{background:var(--yellow);color:var(--on-yellow);border-color:var(--yellow)}
+.pill.p2{border-color:var(--yellow);color:var(--yellow)}
+.pill.p3{border-color:var(--olive);border-style:dashed;color:var(--olive)}
+.fgroups{columns:2 380px;column-gap:clamp(28px,5vw,64px)}
+.fgroup{break-inside:avoid;padding-bottom:44px}
+.fgroup h3{display:flex;align-items:baseline;gap:12px;font-family:var(--font-display);font-weight:800;font-size:17px;letter-spacing:.08em;text-transform:uppercase;color:var(--yellow);padding-bottom:12px;border-bottom:2px solid var(--yellow);margin:0}
+.fgroup h3 small{margin-left:auto;font:500 12px var(--font-mono);color:var(--muted);letter-spacing:0;text-transform:none}
+.feat{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.feat b{font-weight:700}
+.feat p{grid-column:1;margin:0;color:var(--muted);font-size:16px;line-height:1.55}
+.feat .pill{grid-column:2;grid-row:1 / span 2;align-self:start}
+
+/* ---------- Direction artistique ---------- */
+.banner{margin:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg)}
+.banner img{display:block;width:100%;height:auto}
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:20px}
+.sw{display:flex;flex-direction:column;gap:6px;min-width:0}
+.sw i{display:block;aspect-ratio:4/3;max-width:100%;border-radius:10px;border:1px solid var(--line);margin-bottom:6px}
+.sw b{font-weight:700}
+.sw code{font:500 13px var(--font-mono);color:var(--muted)}
+.sw span{font-size:15px;color:var(--muted)}
+.sw em{font:500 11px var(--font-mono);font-style:normal;color:var(--olive);text-transform:uppercase;letter-spacing:.1em}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
+.rule-tile{border-radius:14px;border:1px solid var(--m-line,var(--line));padding:24px;display:flex;flex-direction:column;gap:14px}
+.rule-demo{font-family:var(--font-display);font-weight:800;font-size:clamp(20px,2.2vw,26px);line-height:1.2;text-transform:uppercase}
+.rule-demo .y-text{color:var(--m-accent)}
+.rule-tile p{margin:0;font-size:15px;color:var(--m-muted,var(--muted))}
+.rule-tile.plain{background:var(--surface)}
+.rule-tile.plain .rule-demo{font-family:var(--font-body);font-weight:500;font-size:18px;text-transform:none;line-height:1.5;color:var(--ink)}
+.spec-row{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);gap:12px 32px;padding:26px 0;border-top:1px solid var(--line);align-items:baseline}
+.spec-row:last-of-type{border-bottom:1px solid var(--line)}
+.spec-row .lbl{font:500 12px/1.6 var(--font-mono);color:var(--muted)}
+.spec-row .lbl b{display:block;color:var(--ink);font-weight:600;font-size:13px}
+.sample-display{font-family:var(--font-display);font-weight:900;font-size:clamp(40px,6.4vw,84px);line-height:1;color:var(--yellow);overflow-wrap:anywhere}
+.sample-body{font-size:19px;max-width:58ch;margin:0}
+.sample-mono{font:500 clamp(14px,1.6vw,18px)/1.6 var(--font-mono);margin:0;overflow-wrap:anywhere}
+@media (max-width:700px){.spec-row{grid-template-columns:1fr}}
+.logos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:640px){.logos{grid-template-columns:1fr}}
+.logo-tile{border-radius:16px;border:1px solid var(--m-line);padding:clamp(28px,5vw,52px) 24px;display:grid;place-items:center;gap:16px;text-align:center}
+.lockup{display:flex;align-items:center;gap:16px}
+.lockup .logo-img{width:84px;height:84px}
+.lockup b{font-family:var(--font-display);font-weight:900;font-size:clamp(22px,3vw,32px);letter-spacing:.1em;line-height:1;display:block;text-align:left;color:var(--m-accent-ink)}
+.lockup small{display:block;font:700 11px var(--font-display);letter-spacing:.5em;color:var(--m-ink);margin-top:8px;text-align:left}
+.logo-tile .mode-tag{font:500 12px var(--font-mono);color:var(--m-muted)}
+.photo-dir{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:28px}
+.photo-dir article{border-top:2px solid var(--yellow);padding-top:16px}
+.photo-dir h4{font-weight:700;font-size:19px;margin-bottom:8px}
+.photo-dir p{margin:0;color:var(--muted);font-size:16px}
+.photo-dir dl{margin:14px 0 0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font:13px/1.5 var(--font-mono)}
+.photo-dir dt{color:var(--olive)}
+.photo-dir dd{margin:0}
+.trace-demo{padding:28px 0 8px}
+
+/* ---------- Maquette ---------- */
+.band{background:var(--surface);border-top:1px solid var(--line)}
+.band .sec{border-top:0}
+.switch-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:32px}
+.mode-switch{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:4px;background:var(--bg)}
+.mode-switch button{font:600 15px/1 var(--font-body);border:0;background:none;color:var(--muted);padding:10px 16px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background-color .25s,color .25s}
+.mode-switch button svg{width:16px;height:16px}
+.mode-switch button[aria-pressed="true"]{background:var(--btn-bg);color:var(--btn-fg)}
+.switch-row .note{margin:0}
+#switch-trace{margin-top:22px}
+
+.browser{margin-top:28px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--bg);box-shadow:0 40px 80px -40px var(--shadow)}
+.b-bar{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.b-dots{display:flex;gap:6px;flex:none}
+.b-dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.b-url{flex:1;min-width:0;max-width:420px;margin-inline:auto;text-align:center;font:500 12px var(--font-mono);color:var(--muted);background:var(--bg);border-radius:8px;padding:6px 12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.b-bar .spacer{width:42px;flex:none}
+
+.site{container-type:inline-size}
+.m-top{display:flex;justify-content:space-between;gap:12px;padding:8px 28px;font:500 11px/1.4 var(--font-mono);color:var(--m-muted);border-bottom:1px solid var(--m-line)}
+.m-top b{color:var(--m-ink)}
+.m-nav{display:flex;align-items:center;gap:22px;padding:14px 28px;border-bottom:1px solid var(--m-line)}
+.m-logo{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:900;font-size:15px;letter-spacing:.1em;flex:none;color:var(--m-accent-ink)}
+.m-logo .logo-img{width:36px;height:36px}
+.m-logo small{font:700 8px var(--font-display);letter-spacing:.35em;color:var(--m-ink);align-self:flex-end;margin-bottom:4px}
+.m-links{display:flex;gap:18px;font-size:14px;font-weight:600;color:var(--m-muted)}
+.m-links span:first-child{color:var(--m-ink);box-shadow:inset 0 -3px 0 var(--m-accent)}
+.m-search{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:14px;color:var(--m-muted);border:1px solid var(--m-line);background:var(--m-surface);border-radius:10px;padding:8px 12px;min-width:0;flex:0 1 230px;white-space:nowrap;overflow:hidden}
+.m-search svg{width:15px;height:15px;flex:none}
+.m-icons{display:flex;align-items:center;gap:10px;flex:none}
+.m-modepill{display:inline-flex;align-items:center;gap:6px;font:600 11px var(--font-mono);border:1px solid var(--m-line);border-radius:999px;padding:6px 10px}
+.m-modepill svg{width:13px;height:13px;color:var(--m-accent-ink)}
+.m-cart{font:600 12px var(--font-mono);background:var(--m-accent);color:var(--m-on-accent);border-radius:999px;padding:7px 11px}
+.m-burger{display:none;width:20px;height:20px}
+
+.m-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:36px;padding:52px 28px 40px;align-items:center}
+.m-kicker{font:700 12px var(--font-display);letter-spacing:.2em;text-transform:uppercase;color:var(--m-accent-ink);margin:0 0 16px}
+.m-hero h3{font-family:var(--font-display);font-weight:800;font-size:clamp(22px,4.3cqi,44px);line-height:1.18;margin:0;color:var(--m-ink)}
+.m-sub{font-size:17px;color:var(--m-muted);max-width:44ch;margin:18px 0 0}
+.m-chips{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:26px}
+.m-chip-label{font:500 11px var(--font-mono);color:var(--m-muted);text-transform:uppercase;letter-spacing:.1em;margin-right:4px}
+.m-chip{font:600 13px/1 var(--font-mono);border:1.5px solid var(--m-line);border-radius:999px;padding:9px 13px;white-space:nowrap}
+.m-chip.on{background:var(--m-accent);border-color:var(--m-accent);color:var(--m-on-accent)}
+.m-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.m-btn{display:inline-flex;align-items:center;gap:8px;font:600 15px/1 var(--font-body);padding:13px 18px;border-radius:10px;border:1.5px solid var(--m-edge);white-space:nowrap}
+.m-btn.primary{background:var(--m-accent);border-color:var(--m-accent);color:var(--m-on-accent)}
+.m-hero-visual{position:relative;display:grid;place-items:center;padding:8px}
+.m-hero-visual::before{content:"";position:absolute;inset:6% 4%;background:radial-gradient(closest-side,color-mix(in srgb,var(--m-glow) 20%,transparent),transparent);pointer-events:none}
+.m-hero-visual svg{position:relative;width:100%;max-width:300px;height:auto}
+.m-tag{position:absolute;font:600 11px/1.3 var(--font-mono);background:var(--m-surface);border:1px solid var(--m-line);border-radius:10px;padding:8px 10px;box-shadow:0 10px 30px -12px rgba(0,0,0,.45)}
+.m-tag b{display:block;color:var(--m-accent-ink)}
+.m-tag.t1{left:0;top:16%}
+.m-tag.t2{right:0;bottom:18%}
+
+.tw-case{fill:var(--m-surface);stroke:var(--m-line);stroke-width:2}
+.tw-glass{fill:var(--m-bg);stroke:var(--m-line);stroke-width:1.5}
+.tw-board{fill:var(--m-surface-2);stroke:var(--m-line);stroke-width:1}
+.tw-trace{fill:none;stroke:var(--m-olive);stroke-width:1.5}
+.tw-fan{fill:none;stroke:var(--m-accent);stroke-width:3}
+.tw-hub{fill:var(--m-line)}
+.tw-ram{fill:var(--m-accent)}
+.tw-gpu{fill:var(--m-surface-2);stroke:var(--m-line);stroke-width:1.5}
+.tw-gpu-line{fill:var(--m-accent)}
+.tw-shroud{fill:var(--m-surface);stroke:var(--m-line);stroke-width:1.5}
+.tw-text{font:800 10px var(--font-display);letter-spacing:.35em;fill:var(--m-accent-ink)}
+.tw-a{fill:var(--m-accent)} .tw-b{fill:var(--m-olive)}
+.tw-floor{fill:var(--m-glow);opacity:.18}
+
+.m-trust{list-style:none;margin:0;padding:0 28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid var(--m-line)}
+.m-trust li{padding:16px 16px 16px 0;display:flex;flex-direction:column;gap:2px;font-size:15px;font-weight:600}
+.m-trust li + li{padding-left:16px;border-left:1px solid var(--m-line)}
+.m-trust small{font:500 10px var(--font-mono);text-transform:uppercase;letter-spacing:.12em;color:var(--m-muted)}
+
+.m-range{padding:40px 28px}
+.m-range-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:20px}
+.m-range-head h4{font-family:var(--font-display);font-weight:800;font-size:18px;letter-spacing:.08em;text-transform:uppercase;color:var(--m-accent-ink)}
+.m-range-head span{font-size:14px;color:var(--m-muted);white-space:nowrap}
+.m-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.m-card{position:relative;overflow:hidden;background:var(--m-surface);border:1px solid var(--m-line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:14px;transition:background-color .45s,border-color .45s}
+.m-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--m-accent);transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+.m-card:hover::after{transform:scaleX(1)}
+.m-card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.m-tier{font-family:var(--font-display);font-weight:900;font-size:18px;letter-spacing:.08em}
+.m-res{font:600 11px var(--font-mono);border:1px solid var(--m-line);border-radius:6px;padding:4px 7px;white-space:nowrap}
+.m-res.hot{background:var(--m-accent);color:var(--m-on-accent);border-color:var(--m-accent)}
+.m-specs{list-style:none;margin:0;padding:0;display:grid;gap:4px;font:13px/1.5 var(--font-mono);color:var(--m-muted)}
+.m-specs li:first-child,.m-specs li:nth-child(2){color:var(--m-ink)}
+.m-games{font-size:14px;color:var(--m-muted);margin:0}
+.m-card-foot{margin-top:auto;display:flex;flex-direction:column;gap:6px;padding-top:14px;border-top:1px solid var(--m-line)}
+.m-price{font:700 20px/1.1 var(--font-mono);letter-spacing:-.02em;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--m-accent-ink)}
+.m-price small{font-size:12px;color:var(--m-muted);font-weight:500;letter-spacing:0}
+.m-stock{display:inline-flex;align-items:center;gap:6px;font:500 12px var(--font-mono);color:var(--m-muted)}
+.m-stock::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--m-ok);flex:none}
+.m-stock.wait::before{background:var(--m-warn)}
+
+.m-band{margin:0 28px 36px;border-radius:14px;padding:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;background:var(--m-band-bg);color:var(--m-band-fg)}
+.m-band p{margin:0;font-size:16px;max-width:60ch}
+.m-band b{font-family:var(--font-display);font-weight:800;display:block;font-size:16px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.m-band .m-btn{background:var(--m-band-btn-bg);border-color:var(--m-band-btn-bg);color:var(--m-band-btn-fg)}
+.m-foot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding:24px 28px 28px;border-top:1px solid var(--m-line);font-size:14px;color:var(--m-muted)}
+.m-foot b{display:block;color:var(--m-ink);font-size:15px;margin-bottom:2px}
+
+@container (max-width:820px){
+  .m-links,.m-modepill{display:none}
+  .m-burger{display:block}
+  .m-hero{grid-template-columns:1fr;padding:32px 20px}
+  .m-hero-visual{order:-1}
+  .m-hero-visual svg{max-width:200px}
+  .m-top{padding:8px 20px}.m-top .m-pay{display:none}
+  .m-nav{padding:12px 20px;gap:12px}
+  .m-trust{grid-template-columns:repeat(2,minmax(0,1fr));padding:0 20px}
+  .m-trust li:nth-child(3){padding-left:0;border-left:0}
+  .m-trust li:nth-child(n+3){border-top:1px solid var(--m-line)}
+  .m-range{padding:32px 20px}
+  .m-cards{grid-template-columns:1fr}
+  .m-band{margin:0 20px 28px}
+  .m-foot{grid-template-columns:1fr;padding:20px}
+}
+@container (max-width:480px){
+  .m-logo .word{display:none}
+  .m-search{flex:1 1 auto}
+  .m-search span{overflow:hidden;text-overflow:ellipsis}
+  .m-tag{display:none}
+}
+
+/* Téléphone */
+.phone-row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(28px,6vw,80px);align-items:center;margin-top:clamp(56px,7vw,88px)}
+@media (max-width:780px){.phone-row{grid-template-columns:1fr}.phone{margin-inline:auto}}
+.phone{width:min(320px,100%);border-radius:40px;padding:10px;background:var(--phone);border:1px solid var(--line);box-shadow:0 40px 80px -40px var(--shadow)}
+.phone-screen{position:relative;height:640px;border-radius:30px;overflow:hidden;display:flex;flex-direction:column}
+.p-scroll{flex:1;overflow-y:auto;padding-bottom:96px}
+.p-nav{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 10px;font:600 12px var(--font-mono)}
+.p-nav svg{width:18px;height:18px}
+.p-nav .logo-img{width:28px;height:28px}
+.p-img{position:relative;margin:4px 14px 0;border-radius:18px;background:var(--m-surface);border:1px solid var(--m-line);display:grid;place-items:center;padding:14px 0 6px}
+.p-img svg{width:52%;height:auto}
+.p-img .dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px}
+.p-img .dots i{width:6px;height:6px;border-radius:50%;background:var(--m-line)}
+.p-img .dots i:first-child{background:var(--m-accent);width:16px;border-radius:3px}
+.p-body{padding:16px 18px 0;display:flex;flex-direction:column;gap:12px}
+.p-tier{font:700 11px var(--font-display);letter-spacing:.16em;color:var(--m-accent-ink);margin:0}
+.p-body h4{font-family:var(--font-display);font-weight:900;font-size:22px;line-height:1.1;text-transform:uppercase;letter-spacing:.04em}
+.p-price-row{display:flex;flex-direction:column;gap:6px;position:relative}
+.p-specs{list-style:none;margin:0;padding:12px 0;border-block:1px solid var(--m-line);display:grid;gap:3px;font:12px/1.5 var(--font-mono);color:var(--m-muted)}
+.p-addon{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;align-items:start;padding:12px;border-radius:12px;border:1px solid var(--m-line);background:var(--m-surface);cursor:pointer;font-size:13px}
+.p-addon input{margin:2px 0 0;accent-color:var(--m-accent);width:16px;height:16px}
+.p-addon b{display:block;font-size:14px}
+.p-addon span{color:var(--m-muted);font-size:12px}
+.p-log{font-size:13px;color:var(--m-muted);padding:10px 12px;border-left:3px solid var(--m-edge);background:var(--m-surface-2);border-radius:0 10px 10px 0}
+.p-log b{color:var(--m-ink)}
+.p-bar{position:absolute;left:0;right:0;bottom:0;padding:12px 14px 16px;background:var(--m-bg);border-top:1px solid var(--m-line);display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.p-bar .m-btn{justify-content:center;padding:12px 8px;font-size:14px}
+.p-total{grid-column:1 / -1;display:flex;justify-content:space-between;align-items:center;font:600 12px var(--font-mono);color:var(--m-muted)}
+.p-total b{color:var(--m-ink)}
+.pin{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--m-accent);color:var(--m-on-accent);border:1.5px solid var(--m-pad-border);font:700 11px var(--font-mono);flex:none}
+.pin.abs{position:absolute;right:0;top:0}
+.pin.sm{width:17px;height:17px;font-size:9px;margin-right:6px;vertical-align:1px}
+.notes{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+.notes li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start}
+.notes .num{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--yellow);color:var(--on-yellow);font:700 12px var(--font-mono)}
+.notes b{display:block;font-size:18px;margin-bottom:2px}
+.notes p{margin:0;color:var(--muted)}
+.disclaimer{font:500 12px var(--font-mono);color:var(--muted);margin:20px 0 0}
+
+/* ---------- Arborescence ---------- */
+.tree-root{display:flex;align-items:center;gap:14px;margin-bottom:28px;font-family:var(--font-display);font-weight:800;font-size:17px;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow)}
+.tree-root .trace{flex:1}
+.tree{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,175px),1fr));gap:32px 24px}
+.tree section h4{font-weight:700;font-size:17px;padding-top:12px;border-top:2px solid var(--yellow);margin-bottom:10px}
+.tree ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:16px;color:var(--muted)}
+.tree li.key{color:var(--yellow);font-weight:600}
+
+/* ---------- Technique ---------- */
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:clamp(40px,5vw,56px)}
+@media (max-width:760px){.metrics{grid-template-columns:1fr}}
+.metric{border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.metric b{font-family:var(--font-display);font-weight:800;font-size:clamp(28px,3.2vw,38px);line-height:1;color:var(--yellow);font-variant-numeric:tabular-nums}
+.metric span{color:var(--muted);font-size:16px}
+.seo{margin-top:clamp(40px,5vw,56px)}
+
+/* ---------- Planning ---------- */
+.tl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:20px}
+.tl{min-width:720px;display:grid;grid-template-columns:150px repeat(22,minmax(0,1fr));row-gap:10px;align-items:center}
+.tl-wk{font:500 10px var(--font-mono);color:var(--muted);text-align:center;font-variant-numeric:tabular-nums;padding-bottom:4px;border-bottom:1px solid var(--line)}
+.tl-corner{font:500 10px var(--font-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding-bottom:4px;border-bottom:1px solid var(--line)}
+.tl-label{font-weight:700;font-size:15px;padding-right:12px}
+.tl-bar{height:36px;border-radius:7px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 10px;font:600 12px var(--font-mono);white-space:nowrap;overflow:hidden;margin:0 2px;border:1.5px solid transparent}
+.tl-bar.c0{background:var(--surface-2);border-color:var(--line);color:var(--muted)}
+.tl-bar.c1{background:var(--yellow);border-color:var(--yellow);color:var(--on-yellow)}
+.tl-bar.c2{border-color:var(--yellow);color:var(--yellow)}
+.tl-bar.c3{border-color:var(--olive);border-style:dashed;color:var(--olive)}
+.tl-bar em{font-style:normal;font-weight:500}
+.phases{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:32px}
+@media (max-width:900px){.phases{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.phases{grid-template-columns:1fr}}
+.phases article{display:flex;flex-direction:column;gap:10px}
+.phases h4{font-weight:700;font-size:18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.phases .weeks{font:500 12px var(--font-mono);color:var(--muted)}
+.phases ul{margin:0;padding-left:18px;color:var(--muted);font-size:16px;display:grid;gap:4px}
+.phases .live{font:600 12px var(--font-mono);color:var(--ok)}
+
+/* ---------- Suite ---------- */
+.check{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.check li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start}
+.check li::before{content:"";width:16px;height:16px;border:2px solid var(--yellow);border-radius:4px;margin-top:5px}
+.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;gap:14px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--yellow);color:var(--on-yellow);font:700 13px var(--font-mono)}
+.steps b{display:block}
+.steps span{color:var(--muted);font-size:16px}
+
+.sources{margin-top:clamp(56px,7vw,88px);padding-top:24px;border-top:1px solid var(--line)}
+.sources h3{font-size:16px}
+.sources ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:15px;color:var(--muted)}
+.sources a{color:var(--ink);text-decoration-color:var(--olive);text-decoration-thickness:2px;text-underline-offset:3px;overflow-wrap:anywhere}
+.sources a:hover{text-decoration-color:var(--yellow)}
+footer.end{padding-block:28px 48px;font:500 12px var(--font-mono);color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line)}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="wrap hero">
+  <div class="hero-top">
+    <span class="brand"><img class="logo-img" src="assets/logo-ekg.png" alt="" width="34" height="34">EKINOX <small>GAMOS</small></span>
+    <span>Proposition d'agence · Antananarivo · Novembre 2026 · v2</span>
+  </div>
+
+  <div class="hero-grid">
+    <div>
+      <p class="eyebrow">Création du site e-commerce premium</p>
+      <h1>Ekinox, comme <span class="hl">équinoxe</span>.</h1>
+      <p class="lede">À l'équinoxe, le jour et la nuit durent chacun douze heures. Votre bannière vit déjà cet équilibre : un fond noir et un bandeau jaune. Ekinox Gamos sert aussi deux clientèles avec la même exigence, <b>les joueurs et les professionnels</b>. Nous proposons un site construit sur cette dualité, <b>strictement dans votre charte noir et jaune</b>. Il vend un PC gamer aussi bien qu'un parc de vingt postes, et transforme l'audience Facebook actuelle en clientèle fidèle.</p>
+      <nav class="toc" aria-label="Sommaire">
+        <a href="#diagnostic">Diagnostic</a>
+        <a href="#concept">Concept</a>
+        <a href="#fonctionnalites">Fonctionnalités</a>
+        <a href="#design">Direction artistique</a>
+        <a href="#maquette">Maquette</a>
+        <a href="#arborescence">Arborescence</a>
+        <a href="#technique">Technique</a>
+        <a href="#planning">Planning</a>
+        <a href="#suite">À valider</a>
+      </nav>
+    </div>
+    <figure class="emblem">
+      <svg viewBox="0 0 480 420" aria-hidden="true">
+        <g class="tr">
+          <path d="M240 90V58L212 30H118"/>
+          <path d="M272 95V44L292 24H400"/>
+          <path d="M136 240H112L82 270H40"/>
+          <path d="M344 160H378L408 130H452"/>
+          <path d="M240 310V352L268 380H384"/>
+          <path d="M208 305V362L180 390H92"/>
+        </g>
+        <g class="tr-main">
+          <path d="M130 200H100L70 170H22"/>
+          <path d="M350 200H380L410 230H458"/>
+        </g>
+        <circle cx="118" cy="30" r="6" class="pad-s"/>
+        <circle cx="400" cy="24" r="6" class="pad-s"/>
+        <circle cx="40" cy="270" r="6" class="pad-s"/>
+        <circle cx="452" cy="130" r="6" class="pad-s"/>
+        <circle cx="384" cy="380" r="6" class="pad-s"/>
+        <circle cx="92" cy="390" r="6" class="pad-s"/>
+        <circle cx="14" cy="170" r="8" class="pad"/><circle cx="14" cy="170" r="3" class="pad-dot"/>
+        <circle cx="466" cy="230" r="8" class="pad"/><circle cx="466" cy="230" r="3" class="pad-dot"/>
+        <text x="4" y="138" class="e-label">JOUR</text>
+        <text x="4" y="156" class="e-sub">Pro · jaune</text>
+        <text x="476" y="266" text-anchor="end" class="e-label">NUIT</text>
+        <text x="476" y="284" text-anchor="end" class="e-sub">Gaming · noir</text>
+      </svg>
+      <img class="logo-img" src="assets/logo-ekg.png" alt="Logo Ekinox Gamos : monogramme EKG sur circuit imprimé noir, anneau jaune" width="220" height="220">
+    </figure>
+  </div>
+
+  <div class="trace" aria-hidden="true"></div>
+  <dl class="facts">
+    <div class="fact"><dt>2</dt><dd><span class="k">adresses</span><span class="d">Showroom à Mahamasina, près de Gastro Pizza ; annexe à l'immeuble Raitra, Andravoahangy</span></dd></div>
+    <div class="fact"><dt>12 mois</dt><dd><span class="k">de garantie</span><span class="d">annoncée sur les unités centrales</span></dd></div>
+    <div class="fact"><dt>5</dt><dd><span class="k">univers</span><span class="d">affichés sur la bannière : gaming, architecture, 3D, audio, serveurs</span></dd></div>
+    <div class="fact"><dt>0</dt><dd><span class="k">site officiel</span><span class="d">aucune vitrine web trouvée lors de notre recherche</span></dd></div>
+  </dl>
+</header>
+
+<main>
+<!-- ================= DIAGNOSTIC ================= -->
+<section class="sec" id="diagnostic">
+  <div class="wrap">
+    <p class="eyebrow">Diagnostic</p>
+    <h2>Une vraie boutique, une présence en ligne dispersée.</h2>
+    <p class="intro">Nous avons étudié ce qu'Ekinox Gamos montre publiquement (pages Facebook, annuaires, publications produit) ainsi que le logo et la bannière que vous nous avez transmis.</p>
+
+    <div class="sec-body cols">
+      <div>
+        <h3>Ce que nous avons relevé</h3>
+        <ul class="list">
+          <li>Positionnement affiché : <b>« Spécialiste &amp; fournisseur de matériels informatiques Gaming &amp; Professionnel »</b>.</li>
+          <li>Deux slogans : <q>Challenge everything</q> et <q>All you need is here</q>.</li>
+          <li>Une identité nette et cohérente : badge EKG sur circuit imprimé, uniquement en noir et jaune, et un nom en lettrage techno large.</li>
+          <li>Cinq univers en pictogrammes sur la bannière : gaming, architecture, 3D, audio, serveurs et stockage.</li>
+          <li>Un showroom à <b>Mahamasina, près de Gastro Pizza</b>, et une annexe à l'<b>immeuble Raitra</b> (Andravoahangy Ambony, box 5). Les annuaires en ligne citent encore le Zoky Center.</li>
+          <li>Ouvert du lundi au vendredi de 8h30 à 17h, le samedi de 8h30 à 12h. Contact : +261 34 61 172 11, +261 34 02 056 56, ekinoxgamos@yahoo.com.</li>
+          <li>Exemples de prix publiés : unité centrale i7-4770K et GTX 660 à <span class="price">2 220 000 Ar</span>, setup tout-en-un à <span class="price">2 480 000 Ar</span>, boîtier vide RGB ATX à <span class="price">170 000 Ar</span>.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Ce que cela implique pour le site</h3>
+        <ul class="list arrows">
+          <li>Trois pages Facebook se partagent l'audience et un produit disparaît du fil en quelques jours. <b>Le site devient le catalogue permanent</b>, et chaque post renvoie vers une fiche.</li>
+          <li>Pour connaître un prix à jour ou une disponibilité, il faut écrire et attendre. <b>Le site affiche le stock réel, boutique par boutique.</b></li>
+          <li>Rien ne montre aujourd'hui le travail de l'atelier. <b>Le site rend visibles l'assemblage, les tests et la garantie.</b> C'est ce qui justifie un positionnement premium.</li>
+          <li>Les cinq univers de la bannière ne sont présentés nulle part. <b>Ils deviennent les entrées de l'espace professionnel.</b></li>
+          <li>Les adresses publiques ne concordent pas et l'e-mail est en @yahoo.com. <b>Le site, les fiches Google et une adresse contact@ au nom de domaine</b> deviennent la référence et rassurent les clients pros.</li>
+          <li>Les clients concluent par message. <b>WhatsApp et Messenger restent au cœur de la vente</b>, le site leur envoie des demandes déjà qualifiées.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Le marché à Antananarivo</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Acteur</th><th>Ce qui est visible en ligne</th><th>Ce que nous en retenons</th></tr></thead>
+          <tbody>
+            <tr><td>PC Upgrade</td><td>Site e-commerce, univers gamer, MVola et Orange Money, livraison Tana et province (fiche annuaire de 2022)</td><td>Le paiement mobile et la livraison en province sont le minimum attendu.</td></tr>
+            <tr><td>Micro Mania</td><td>Site, deux boutiques à Tana, livraison sous 24 h</td><td>La rapidité de livraison doit se lire dès la page d'accueil.</td></tr>
+            <tr><td>Zoma.mg</td><td>Marketplace, plus de 1 100 ordinateurs portables</td><td>Sur le volume, inutile de rivaliser. Ekinox gagne sur le conseil et l'assemblage.</td></tr>
+            <tr><td>PC Mada Store</td><td>PC gamer d'occasion, commande par WhatsApp ou téléphone</td><td>WhatsApp reste le canal où la vente se conclut. Le site doit y mener.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout mock" data-mode="jour">
+      <div class="callout-in">
+        <p class="eyebrow">La place à prendre</p>
+        <p class="big">Personne ne s'est encore imposé comme l'atelier premium de Tana : l'endroit où l'on configure son PC en ligne, où l'on voit sa machine assemblée avant de la recevoir, et où la garantie se suit depuis un QR code. C'est le territoire que nous proposons pour Ekinox Gamos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONCEPT ================= -->
+<section class="sec" id="concept">
+  <div class="wrap">
+    <p class="eyebrow">Concept &amp; positionnement</p>
+    <h2>Deux publics, une seule exigence.</h2>
+    <p class="intro">La promesse tient en trois lignes. Elle apparaît sur l'accueil, sur chaque fiche PC et sur les étiquettes des machines.</p>
+
+    <div class="sec-body">
+      <div class="promise">
+        <p>Assemblé à Tana.</p>
+        <p><span class="hl">Testé 24 h.</span></p>
+        <p>Garanti 12 mois.</p>
+      </div>
+      <p class="note">Promesse proposée. Le protocole de test (durée, logiciels, rapport remis au client) reste à formaliser avec l'atelier avant d'être affiché.</p>
+    </div>
+
+    <div class="modes">
+      <article class="mode-panel mock" data-mode="nuit">
+        <div class="mode-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+          <h3>NUIT</h3><span>Fond noir · Gaming</span>
+        </div>
+        <dl>
+          <dt>Slogan</dt><dd class="slogan">Challenge everything</dd>
+          <dt>Pour</dt><dd>Joueurs, streamers, étudiants, cybers gaming</dd>
+          <dt>Ton</dt><dd>Tutoiement, direct, précis sur les composants</dd>
+          <dt>Entrée</dt><dd>Par budget en Ariary ou par jeu</dd>
+          <dt>Action</dt><dd>Configurer mon PC</dd>
+          <dt>Preuve</dt><dd>Photos de sa machine assemblée, FPS estimés par jeu</dd>
+        </dl>
+      </article>
+      <article class="mode-panel mock" data-mode="jour">
+        <div class="mode-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+          <h3>JOUR</h3><span>Bandeau jaune · Professionnels</span>
+        </div>
+        <dl>
+          <dt>Slogan</dt><dd class="slogan">All you need is here</dd>
+          <dt>Pour</dt><dd>PME, architectes, studios 3D et audio, administrations, écoles, cybercafés</dd>
+          <dt>Ton</dt><dd>Vouvoiement, sobre, factuel</dd>
+          <dt>Entrée</dt><dd>Par univers métier et par nombre de postes</dd>
+          <dt>Action</dt><dd>Demander un devis</dd>
+          <dt>Preuve</dt><dd>Proforma avec NIF et STAT, prix HT, SAV sur site</dd>
+        </dl>
+      </article>
+    </div>
+
+    <div class="block">
+      <h3>De la publication Facebook à la fiche produit</h3>
+      <div class="rewrite">
+        <div class="post">
+          <div class="post-head">
+            <img class="logo-img" src="assets/logo-ekg.png" alt="" width="38" height="38">
+            <div><b>Ekinox Gamos</b><small>Publication actuelle, telle que publiée</small></div>
+          </div>
+          <p>🔥🔥UC 4Th GEN🔥🔥 ✅PRIX : 2.220.000Ar 🎯Intel Core i7-4770K 🎯Gigabyte ga-z87p-d3 🎯PSU GTX 660 3Go 🎯Jonsbo cr-1400 🎯RAM 8Go 🎯SSD 120Go 🎯HDD 1To 🎯PSU Huntkey 450W 🎯FAN coolmoon 3 🎯Boitier RUIX Eversky #GARANTIE_12_MOIS 👉Immeuble Raitra Andravoahangy Ambony ☎️ 034 02 056 56</p>
+        </div>
+        <span class="arrow" aria-hidden="true">→</span>
+        <div class="fiche">
+          <div class="fiche-top">
+            <div>
+              <h4>Unité centrale Core i7 · 4e gén.</h4>
+              <span class="ref">Réf. EKG-UC-4770K</span>
+            </div>
+            <span class="price">2 220 000 Ar</span>
+          </div>
+          <dl class="specs">
+            <dt>Processeur</dt><dd>Intel Core i7-4770K</dd>
+            <dt>Carte mère</dt><dd>Gigabyte GA-Z87P-D3</dd>
+            <dt>Graphique</dt><dd>GeForce GTX 660 3 Go</dd>
+            <dt>Mémoire</dt><dd>8 Go</dd>
+            <dt>Stockage</dt><dd>SSD 120 Go + HDD 1 To</dd>
+            <dt>Alim.</dt><dd>Huntkey 450 W</dd>
+            <dt>Boîtier</dt><dd>Ruix Eversky, ventirad Jonsbo CR-1400</dd>
+          </dl>
+          <div class="badges">
+            <span class="badge y">Garantie 12 mois</span>
+            <span class="badge ok">En stock · Andravoahangy</span>
+          </div>
+          <div class="cta"><span class="btn primary">Commander sur WhatsApp</span><span class="btn">Réserver en boutique</span></div>
+        </div>
+      </div>
+      <p class="caption">Le même contenu, structuré : lisible en trois secondes, indexé par Google, et partageable sur Facebook avec un lien vers la fiche. La coquille « PSU GTX 660 » disparaît, chaque composant a son champ.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FONCTIONNALITÉS ================= -->
+<section class="sec" id="fonctionnalites">
+  <div class="wrap">
+    <p class="eyebrow">Fonctionnalités</p>
+    <h2>Ce que le site doit savoir faire.</h2>
+    <p class="intro">Chaque fonctionnalité répond à un frein observé chez vos clients. Elles sont réparties en trois phases pour mettre en ligne vite, puis enrichir.</p>
+    <div class="legend">
+      <span><span class="pill p1">P1</span>Lancement</span>
+      <span><span class="pill p2">P2</span>Expérience</span>
+      <span><span class="pill p3">P3</span>Fidélité</span>
+    </div>
+
+    <div class="sec-body fgroups">
+      <div class="fgroup">
+        <h3>Vendre <small>6 fonctions</small></h3>
+        <div class="feat"><b>Catalogue par compatibilité</b><span class="pill p1">P1</span><p>Filtres par socket, DDR4 ou DDR5, format de carte mère. Recherche tolérante : « rtx4060 », « 4060 ti » ou « rtx 4060 » donnent le même résultat.</p></div>
+        <div class="feat"><b>Commande WhatsApp préremplie</b><span class="pill p1">P1</span><p>Le panier part en un message vers un conseiller, avec références, quantités et total en Ariary.</p></div>
+        <div class="feat"><b>Paiement mobile money</b><span class="pill p1">P1</span><p>MVola, Orange Money et Airtel Money, paiement à la livraison, virement pour les professionnels.</p></div>
+        <div class="feat"><b>Réservation avec acompte</b><span class="pill p1">P1</span><p>Le client bloque un produit avec un acompte mobile money et le retire à Mahamasina ou Andravoahangy.</p></div>
+        <div class="feat"><b>Livraison Tana et province</b><span class="pill p1">P1</span><p>Tarif par zone, suivi par statut, envoi en province via un transporteur partenaire.</p></div>
+        <div class="feat"><b>Ekinox Forge, le configurateur</b><span class="pill p2">P2</span><p>On part d'un budget en Ariary ou d'un jeu. Le configurateur propose une machine compatible, vérifie l'alimentation et le boîtier, affiche les FPS estimés et envoie le tout à un conseiller.</p></div>
+      </div>
+
+      <div class="fgroup">
+        <h3>Rassurer <small>5 fonctions</small></h3>
+        <div class="feat"><b>Stock réel par boutique</b><span class="pill p1">P1</span><p>« En stock · Mahamasina », « Sur commande », « Prochain arrivage le 12 déc. » Fini les messages pour demander si c'est disponible.</p></div>
+        <div class="feat"><b>Carnet d'assemblage</b><span class="pill p2">P2</span><p>Photos et courte vidéo du PC monté, câblage et test inclus, envoyées au client avant la livraison.</p></div>
+        <div class="feat"><b>Passeport garantie</b><span class="pill p2">P2</span><p>Chaque machine a sa fiche numérique (numéro de série, date, composants). Le QR code collé sur le boîtier ouvre directement le SAV.</p></div>
+        <div class="feat"><b>Suivi SAV en ligne</b><span class="pill p2">P2</span><p>Ticket de réparation, statut visible en ligne et notification WhatsApp à chaque étape.</p></div>
+        <div class="feat"><b>Avis clients vérifiés</b><span class="pill p2">P2</span><p>Ouverts seulement après achat, avec photo du setup. Ils servent aussi de contenu pour Facebook.</p></div>
+      </div>
+
+      <div class="fgroup">
+        <h3>Pro &amp; univers métier <small>3 fonctions</small></h3>
+        <div class="feat"><b>Devis en ligne</b><span class="pill p1">P1</span><p>Le panier se transforme en devis PDF avec durée de validité et conditions.</p></div>
+        <div class="feat"><b>Compte entreprise</b><span class="pill p2">P2</span><p>Proforma et factures avec NIF et STAT, prix HT et TTC (TVA 20 %), historique des commandes, plusieurs utilisateurs par société.</p></div>
+        <div class="feat"><b>Configurations par métier</b><span class="pill p2">P2</span><p>Les cinq univers de la bannière : stations pour l'architecture et la 3D, postes audio, serveurs et stockage, packs cyber et salles de jeux. Installation sur site à Tana.</p></div>
+      </div>
+
+      <div class="fgroup">
+        <h3>Fidéliser <small>4 fonctions</small></h3>
+        <div class="feat"><b>Pack anti-délestage</b><span class="pill p1">P1</span><p>Proposé sur chaque PC : onduleur et parafoudre dimensionnés selon la puissance de la machine. Utile au client pendant les coupures, et il augmente le panier moyen.</p></div>
+        <div class="feat"><b>Arrivages et précommandes</b><span class="pill p2">P2</span><p>Liste d'attente sur les prochains arrivages (cartes graphiques, processeurs), avec réservation prioritaire.</p></div>
+        <div class="feat"><b>Reprise de l'ancien matériel</b><span class="pill p3">P3</span><p>Estimation en ligne d'une carte graphique ou d'un PC, déduite de l'achat suivant.</p></div>
+        <div class="feat"><b>Ekinox Club</b><span class="pill p3">P3</span><p>Points sur chaque achat, accès anticipé aux arrivages, remise sur les upgrades en atelier.</p></div>
+      </div>
+
+      <div class="fgroup">
+        <h3>Piloter <small>4 fonctions</small></h3>
+        <div class="feat"><b>Stocks multi-boutiques</b><span class="pill p1">P1</span><p>Un seul back-office pour Mahamasina et Andravoahangy, transferts entre boutiques, alertes de stock bas.</p></div>
+        <div class="feat"><b>Générateur de posts Facebook</b><span class="pill p2">P2</span><p>Depuis une fiche produit, le back-office produit le visuel prix en noir et jaune avec le badge EKG, et le texte du post avec le lien vers la fiche. Facebook attire, le site convertit.</p></div>
+        <div class="feat"><b>Catalogue Meta synchronisé</b><span class="pill p2">P2</span><p>Les produits apparaissent dans les boutiques Facebook et Instagram, avec le suivi des conversions.</p></div>
+        <div class="feat"><b>Tableau de bord des ventes</b><span class="pill p2">P2</span><p>Ventes par canal (site, WhatsApp, boutique), produits les plus consultés, devis en attente.</p></div>
+      </div>
+
+      <div class="fgroup">
+        <h3>Ancrage local <small>3 fonctions</small></h3>
+        <div class="feat"><b>Mode économie de données</b><span class="pill p1">P1</span><p>Images légères, accueil sous 600 Ko, site utilisable en 3G. Le forfait du client est respecté.</p></div>
+        <div class="feat"><b>Français et malagasy</b><span class="pill p3">P3</span><p>Les pages clés traduites en malagasy : accueil, fiches PC, livraison et garantie.</p></div>
+        <div class="feat"><b>Offrir depuis l'étranger</b><span class="pill p3">P3</span><p>La diaspora achète un PC pour un proche à Madagascar, avec prix affichés en euros et paiement par carte. Prestataire de paiement à étudier.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DIRECTION ARTISTIQUE ================= -->
+<section class="sec" id="design">
+  <div class="wrap">
+    <p class="eyebrow">Direction artistique</p>
+    <h2>Noir, jaune, circuit.</h2>
+    <p class="intro">Votre identité tient en deux couleurs et un motif : le noir du circuit, le jaune de l'anneau et du bandeau, et les pistes du circuit imprimé. Le site reprend ce système tel quel, sans ajouter de couleur de marque.</p>
+
+    <div class="sec-body">
+      <h3>Votre identité aujourd'hui</h3>
+      <figure class="banner"><img src="assets/banniere-ekg.jpg" alt="Bannière Ekinox Gamos : badge EKG, nom EKINOX GAMOS sur bandeau jaune, slogan Challenge everything, pictogrammes des cinq univers, slogan All you need is here et coordonnées" width="1597" height="904" loading="lazy"></figure>
+      <p class="caption">Badge EKG, nom en lettrage techno sur bandeau jaune, slogans « Challenge everything » et « All you need is here », cinq univers en pictogrammes, coordonnées en jaune sur noir.</p>
+
+      <div class="block">
+        <h3>Couleurs de la charte</h3>
+        <div class="swatches">
+          <div class="sw"><i style="background:#FEE903"></i><b>Jaune EKG</b><code>#FEE903</code><span>L'anneau du badge et le bandeau du nom. Boutons, titres, prix, pastilles.</span></div>
+          <div class="sw"><i style="background:#000000"></i><b>Noir EKG</b><code>#000000</code><span>Le fond du badge et de la bannière. Fond principal du site.</span></div>
+          <div class="sw"><i style="background:#969108"></i><b>Olive EKG</b><code>#969108</code><span>Le E du logo, du jaune posé en transparence sur le noir. Pistes de circuit, étiquettes.</span></div>
+          <div class="sw"><i style="background:#D6D2B6"></i><b>Gris chaud de lecture</b><code>#D6D2B6</code><span>Texte courant sur fond noir uniquement.</span><em>Ajout fonctionnel, hors charte</em></div>
+        </div>
+        <p class="caption">Les trois couleurs de marque sont relevées directement sur votre fichier de logo. Si une charte officielle existe (codes Pantone, CMJN), elle complète ces valeurs.</p>
+      </div>
+
+      <div class="block">
+        <h3>Trois règles d'usage</h3>
+        <div class="rules">
+          <div class="rule-tile mock" data-mode="nuit">
+            <span class="rule-demo"><span class="y-text">Garanti 12 mois</span></span>
+            <p>Sur le noir, le jaune écrit : titres, prix, boutons. C'est le badge, anneau jaune sur circuit noir.</p>
+          </div>
+          <div class="rule-tile mock" data-mode="jour">
+            <span class="rule-demo">Garanti 12 mois</span>
+            <p>Sur le jaune, le noir écrit : c'est le bandeau « EKINOX GAMOS » de votre bannière. Réservé aux bandeaux, à l'espace pro et aux mises en avant.</p>
+          </div>
+          <div class="rule-tile plain">
+            <span class="rule-demo">Chaque PC est monté et testé dans notre atelier de Mahamasina.</span>
+            <p>Pas de blanc : il n'existe pas dans la marque. Les longs textes sur fond noir utilisent un gris chaud, plus reposant que le jaune pour la lecture.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Typographie</h3>
+        <div class="spec-row">
+          <span class="lbl"><b>Orbitron</b>Titres, gammes, chiffres clés. Large et technique, comme le nom « EKINOX GAMOS » de la bannière.</span>
+          <span class="sample-display">ZÉNITH</span>
+        </div>
+        <div class="spec-row">
+          <span class="lbl"><b>Barlow</b>Texte courant, 16 à 19 px</span>
+          <p class="sample-body">Chaque PC est monté et câblé dans notre atelier de Mahamasina, puis testé en charge avant de partir chez vous.</p>
+        </div>
+        <div class="spec-row">
+          <span class="lbl"><b>JetBrains Mono</b>Specs, prix, références</span>
+          <p class="sample-mono">RTX 5060 Ti · 16 Go GDDR7 · 180 W<br>5 890 000 Ar · Réf. EKG-ZEN-01</p>
+        </div>
+        <p class="caption">Si vous connaissez la police utilisée pour le nom sur la bannière, nous la prendrons pour les titres à la place d'Orbitron.</p>
+      </div>
+
+      <div class="block">
+        <h3>Votre logo, tel quel</h3>
+        <div class="logos">
+          <div class="logo-tile mock" data-mode="nuit">
+            <div class="lockup">
+              <img class="logo-img" src="assets/logo-ekg.png" alt="Logo Ekinox Gamos sur fond noir" width="84" height="84">
+              <div><b>EKINOX</b><small>GAMOS</small></div>
+            </div>
+            <span class="mode-tag">En-tête, fond noir</span>
+          </div>
+          <div class="logo-tile mock" data-mode="jour">
+            <div class="lockup">
+              <img class="logo-img" src="assets/logo-ekg.png" alt="Logo Ekinox Gamos sur fond jaune" width="84" height="84">
+              <div><b>EKINOX</b><small>GAMOS</small></div>
+            </div>
+            <span class="mode-tag">En-tête, bandeau jaune</span>
+          </div>
+        </div>
+        <ul class="list" style="margin-top:24px">
+          <li>Le badge est utilisé sans aucune modification. Dans l'en-tête du site, il est suivi du nom, qui reprendra le lettrage de la bannière dès que nous aurons le fichier vectoriel.</li>
+          <li>Taille minimale de 32 px à l'écran. En dessous, le circuit devient illisible.</li>
+          <li>Pour le favicon et les étiquettes QR, une version réduite du badge pourrait être utile. Elle ne sera dessinée qu'avec votre accord, à partir de vos fichiers sources.</li>
+          <li>Toujours sur fond noir ou jaune uni, jamais sur une photo chargée.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Pistes et pastilles</h3>
+        <p class="note" style="margin:0">Les séparateurs du site sont des pistes de circuit terminées par une pastille, comme sur le badge. Au survol d'un produit, une piste jaune s'allume sous la carte. Au changement de mode, une piste traverse l'écran. Ce sont les deux seuls mouvements du site.</p>
+        <div class="trace-demo"><div class="trace" aria-hidden="true"></div></div>
+      </div>
+
+      <div class="block">
+        <h3>Direction photo</h3>
+        <div class="photo-dir">
+          <article>
+            <h4>Studio atelier</h4>
+            <p>Vos propres montages photographiés au showroom. Aucune image de banque d'images : chaque visuel doit pouvoir être pris chez Ekinox.</p>
+            <dl><dt>Fond</dt><dd>Noir continu, comme la bannière</dd><dt>Lumière</dt><dd>Rasante ; éclairage interne de la machine réglé en jaune quand c'est possible</dd></dl>
+          </article>
+          <article>
+            <h4>Mains et outils</h4>
+            <p>L'atelier en action : câble management, pâte thermique, banc de test. Ces images prouvent le savoir-faire.</p>
+            <dl><dt>Cadrage</dt><dd>Serré, sur les gestes</dd><dt>Usage</dt><dd>Page atelier, carnets d'assemblage</dd></dl>
+          </article>
+          <article>
+            <h4>Postes en situation</h4>
+            <p>Pour l'espace pro : stations installées chez des architectes, studios ou entreprises de Tana, avec leur accord.</p>
+            <dl><dt>Cadrage</dt><dd>Poste et écran, logiciel métier à l'écran</dd><dt>Usage</dt><dd>Univers métier, références clients</dd></dl>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MAQUETTE ================= -->
+<div class="band" id="maquette">
+<section class="sec">
+  <div class="wrap">
+    <p class="eyebrow">Maquette</p>
+    <h2>La page d'accueil, de jour comme de nuit.</h2>
+    <p class="intro">Le mode Nuit reprend le fond noir de votre bannière, le mode Jour son bandeau jaune. Par défaut, le site suit l'heure de Tana : Jour de 6 h à 18 h, Nuit ensuite. Les pages pros s'ouvrent toujours en Jour, et le choix du visiteur est mémorisé.</p>
+
+    <div class="switch-row">
+      <div class="mode-switch" role="group" aria-label="Mode de la maquette">
+        <button type="button" id="mode-nuit" data-set-mode="nuit" aria-pressed="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>Nuit · Gaming</button>
+        <button type="button" id="mode-jour" data-set-mode="jour" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>Jour · Pro</button>
+      </div>
+      <p class="note">Changez de mode : couleurs, textes, gamme et appels à l'action s'adaptent.</p>
+    </div>
+    <div class="trace" id="switch-trace" aria-hidden="true"></div>
+
+    <div class="browser">
+      <div class="b-bar"><span class="b-dots"><i></i><i></i><i></i></span><span class="b-url">ekinoxgamos.mg</span><span class="spacer"></span></div>
+
+      <div class="mock sync site" data-mode="nuit">
+        <div class="m-top">
+          <span><span data-show="nuit">Livraison 24 h à Tana · Province par transporteur</span><span data-show="jour">Devis sous 24 h ouvrées · Installation sur site à Tana</span></span>
+          <span class="m-pay">MVola · Orange Money · Airtel Money</span>
+          <span><b>FR</b> · MG</span>
+        </div>
+
+        <div class="m-nav">
+          <span class="m-logo"><img class="logo-img" src="assets/logo-ekg.png" alt="" width="36" height="36"><span class="word">EKINOX</span><small class="word">GAMOS</small></span>
+          <span class="m-links" data-show="nuit"><span>PC Gamer</span><span>Configurateur</span><span>Composants</span><span>Périphériques</span><span>Arrivages</span></span>
+          <span class="m-links" data-show="jour"><span>Bureautique</span><span>Archi &amp; 3D</span><span>Audio</span><span>Serveurs</span><span>Devis</span></span>
+          <span class="m-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Rechercher « RTX 5060 »</span></span>
+          <span class="m-icons">
+            <span class="m-modepill">
+              <svg data-show="nuit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+              <svg data-show="jour" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg>
+              <span data-show="nuit">Nuit</span><span data-show="jour">Jour</span>
+            </span>
+            <span class="m-cart">Panier · 0</span>
+            <svg class="m-burger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </span>
+        </div>
+
+        <section class="m-hero">
+          <div>
+            <p class="m-kicker"><span data-show="nuit">Challenge everything</span><span data-show="jour">All you need is here</span></p>
+            <h3><span data-show="nuit">Ton prochain PC, <span class="m-hl">assemblé à Tana</span>.</span><span data-show="jour">Équipez vos équipes, <span class="m-hl">sans surprise</span>.</span></h3>
+            <p class="m-sub"><span data-show="nuit">Choisis ton budget ou ton jeu. On assemble, on teste 24 h, et tu reçois les photos de ta machine avant la livraison.</span><span data-show="jour">Bureautique, architecture, 3D, audio, serveurs : des postes configurés pour votre métier, installés et garantis 12 mois. Proforma avec NIF et STAT.</span></p>
+            <div class="m-chips" data-show="nuit"><span class="m-chip-label">Budget</span><span class="m-chip">3 M Ar</span><span class="m-chip on">6 M Ar</span><span class="m-chip">10 M Ar et +</span></div>
+            <div class="m-chips" data-show="jour"><span class="m-chip-label">Univers</span><span class="m-chip">Bureautique</span><span class="m-chip on">Archi &amp; 3D</span><span class="m-chip">Audio</span><span class="m-chip">Serveurs</span></div>
+            <div class="m-ctas" data-show="nuit"><span class="m-btn primary">Configurer mon PC</span><span class="m-btn">Voir la gamme</span></div>
+            <div class="m-ctas" data-show="jour"><span class="m-btn primary">Demander un devis</span><span class="m-btn">Parler à un conseiller</span></div>
+          </div>
+          <div class="m-hero-visual">
+            <svg viewBox="0 0 240 300" aria-hidden="true">
+              <ellipse cx="120" cy="290" rx="104" ry="8" class="tw-floor"/>
+              <rect x="30" y="16" width="180" height="266" rx="12" class="tw-case"/>
+              <rect x="44" y="30" width="152" height="238" rx="6" class="tw-glass"/>
+              <rect x="44" y="30" width="76" height="3" class="tw-a"/><rect x="120" y="30" width="76" height="3" class="tw-b"/>
+              <rect x="58" y="46" width="124" height="150" rx="4" class="tw-board"/>
+              <path d="M66 130H84L94 120H104M66 60H80L88 52H140M150 136H170V190" class="tw-trace"/>
+              <circle cx="112" cy="92" r="26" class="tw-fan"/><circle cx="112" cy="92" r="9" class="tw-hub"/>
+              <rect x="154" y="62" width="6" height="54" rx="1" class="tw-ram"/><rect x="164" y="62" width="6" height="54" rx="1" class="tw-ram"/>
+              <rect x="58" y="146" width="124" height="28" rx="4" class="tw-gpu"/>
+              <rect x="58" y="171" width="124" height="3" class="tw-gpu-line"/>
+              <rect x="44" y="216" width="152" height="52" rx="2" class="tw-shroud"/>
+              <text x="120" y="246" text-anchor="middle" class="tw-text">EKINOX</text>
+            </svg>
+            <span class="m-tag t1"><b>Testé 24 h</b>avant livraison</span>
+            <span class="m-tag t2"><b>Garantie 12 mois</b>passeport QR</span>
+          </div>
+        </section>
+
+        <ul class="m-trust">
+          <li><small>Atelier</small>Assemblé et câblé à Tana</li>
+          <li><small>Contrôle</small>Test de charge 24 h</li>
+          <li><small>Garantie</small>12 mois, passeport QR</li>
+          <li><small>Retrait</small>Mahamasina ou Andravoahangy</li>
+        </ul>
+
+        <section class="m-range">
+          <div class="m-range-head">
+            <h4><span data-show="nuit">La gamme Ekinox</span><span data-show="jour">Postes par métier</span></h4>
+            <span>Tout voir →</span>
+          </div>
+          <div class="m-cards" data-show="nuit">
+            <article class="m-card">
+              <div class="m-card-top"><span class="m-tier">AUBE</span><span class="m-res">1080p</span></div>
+              <ul class="m-specs"><li>Ryzen 5 5600</li><li>RTX 5050 8 Go</li><li>16 Go DDR4</li><li>SSD NVMe 512 Go</li></ul>
+              <p class="m-games">Valorant · EA FC · Fortnite</p>
+              <div class="m-card-foot"><span class="m-price">3 290 000 Ar</span><span class="m-stock">En stock · Mahamasina</span></div>
+            </article>
+            <article class="m-card">
+              <div class="m-card-top"><span class="m-tier">ZÉNITH</span><span class="m-res hot">Le plus choisi</span></div>
+              <ul class="m-specs"><li>Ryzen 5 7600</li><li>RTX 5060 Ti 16 Go</li><li>32 Go DDR5</li><li>SSD NVMe 1 To</li></ul>
+              <p class="m-games">1440p fluide · GTA V · Warzone</p>
+              <div class="m-card-foot"><span class="m-price">5 890 000 Ar</span><span class="m-stock">En stock · Andravoahangy</span></div>
+            </article>
+            <article class="m-card">
+              <div class="m-card-top"><span class="m-tier">SOLSTICE</span><span class="m-res">4K</span></div>
+              <ul class="m-specs"><li>Ryzen 7 9800X3D</li><li>RTX 5080 16 Go</li><li>32 Go DDR5</li><li>SSD NVMe 2 To</li></ul>
+              <p class="m-games">4K et streaming</p>
+              <div class="m-card-foot"><span class="m-price">12 900 000 Ar</span><span class="m-stock wait">Prochain arrivage · 12 déc.</span></div>
+            </article>
+          </div>
+          <div class="m-cards" data-show="jour">
+            <article class="m-card">
+              <div class="m-card-top"><span class="m-tier">BUREAU</span><span class="m-res">Win 11 Pro</span></div>
+              <ul class="m-specs"><li>Intel Core i5</li><li>16 Go DDR4</li><li>SSD 512 Go</li><li>Wi-Fi + Ethernet</li></ul>
+              <p class="m-games">Bureautique, comptabilité, ERP</p>
+              <div class="m-card-foot"><span class="m-price">1 950 000 Ar <small>HT</small></span><span class="m-stock">14 unités disponibles</span></div>
+            </article>
+            <article class="m-card">
+              <div class="m-card-top"><span class="m-tier">ARCHI 3D</span><span class="m-res hot">Studio</span></div>
+              <ul class="m-specs"><li>Ryzen 9 9900X</li><li>RTX 5070 12 Go</li><li>64 Go DDR5</li><li>SSD NVMe 2 To</li></ul>
+              <p class="m-games">Revit, SketchUp, Blender, Lumion</p>
+              <div class="m-card-foot"><span class="m-price">8 400 000 Ar <small>HT</small></span><span class="m-stock">Sur commande · 5 jours</span></div>
+            </article>
+            <article class="m-card">
+              <div class="m-card-top"><span class="m-tier">SERVEUR</span><span class="m-res">PME</span></div>
+              <ul class="m-specs"><li>Serveur tour</li><li>64 Go ECC</li><li>4 disques en RAID</li><li>Onduleur inclus</li></ul>
+              <p class="m-games">Fichiers partagés, sauvegardes, ERP</p>
+              <div class="m-card-foot"><span class="m-price">Sur devis</span><span class="m-stock">Réponse sous 24 h</span></div>
+            </article>
+          </div>
+        </section>
+
+        <div class="m-band">
+          <p data-show="nuit"><b>Prochain arrivage : cartes RTX 50</b>Réserve la tienne avec 20 % d'acompte MVola. Les inscrits sont servis en premier.</p>
+          <p data-show="jour"><b>Un bureau, un studio, une salle à équiper ?</b>Visite technique gratuite à Tana, proforma sous 24 h ouvrées, paiement par virement.</p>
+          <span class="m-btn" data-show="nuit">Rejoindre la liste</span>
+          <span class="m-btn" data-show="jour">Planifier une visite</span>
+        </div>
+
+        <div class="m-foot">
+          <div><b>Showroom · Mahamasina</b>Près de Gastro Pizza</div>
+          <div><b>Annexe · Immeuble Raitra</b>Andravoahangy Ambony, box 5</div>
+          <div><b>+261 34 61 172 11</b>Lun–ven 8h30–17h · Sam 8h30–12h</div>
+        </div>
+      </div>
+    </div>
+    <p class="caption">Le mode Jour en plein jaune est volontairement fort, comme le bandeau de la bannière. Si l'équipe le préfère plus calme, le jaune peut se limiter à l'en-tête et aux bandeaux, sur fond noir.</p>
+
+    <div class="phone-row">
+      <div class="phone">
+        <div class="phone-screen mock sync" data-mode="nuit">
+          <div class="p-scroll">
+            <div class="p-nav">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+              <img class="logo-img" src="assets/logo-ekg.png" alt="" width="28" height="28">
+              <span>Panier · 0</span>
+            </div>
+            <div class="p-img">
+              <svg viewBox="0 0 240 300" aria-hidden="true">
+                <ellipse cx="120" cy="290" rx="104" ry="8" class="tw-floor"/>
+                <rect x="30" y="16" width="180" height="266" rx="12" class="tw-case"/>
+                <rect x="44" y="30" width="152" height="238" rx="6" class="tw-glass"/>
+                <rect x="44" y="30" width="76" height="3" class="tw-a"/><rect x="120" y="30" width="76" height="3" class="tw-b"/>
+                <rect x="58" y="46" width="124" height="150" rx="4" class="tw-board"/>
+                <path d="M66 130H84L94 120H104M66 60H80L88 52H140M150 136H170V190" class="tw-trace"/>
+                <circle cx="112" cy="92" r="26" class="tw-fan"/><circle cx="112" cy="92" r="9" class="tw-hub"/>
+                <rect x="154" y="62" width="6" height="54" rx="1" class="tw-ram"/><rect x="164" y="62" width="6" height="54" rx="1" class="tw-ram"/>
+                <rect x="58" y="146" width="124" height="28" rx="4" class="tw-gpu"/>
+                <rect x="58" y="171" width="124" height="3" class="tw-gpu-line"/>
+                <rect x="44" y="216" width="152" height="52" rx="2" class="tw-shroud"/>
+                <text x="120" y="246" text-anchor="middle" class="tw-text">EKINOX</text>
+              </svg>
+              <span class="dots"><i></i><i></i><i></i><i></i></span>
+            </div>
+            <div class="p-body">
+              <p class="p-tier">ZÉNITH · 1440P</p>
+              <h4>Ekinox Zénith</h4>
+              <div class="p-price-row">
+                <span class="pin abs">1</span>
+                <span class="m-price">5 890 000 Ar</span>
+                <span class="m-stock">En stock · Andravoahangy</span>
+              </div>
+              <ul class="p-specs"><li>Ryzen 5 7600 · RTX 5060 Ti 16 Go</li><li>32 Go DDR5 · SSD NVMe 1 To</li><li>Alim. 650 W 80+ Gold</li></ul>
+              <label class="p-addon" for="addon-ups">
+                <input type="checkbox" id="addon-ups">
+                <span><b><span class="pin sm">2</span>Pack anti-délestage</b><span>Onduleur 1 200 VA et parafoudre · +390 000 Ar</span></span>
+              </label>
+              <div class="p-log"><span class="pin sm">3</span><b>Carnet d'assemblage inclus.</b> Photos et vidéo de ton PC monté, envoyées avant la livraison.</div>
+            </div>
+          </div>
+          <div class="p-bar">
+            <div class="p-total"><span><span class="pin sm">4</span>Total</span><b id="p-total">5 890 000 Ar</b></div>
+            <span class="m-btn primary">WhatsApp</span>
+            <span class="m-btn">Payer MVola</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3>La fiche produit sur mobile</h3>
+        <p class="note" style="margin:0 0 28px">La majorité des visites viendra d'un téléphone, depuis un lien Facebook. La fiche doit permettre d'acheter sans jamais chercher un bouton.</p>
+        <ol class="notes">
+          <li><span class="num">1</span><div><b>Prix et disponibilité d'abord</b><p>Prix en Ariary et boutique où le PC est en stock, visibles sans faire défiler.</p></div></li>
+          <li><span class="num">2</span><div><b>Pack anti-délestage</b><p>Proposé avant l'achat, dimensionné pour la machine. Cochez la case dans la maquette : le total se met à jour.</p></div></li>
+          <li><span class="num">3</span><div><b>Carnet d'assemblage</b><p>Le client voit sa propre machine avant de la recevoir. C'est la preuve la plus forte du positionnement premium.</p></div></li>
+          <li><span class="num">4</span><div><b>Barre d'achat fixe</b><p>Commander sur WhatsApp avec le panier prérempli, ou payer directement par mobile money.</p></div></li>
+        </ol>
+        <p class="disclaimer">Configurations, prix, stocks et dates de la maquette sont fictifs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ================= ARBORESCENCE ================= -->
+<section class="sec" id="arborescence">
+  <div class="wrap">
+    <p class="eyebrow">Arborescence</p>
+    <h2>Une structure courte, pensée pour le mobile.</h2>
+    <p class="intro">Six entrées principales. Tout produit est accessible en trois touches depuis l'accueil.</p>
+    <div class="sec-body">
+      <div class="tree-root"><span>Accueil</span><div class="trace" aria-hidden="true"></div></div>
+      <div class="tree">
+        <section><h4>PC Gamer</h4><ul><li class="key">Gamme Ekinox</li><li>PC par budget</li><li>PC par jeu</li><li class="key">Configurateur Forge</li></ul></section>
+        <section><h4>Composants</h4><ul><li>Cartes graphiques</li><li>Processeurs</li><li>Cartes mères</li><li>Mémoire et stockage</li><li>Alimentations</li><li>Boîtiers et refroidissement</li></ul></section>
+        <section><h4>Périphériques</h4><ul><li>Écrans</li><li>Claviers, souris, casques</li><li>Sièges et bureaux</li><li>Réseau</li><li class="key">Onduleurs et protection</li></ul></section>
+        <section><h4>Univers pro</h4><ul><li>Bureautique</li><li>Architecture et BTP</li><li>3D et création</li><li>Audio et MAO</li><li>Serveurs et stockage</li><li>Cybers et salles de jeux</li><li class="key">Demande de devis</li></ul></section>
+        <section><h4>Services</h4><ul><li class="key">Arrivages et précommandes</li><li>Reprise</li><li>SAV et garantie</li><li>Assemblage et upgrade</li><li>Compte entreprise</li></ul></section>
+        <section><h4>Ekinox</h4><ul><li>Nos deux boutiques</li><li>L'atelier</li><li>Guides et comparatifs</li><li>Contact WhatsApp</li></ul></section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TECHNIQUE ================= -->
+<section class="sec" id="technique">
+  <div class="wrap">
+    <p class="eyebrow">Technique</p>
+    <h2>Rapide en 4G, simple à gérer au quotidien.</h2>
+    <p class="intro">Notre recommandation privilégie la vitesse d'affichage à Madagascar et un back-office que l'équipe peut utiliser seule, y compris depuis un téléphone.</p>
+
+    <div class="sec-body table-wrap">
+      <table>
+        <thead><tr><th>Brique</th><th>Recommandation</th><th>Pourquoi</th></tr></thead>
+        <tbody>
+          <tr><td>Interface</td><td>Next.js (React), rendu côté serveur</td><td>Pages rapides et bien référencées, images optimisées automatiquement.</td></tr>
+          <tr><td>E-commerce</td><td>Medusa v2, open source</td><td>Stocks par emplacement pour les deux boutiques, tarifs pros par listes de prix, back-office inclus.</td></tr>
+          <tr><td>Recherche</td><td>Meilisearch</td><td>Résultats instantanés et tolérants aux fautes de frappe sur les références.</td></tr>
+          <tr><td>Paiements</td><td>API marchandes MVola, Orange Money, Airtel Money ; paiement à la livraison ; virement</td><td>Couvre les trois opérateurs mobile money du pays et les habitudes des pros.</td></tr>
+          <tr><td>Messagerie</td><td>Lien WhatsApp prérempli en P1, WhatsApp Business Platform en P2</td><td>Confirmations de commande, suivi SAV et alertes d'arrivage dans l'application que les clients utilisent déjà.</td></tr>
+          <tr><td>Hébergement</td><td>Interface sur CDN, back-office sur serveur dédié (VPS)</td><td>Temps de chargement stables depuis Madagascar, coûts maîtrisés.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption">Si l'équipe préfère un outil plus répandu localement, WooCommerce reste possible. Il coûte moins cher au départ, mais le site est plus lent et la maintenance des extensions plus lourde.</p>
+
+    <div class="metrics">
+      <div class="metric"><b>&lt; 600 Ko</b><span>Poids de la page d'accueil sur mobile</span></div>
+      <div class="metric"><b>&lt; 2,5 s</b><span>Affichage du contenu principal (LCP) en 4G</span></div>
+      <div class="metric"><b>0</b><span>Vidéo en lecture automatique sur mobile</span></div>
+    </div>
+
+    <div class="seo cols">
+      <div>
+        <h3>Référencement local</h3>
+        <ul class="list">
+          <li>Fiches Google Business Profile pour les deux boutiques, avec l'adresse de Mahamasina corrigée, horaires et photos.</li>
+          <li>Données structurées Product avec <span class="mono">priceCurrency: "MGA"</span>, le code ISO de l'Ariary.</li>
+          <li>Pages ciblées : « PC gamer Antananarivo », « station architecture Antananarivo », « matériel informatique Mahamasina ».</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contenus qui attirent</h3>
+        <ul class="list">
+          <li>« Quel PC gamer pour 4 millions d'Ariary ? »</li>
+          <li>« Protéger son PC pendant les délestages »</li>
+          <li>« Quel poste pour Revit et Lumion ? »</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLANNING ================= -->
+<section class="sec" id="planning">
+  <div class="wrap">
+    <p class="eyebrow">Planning</p>
+    <h2>22 semaines, trois mises en ligne.</h2>
+    <p class="intro">Le site est en ligne dès la fin de la phase 1. Les phases suivantes s'ajoutent sans interrompre les ventes.</p>
+
+    <div class="sec-body tl-wrap">
+      <div class="tl" role="img" aria-label="Planning sur 22 semaines : cadrage semaines 1 et 2, phase 1 semaines 3 à 10, phase 2 semaines 11 à 16, phase 3 semaines 17 à 22.">
+        <span class="tl-corner">Semaine</span>
+        <span class="tl-wk">1</span><span class="tl-wk">2</span><span class="tl-wk">3</span><span class="tl-wk">4</span><span class="tl-wk">5</span><span class="tl-wk">6</span><span class="tl-wk">7</span><span class="tl-wk">8</span><span class="tl-wk">9</span><span class="tl-wk">10</span><span class="tl-wk">11</span><span class="tl-wk">12</span><span class="tl-wk">13</span><span class="tl-wk">14</span><span class="tl-wk">15</span><span class="tl-wk">16</span><span class="tl-wk">17</span><span class="tl-wk">18</span><span class="tl-wk">19</span><span class="tl-wk">20</span><span class="tl-wk">21</span><span class="tl-wk">22</span>
+
+        <span class="tl-label">Cadrage</span>
+        <span class="tl-bar c0" style="grid-column:2 / span 2">2 sem.</span>
+        <span style="grid-column:4 / -1"></span>
+
+        <span class="tl-label">P1 Lancement</span>
+        <span style="grid-column:2 / span 2"></span>
+        <span class="tl-bar c1" style="grid-column:4 / span 8"><span>Catalogue, paiements, WhatsApp</span><em>En ligne</em></span>
+        <span style="grid-column:12 / -1"></span>
+
+        <span class="tl-label">P2 Expérience</span>
+        <span style="grid-column:2 / span 10"></span>
+        <span class="tl-bar c2" style="grid-column:12 / span 6"><span>Forge, garantie, pros</span></span>
+        <span style="grid-column:18 / -1"></span>
+
+        <span class="tl-label">P3 Fidélité</span>
+        <span style="grid-column:2 / span 16"></span>
+        <span class="tl-bar c3" style="grid-column:18 / span 6"><span>Club, reprise, MG</span></span>
+      </div>
+    </div>
+
+    <div class="phases">
+      <article>
+        <h4>Cadrage</h4><span class="weeks">Semaines 1 et 2</span>
+        <ul><li>Atelier de cadrage</li><li>Fichiers de marque et catalogue</li><li>Shooting photo au showroom</li><li>Maquettes validées</li></ul>
+      </article>
+      <article>
+        <h4><span class="pill p1">P1</span>Lancement</h4><span class="weeks">Semaines 3 à 10</span>
+        <ul><li>Catalogue et fiches</li><li>Mobile money et WhatsApp</li><li>Réservation, retrait, livraison</li><li>Devis en ligne, stocks multi-boutiques</li></ul>
+        <span class="live">Mise en ligne fin S10</span>
+      </article>
+      <article>
+        <h4><span class="pill p2">P2</span>Expérience</h4><span class="weeks">Semaines 11 à 16</span>
+        <ul><li>Configurateur Forge</li><li>Carnet d'assemblage, passeport garantie</li><li>Comptes entreprises, univers métier</li><li>Générateur de posts, catalogue Meta</li></ul>
+        <span class="live">Mise en ligne fin S16</span>
+      </article>
+      <article>
+        <h4><span class="pill p3">P3</span>Fidélité</h4><span class="weeks">Semaines 17 à 22</span>
+        <ul><li>Ekinox Club</li><li>Reprise de l'ancien matériel</li><li>Version malagasy</li><li>Offre diaspora</li></ul>
+        <span class="live">Mise en ligne fin S22</span>
+      </article>
+    </div>
+    <p class="caption">Durées estimées pour une petite équipe : un développeur, un designer et un référent Ekinox pour les contenus. Elles seront ajustées après le cadrage, selon la taille du catalogue.</p>
+  </div>
+</section>
+
+<!-- ================= À VALIDER ================= -->
+<section class="sec" id="suite">
+  <div class="wrap">
+    <p class="eyebrow">Prochaines étapes</p>
+    <h2>Ce que nous devons confirmer avec vous.</h2>
+    <div class="sec-body cols">
+      <div>
+        <h3>Points à vérifier</h3>
+        <ul class="check">
+          <li>L'adresse exacte du showroom de Mahamasina, près de Gastro Pizza, avec un point GPS pour Google Maps. Les annuaires citent encore le Zoky Center et d'anciennes publications Soanierana : tout sera corrigé.</li>
+          <li>L'annexe de l'immeuble Raitra à Andravoahangy est-elle toujours ouverte ?</li>
+          <li>Lequel des deux numéros (+261 34 61 172 11 ou +261 34 02 056 56) sera relié à WhatsApp Business pour les commandes ?</li>
+          <li>La page Facebook principale parmi les trois, et le sort des deux autres.</li>
+          <li>Les fichiers vectoriels du logo et de la bannière, et le nom de la police du nom « EKINOX GAMOS ».</li>
+          <li>Notre lecture des cinq pictogrammes de la bannière : gaming, architecture, 3D, audio, serveurs et stockage.</li>
+          <li>La taille du catalogue et l'outil de stock ou de caisse utilisé aujourd'hui.</li>
+          <li>Les conditions de garantie par type de produit : 12 mois sur les unités centrales, et sur les composants seuls ?</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Pour démarrer</h3>
+        <ol class="steps">
+          <li><div><b>Atelier de cadrage</b><span>Deux heures pour valider le concept Jour / Nuit et les priorités de la phase 1.</span></div></li>
+          <li><div><b>Fichiers de marque</b><span>Logo et bannière en vectoriel (SVG, AI ou PDF), et la police du nom.</span></div></li>
+          <li><div><b>Export du catalogue</b><span>Références, prix et stock par boutique, même dans un simple tableur.</span></div></li>
+          <li><div><b>Comptes marchands</b><span>Ouverture ou accès aux API MVola, Orange Money et Airtel Money.</span></div></li>
+          <li><div><b>Shooting photo</b><span>Une demi-journée au showroom : gamme, atelier, équipe.</span></div></li>
+          <li><div><b>Domaine et e-mail</b><span>Réserver ekinoxgamos.mg s'il est libre, avec une adresse contact@ pour remplacer l'adresse Yahoo.</span></div></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="sources">
+      <h3>Sources consultées</h3>
+      <ul>
+        <li>Logo et bannière transmis par Ekinox Gamos</li>
+        <li><a href="https://www.facebook.com/p/Ekinox-Gamos-100064281385706/" target="_blank" rel="noopener">Page Facebook Ekinox Gamos</a></li>
+        <li><a href="https://www.facebook.com/Ekinoxgpu/" target="_blank" rel="noopener">Page Facebook Ekinox Gamos 2.0</a></li>
+        <li><a href="https://www.facebook.com/p/Ekinox-Gamos-Prix-cass%C3%A9-61555009070487/" target="_blank" rel="noopener">Page Facebook Ekinox Gamos Prix cassé</a></li>
+        <li><a href="https://m.facebook.com/999652590062809/photos/uc-6th-genprix-2220000arintel-core-i7-4770kgigabyte-ga-z87p-d3psu-gtx-660-3gojon/4172664846094885/" target="_blank" rel="noopener">Publication « UC 4th Gen » à 2 220 000 Ar</a></li>
+        <li><a href="https://www.facebook.com/Ekinox-Gamos-999652590062809/videos/boitier-vide-rgb-atx-170000ar/1428579757292034/" target="_blank" rel="noopener">Vidéo « Boîtier vide RGB ATX 170 000 Ar »</a></li>
+        <li><a href="https://www.findglocal.com/MG/Antananarivo/999652590062809/Ekinox-Gamos" target="_blank" rel="noopener">Fiche annuaire FindGlocal (adresses et horaires)</a></li>
+        <li><a href="https://annuaire.mg/pc-upgrade/" target="_blank" rel="noopener">Annuaire.mg, fiche PC Upgrade</a> et <a href="https://agoramada.com/t/pc-upgrade-lunivers-des-gamers/537" target="_blank" rel="noopener">Agoramada</a></li>
+        <li><a href="https://micromania.mg/" target="_blank" rel="noopener">Micro Mania</a>, <a href="https://www.zoma.mg/15-ordinateur-portable" target="_blank" rel="noopener">Zoma.mg</a>, <a href="https://www.findglocal.com/MG/Antananarivo/323839554967259/PC-MADA-STORE" target="_blank" rel="noopener">PC Mada Store</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="wrap end">
+  <span>Proposition préparée pour Ekinox Gamos · Antananarivo</span>
+  <span>Document de travail · Novembre 2026 · v2</span>
+</footer>
+
+<script>
+(function(){
+  var buttons = document.querySelectorAll('[data-set-mode]');
+  var mocks = document.querySelectorAll('.mock.sync');
+  var line = document.getElementById('switch-trace');
+  function setMode(mode, animate){
+    mocks.forEach(function(el){ el.setAttribute('data-mode', mode); });
+    buttons.forEach(function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-set-mode') === mode)); });
+    if (animate && line){
+      line.classList.remove('sweep');
+      void line.offsetWidth;
+      line.classList.add('sweep');
+    }
+    try { localStorage.setItem('ekg-mode', mode); } catch(e) {}
+  }
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){ setMode(b.getAttribute('data-set-mode'), true); });
+  });
+  var saved = null;
+  try { saved = localStorage.getItem('ekg-mode'); } catch(e) {}
+  if (saved === 'jour' || saved === 'nuit') setMode(saved, false);
+
+  var addon = document.getElementById('addon-ups');
+  var total = document.getElementById('p-total');
+  function fmt(n){ return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' Ar'; }
+  if (addon && total){
+    addon.addEventListener('change', function(){ total.textContent = fmt(5890000 + (addon.checked ? 390000 : 0)); });
+  }
+})();
+</script>
+</body>
+</html>

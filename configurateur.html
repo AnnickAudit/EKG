@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Configurateur Forge · Ekinox Gamos</title>
+<meta name="description" content="Compose ton PC pièce par pièce : compatibilité vérifiée, puissance d'alimentation calculée, total en Ariary et envoi à un conseiller.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="assets/img/logo-ekg.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){var d=document.documentElement,m=null,f=d.getAttribute("data-force");try{m=localStorage.getItem("ekg-mode")}catch(e){}if(f){m=f}else if(m!=="jour"&&m!=="nuit"){var h=(new Date().getUTCHours()+3)%24;m=(h>=6&&h<18)?"jour":"nuit"}d.setAttribute("data-mode",m)})();</script>
+</head>
+<body data-nav="configurateur.html">
+<a class="skip" href="#main">Aller au contenu</a>
+<header id="site-header"></header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a><span>/</span><span>Configurateur Forge</span></nav>
+      <p class="kicker">Ekinox Forge</p>
+      <h1>Compose ton PC.</h1>
+      <p class="lead">Choisis chaque pièce, Forge vérifie la compatibilité en direct. Pas d'idée ? Indique ton budget et ton usage, on te propose une base à ajuster.</p>
+    </div>
+  </section>
+
+  <div class="wrap" style="padding-top:28px">
+    <form class="forge-start" id="forge-start">
+      <div class="field">
+        <label for="fs-budget">Budget <output id="fs-budget-out" for="fs-budget"></output></label>
+        <input type="range" id="fs-budget" min="3000000" max="16000000" step="250000" value="6000000">
+      </div>
+      <div class="field">
+        <label for="fs-usage">Usage</label>
+        <select class="select" id="fs-usage">
+          <option value="1080p">Jeu en 1080p</option>
+          <option value="1440p" selected>Jeu en 1440p</option>
+          <option value="4K">Jeu en 4K</option>
+          <option value="creation">Création, montage, 3D</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="fs-game">Jeu de référence</label>
+        <select class="select" id="fs-game"></select>
+      </div>
+      <button class="btn btn-primary btn-lg" type="submit">Proposer une config</button>
+    </form>
+  </div>
+
+  <div class="wrap forge">
+    <div class="forge-steps" id="forge-steps"></div>
+    <aside class="summary" id="forge-summary" aria-label="Récapitulatif de la configuration"></aside>
+  </div>
+
+  <div class="sticky-buy" id="forge-sticky">
+    <div><span class="price" id="fsb-total"></span><br><span class="stock" id="fsb-state"></span></div>
+    <a class="btn btn-primary" href="#forge-summary">Récapitulatif</a>
+  </div>
+</main>
+
+<footer id="site-footer"></footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/forge.js"></script>
+</body>
+</html>
