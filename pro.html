@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="assets/css/site.css">
 <script>(function(){var d=document.documentElement,m=null,f=d.getAttribute("data-force");try{m=localStorage.getItem("ekg-mode")}catch(e){}if(f){m=f}else if(m!=="jour"&&m!=="nuit"){var h=(new Date().getUTCHours()+3)%24;m=(h>=6&&h<18)?"jour":"nuit"}d.setAttribute("data-mode",m);if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches&&"IntersectionObserver"in window)d.classList.add("motion")})();</script>
 </head>
-<body data-nav="pro.html">
+<body data-nav="pro.html" data-universe="pro">
 <a class="skip" href="#main">Aller au contenu</a>
 <header id="site-header"></header>
 
@@ -22,6 +22,7 @@
     <div class="wrap pro-hero-in">
       <div>
         <nav class="crumbs" aria-label="Fil d'Ariane" style="color:inherit"><a href="index.html">Accueil</a><span>/</span><span>Espace pro</span></nav>
+        <div data-mode-switch></div>
         <p class="kicker">All you need is here</p>
         <h1>Ekinox Pro</h1>
         <p class="lead" style="margin-top:16px">Postes, stations et serveurs pour les entreprises, studios et institutions de Tana. Configurés pour votre métier, installés sur site, garantis 12 mois.</p>

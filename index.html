@@ -21,6 +21,7 @@
   <!-- Héros : slogan de la marque -->
   <section class="hero">
     <div class="wrap">
+      <div data-mode-switch></div>
       <p class="eyebrow" data-show-mode="nuit">Ekinox Gamos · Antananarivo</p>
       <p class="eyebrow" data-show-mode="jour">Ekinox Pro</p>
       <h1 data-show-mode="nuit">Challenge everything.</h1>
@@ -36,7 +37,7 @@
 
   <!-- Tuiles produit -->
   <section class="tiles wrap-wide" aria-label="À la une">
-    <div class="tile tile-full">
+    <div class="tile tile-full" data-show-mode="nuit">
       <p class="eyebrow">Édition signature</p>
       <h2>Ekinox Équinoxe</h2>
       <p class="sub">Noir, jaune et RTX 5070. La machine aux couleurs de la maison.</p>
@@ -45,7 +46,16 @@
       <div class="tile-media"><img src="assets/img/photos/pc-glass.jpg" alt="Boîtier PC noir à panneaux vitrés" loading="lazy"></div>
     </div>
 
-    <div class="tile">
+    <div class="tile tile-full" data-show-mode="jour">
+      <p class="eyebrow">Architecture &amp; 3D</p>
+      <h2>Stations de travail.</h2>
+      <p class="sub">Revit, Lumion, Blender : des machines dimensionnées pour vos logiciels métier.</p>
+      <p class="price-from" data-price-ht="archi"></p>
+      <div class="cta-row"><a class="btn btn-primary" href="pro.html#devis">Demander un devis</a><a class="more" href="pro.html#archi">En savoir plus</a></div>
+      <div class="tile-media"><img src="assets/img/photos/archi-cad.jpg" alt="Ingénieurs travaillant sur des plans à l'ordinateur" loading="lazy"></div>
+    </div>
+
+    <div class="tile" data-show-mode="nuit">
       <p class="eyebrow">Le plus choisi</p>
       <h2>Ekinox Zénith</h2>
       <p class="sub">Le 1440p fluide, avec 16 Go de mémoire vidéo.</p>
@@ -54,7 +64,7 @@
       <div class="tile-media"><img src="assets/img/photos/pc-lianli.jpg" alt="PC gamer vitré avec ventilateurs éclairés" loading="lazy"></div>
     </div>
 
-    <div class="tile">
+    <div class="tile" data-show-mode="nuit">
       <p class="eyebrow">Configurateur</p>
       <h2>Ekinox Forge</h2>
       <p class="sub">Compose ton PC pièce par pièce. La compatibilité est vérifiée en direct.</p>
@@ -62,20 +72,58 @@
       <div class="tile-media"><img src="assets/img/photos/pc-inside.jpg" alt="Intérieur d'un PC avec carte graphique et watercooling" loading="lazy"></div>
     </div>
 
-    <div class="tile">
-      <p class="eyebrow">Pour les entreprises</p>
-      <h2>Ekinox Pro</h2>
-      <p class="sub">Bureautique, architecture, 3D, audio et serveurs. Installé sur site à Tana.</p>
-      <div class="cta-row"><a class="btn btn-primary" href="pro.html#devis">Demander un devis</a><a class="more" href="pro.html">En savoir plus</a></div>
-      <div class="tile-media"><img src="assets/img/photos/archi-cad.jpg" alt="Ingénieurs travaillant sur des plans à l'ordinateur" loading="lazy"></div>
-    </div>
 
-    <div class="tile" id="arrivages">
+    <div class="tile" id="arrivages" data-show-mode="nuit">
       <p class="eyebrow">Prochain arrivage · 12 déc.</p>
       <h2>GeForce RTX 50</h2>
       <p class="sub">Réserve la tienne avec 20 % d'acompte MVola. Les inscrits sont servis en premier.</p>
       <div class="cta-row"><button class="btn btn-primary" type="button" id="notify-rtx">Me prévenir</button><a class="more" href="catalogue.html?cat=gpu">Cartes graphiques</a></div>
       <div class="tile-media"><img src="assets/img/photos/gpu-rtx.jpg" alt="Carte graphique GeForce RTX" loading="lazy"></div>
+    </div>
+
+    <!-- Tuiles Pro -->
+    <div class="tile" data-show-mode="jour">
+      <p class="eyebrow">Postes de travail</p>
+      <h2>Ekinox Bureau</h2>
+      <p class="sub">Comptabilité, ERP et Office. Livrés configurés et intégrés à votre réseau.</p>
+      <p class="price-from" data-price-ht="bureautique"></p>
+      <div class="cta-row"><a class="btn btn-primary" href="pro.html#devis">Demander un devis</a><a class="more" href="pro.html#bureautique">En savoir plus</a></div>
+      <div class="tile-media"><img src="assets/img/photos/bureau-office.jpg" alt="Open space équipé de postes de travail" loading="lazy"></div>
+    </div>
+
+    <div class="tile" data-show-mode="jour">
+      <p class="eyebrow">Audio &amp; MAO</p>
+      <h2>Station Studio</h2>
+      <p class="sub">Silencieuse et à faible latence, pour l'enregistrement et le mixage.</p>
+      <p class="price-from" data-price-ht="audio"></p>
+      <div class="cta-row"><a class="btn btn-primary" href="pro.html#devis">Demander un devis</a><a class="more" href="pro.html#audio">En savoir plus</a></div>
+      <div class="tile-media"><img src="assets/img/photos/audio-studio.jpg" alt="Studio d'enregistrement avec console de mixage" loading="lazy"></div>
+    </div>
+
+    <div class="tile" data-show-mode="jour">
+      <p class="eyebrow">Serveurs &amp; stockage</p>
+      <h2>Serveur PME</h2>
+      <p class="sub">Partage de fichiers et sauvegardes. RAID, onduleur et installation compris.</p>
+      <p class="price-from" data-price-ht="serveurs"></p>
+      <div class="cta-row"><a class="btn btn-primary" href="pro.html#devis">Demander un devis</a><a class="more" href="pro.html#serveurs">En savoir plus</a></div>
+      <div class="tile-media"><img src="assets/img/photos/serveurs.jpg" alt="Baies de serveurs dans un centre de données" loading="lazy"></div>
+    </div>
+
+    <div class="tile" data-show-mode="jour">
+      <p class="eyebrow">Cybercafés &amp; salles de jeux</p>
+      <h2>Pack 10 postes</h2>
+      <p class="sub">Postes identiques, réseau et onduleurs, installés et configurés sur place.</p>
+      <p class="price-from" data-price-ht="cyber"></p>
+      <div class="cta-row"><a class="btn btn-primary" href="pro.html#devis">Demander un devis</a><a class="more" href="pro.html#cyber">En savoir plus</a></div>
+      <div class="tile-media"><img src="assets/img/photos/cyber-club.jpg" alt="Joueurs dans une salle de jeux en réseau" loading="lazy"></div>
+    </div>
+
+    <div class="tile" data-show-mode="jour">
+      <p class="eyebrow">Ekinox Pro</p>
+      <h2>Votre devis sous 24 h.</h2>
+      <p class="sub">Établi au nom de votre société, avec la TVA détaillée.</p>
+      <div class="cta-row"><a class="btn btn-primary" href="pro.html#devis">Demander un devis</a><a class="more" href="pro.html">Espace pro</a></div>
+      <div class="tile-art"><span data-icon="briefcase"></span><div class="mini"><a href="pro.html#devis"><span>Proforma avec NIF et STAT</span><span>✓</span></a><a href="pro.html#devis"><span>Prix HT, TVA 20 % détaillée</span><span>✓</span></a><a href="pro.html#devis"><span>Installation sur site à Tana</span><span>✓</span></a></div></div>
     </div>
 
     <div class="tile">
@@ -96,7 +144,7 @@
   </section>
 
   <!-- Gamme -->
-  <section class="section" aria-labelledby="lineup-title">
+  <section class="section" aria-labelledby="lineup-title" data-show-mode="nuit">
     <div class="wrap section-title">
       <h2 id="lineup-title">Découvre la gamme.</h2>
       <a class="more" href="gamme.html">Comparer tous les modèles</a>
@@ -104,6 +152,17 @@
     <div data-scroller>
       <div class="scroller" id="home-pcs"></div>
       <div class="scroller-nav"><button type="button" data-dir="prev" aria-label="Modèles précédents"><span data-icon="chevL"></span></button><button type="button" data-dir="next" aria-label="Modèles suivants"><span data-icon="chevR"></span></button></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="pro-title" data-show-mode="jour">
+    <div class="wrap section-title">
+      <h2 id="pro-title">Une configuration par métier.</h2>
+      <a class="more" href="pro.html">Tous les univers pro</a>
+    </div>
+    <div data-scroller>
+      <div class="scroller" id="home-pro"></div>
+      <div class="scroller-nav"><button type="button" data-dir="prev" aria-label="Configurations précédentes"><span data-icon="chevL"></span></button><button type="button" data-dir="next" aria-label="Configurations suivantes"><span data-icon="chevR"></span></button></div>
     </div>
   </section>
 

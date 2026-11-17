@@ -9,6 +9,23 @@
     if (it) el.textContent = "À partir de " + A.fmtAr(it.price);
   });
 
+  /* Prix HT des tuiles Pro */
+  A.$$("[data-price-ht]").forEach(function (el) {
+    var u = D.universes.filter(function (x) { return x.id === el.getAttribute("data-price-ht"); })[0];
+    if (u) el.textContent = u.config.priceHT ? "À partir de " + A.fmtAr(u.config.priceHT) + " HT" : "Sur devis";
+  });
+
+  /* Configurations par métier (mode Pro) */
+  $("#home-pro").innerHTML = D.universes.map(function (u) {
+    var url = "pro.html#" + u.id;
+    return '<article class="pc-card"><a class="pc-media" href="' + url + '" tabindex="-1" aria-hidden="true">' + A.photo(u.photo, "", { alt: "" }) + "</a>" +
+      '<div class="pc-body"><p class="pc-eyebrow">' + esc(u.name) + '</p><h3><a class="pc-name" href="' + url + '">' + esc(u.config.name) + "</a></h3>" +
+      '<p class="pc-line">' + esc(u.software.slice(0, 3).join(" · ")) + "</p>" +
+      '<ul class="pc-specs">' + u.config.items.slice(0, 3).map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" +
+      '<p class="pc-price">' + (u.config.priceHT ? A.fmtAr(u.config.priceHT) + " <small>HT</small>" : "Sur devis") + "</p>" +
+      '<div class="pc-actions"><a class="btn btn-primary btn-sm" href="pro.html#devis">Devis</a><a class="more" href="' + url + '">En savoir plus</a></div></div></article>';
+  }).join("");
+
   /* Onduleurs de la tuile anti-délestage */
   $("#home-ups").innerHTML = ["ups-1200", "ups-2000", "surge"].map(function (id) {
     var p = A.getItem(id);

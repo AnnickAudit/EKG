@@ -59,6 +59,8 @@
     menu: I('<path d="M4 7h16M4 12h16M4 17h16"/>'),
     close: I('<path d="M6 6l12 12M18 6 6 18"/>'),
     arrow: I('<path d="M5 12h14M13 6l6 6-6 6"/>'),
+    gamepad: I('<path d="M7.5 6h9a4.5 4.5 0 0 1 4.4 5.5l-1 4.4a2.6 2.6 0 0 1-4.6 1L14 15h-4l-1.3 1.9a2.6 2.6 0 0 1-4.6-1l-1-4.4A4.5 4.5 0 0 1 7.5 6z"/><path d="M6.5 11h4M8.5 9v4"/><circle cx="15.5" cy="10" r=".9"/><circle cx="17.5" cy="12.5" r=".9"/>'),
+    briefcase: I('<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 12.5h18"/>'),
     chevL: I('<path d="m15 18-6-6 6-6"/>'),
     chevR: I('<path d="m9 18 6-6-6-6"/>'),
     whatsapp: I('<path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.7z"/><path d="M9 8.6c.2-.5.5-.6.8-.6h.5c.2 0 .4.1.5.4l.7 1.7c.1.3 0 .5-.1.7l-.5.6c-.1.1-.1.3 0 .5.5 1 1.5 2 2.6 2.5.2.1.4.1.5-.1l.6-.7c.2-.2.4-.2.7-.1l1.6.8c.3.1.4.3.4.5v.5c0 .4-.2.7-.6.9-.6.3-1.4.5-2.3.2-2.4-.8-4.4-2.8-5.2-5.1-.2-.8 0-1.5.3-1.9z"/>'),
@@ -217,20 +219,42 @@
 
   /* ---------- Mode Jour / Nuit ---------- */
   function getMode() { return doc.documentElement.getAttribute("data-mode") || "nuit"; }
+  /* Deux univers : « nuit » = Gamer, « jour » = Pro */
   function setMode(m) {
     doc.documentElement.setAttribute("data-mode", m);
     try { localStorage.setItem("ekg-mode", m); } catch (e) {}
     renderModeBtn();
     doc.dispatchEvent(new CustomEvent("ekg:mode", { detail: m }));
   }
-  function renderModeBtn() {
-    var b = $("#mode-btn"); if (!b) return;
-    var m = getMode();
-    b.innerHTML = m === "nuit" ? icons.moon : icons.sun;
-    var label = "Mode " + (m === "nuit" ? "Nuit (gaming)" : "Jour (pro)") + " actif. Passer en mode " + (m === "nuit" ? "Jour" : "Nuit");
-    b.setAttribute("aria-label", label);
-    b.setAttribute("title", label);
+  function modeSwitch(cls, label) {
+    return '<div class="mode-switch' + (cls ? " " + cls : "") + '" role="group" aria-label="' + label + '">' +
+      '<span class="mode-thumb" aria-hidden="true"></span>' +
+      '<button type="button" data-set-mode="nuit">' + icons.gamepad + "<span>Gamer</span></button>" +
+      '<button type="button" data-set-mode="jour">' + icons.briefcase + "<span>Pro</span></button></div>";
   }
+  function renderModeBtn() {
+    var m = getMode();
+    $$(".mode-switch [data-set-mode]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-set-mode") === m)); });
+  }
+  function modeSeen() { try { return localStorage.getItem("ekg-mode-seen") === "1"; } catch (e) { return true; } }
+  function dismissHint() {
+    try { localStorage.setItem("ekg-mode-seen", "1"); } catch (e) {}
+    $$(".mode-switch.hint").forEach(function (s) { s.classList.remove("hint"); });
+    var tip = $("#mode-tip"); if (tip) tip.remove();
+  }
+  /* Choix d'univers : bascule sur place, ou ouvre la page de l'univers choisi */
+  doc.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-set-mode]");
+    if (!b) return;
+    var m = b.getAttribute("data-set-mode");
+    dismissHint();
+    if (m === getMode()) return;
+    setMode(m);
+    var universe = doc.body.getAttribute("data-universe");
+    if (universe === "pro" && m === "nuit") { setTimeout(function () { location.href = "index.html"; }, 350); return; }
+    if (universe === "gamer" && m === "jour") { setTimeout(function () { location.href = "pro.html"; }, 350); return; }
+    toast(m === "jour" ? "Mode Pro : offres entreprises, devis et prix HT" : "Mode Gamer : PC de jeu, Forge et arrivages");
+  });
 
   /* ---------- Toasts ---------- */
   function toast(msg, link) {
@@ -258,8 +282,10 @@
       '<a class="logo" href="index.html" aria-label="Ekinox Gamos, accueil"><img src="assets/img/logo-ekg.png" alt="" width="30" height="30"><span>Ekinox Gamos</span></a>' +
       '<div class="gnav-links">' + links + "</div>" +
       '<div class="gnav-tools">' +
+      '<div class="mode-wrap">' + modeSwitch(modeSeen() ? "" : "hint", "Univers du site : Gamer ou Pro") +
+      (modeSeen() ? "" : '<div class="mode-tip" id="mode-tip" role="note"><b>Gamer ou Pro ?</b> Choisis ton univers : PC de jeu, ou équipement pour ton entreprise.<button type="button" class="mode-tip-x" aria-label="Fermer">×</button></div>') +
+      "</div>" +
       '<button class="icon-btn" id="search-btn" type="button" aria-expanded="false" aria-controls="search-panel" aria-label="Rechercher">' + icons.search + "</button>" +
-      '<button class="icon-btn mode-btn" id="mode-btn" type="button"></button>' +
       '<a class="icon-btn cart-btn" href="panier.html" aria-label="Panier">' + icons.cart + "<b data-cart-count></b></a>" +
       '<button class="icon-btn burger" id="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Ouvrir le menu">' + icons.menu + "</button>" +
       "</div></div>" +
@@ -272,12 +298,15 @@
     /* Ruban d'annonce, sous la navigation (il défile avec la page) */
     el.insertAdjacentHTML("afterend",
       '<div class="ribbon"><p>' +
-      '<span data-show-mode="nuit">Livraison en 24 h à Tana, paiement MVola, Orange Money ou Airtel Money. <a href="gamme.html">Voir la gamme ›</a></span>' +
-      '<span data-show-mode="jour">Ekinox Pro : devis sous 24 h ouvrées et installation sur site à Tana. <a href="pro.html#devis">Demander un devis ›</a></span>' +
+      '<span data-show-mode="nuit">Livraison en 24 h à Tana, paiement mobile money. Tu équipes une entreprise ? <button type="button" class="ribbon-switch" data-set-mode="jour">Passe en mode Pro ›</button></span>' +
+      '<span data-show-mode="jour">Ekinox Pro : devis sous 24 h ouvrées, installation sur site. Tu cherches un PC de jeu ? <button type="button" class="ribbon-switch" data-set-mode="nuit">Passe en mode Gamer ›</button></span>' +
       ' <span class="demo">· Site de démonstration</span></p></div>');
 
+    /* Interrupteurs Gamer / Pro placés dans les pages */
+    $$("[data-mode-switch]").forEach(function (slot) { slot.innerHTML = modeSwitch("mode-switch-lg", "Choisis ton univers : Gamer ou Pro"); });
     renderModeBtn();
-    $("#mode-btn").addEventListener("click", function () { setMode(getMode() === "nuit" ? "jour" : "nuit"); });
+    var tipX = $(".mode-tip-x");
+    if (tipX) tipX.addEventListener("click", dismissHint);
 
     var panels = { search: [$("#search-btn"), $("#search-panel")], drawer: [$("#burger"), $("#drawer")] };
     function toggle(name, open) {
@@ -339,6 +368,7 @@
       next.addEventListener("click", function () { go(1); });
       sc.addEventListener("scroll", update, { passive: true });
       window.addEventListener("resize", update);
+      doc.addEventListener("ekg:mode", function () { setTimeout(update, 30); });
       update();
     });
   }
